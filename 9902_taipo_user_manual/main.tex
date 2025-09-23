@@ -1,0 +1,14 @@
+\documentclass[table]{article}
+\input{preamble.tex}
+
+% The \LANG macro is passed from the Makefile.
+% It will contain the language code, e.g., "en", "pl", "de".
+\newcommand{\includefile}[1]{%
+    \subfile{pages/#1/content.tex}%
+}
+
+\begin{document}
+
+\expandafter\includefile\expandafter{\LANG}
+
+\end{document}

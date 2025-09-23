@@ -1,0 +1,53 @@
+
+
+\newcommand{\maketitlepage}[4]{%
+\begin{titlepage}
+  \begin{tikzpicture}[overlay,remember picture,line width=5pt]
+      \fill[black] (current page.south west) rectangle (current page.north);
+      \node (title_img) at ($(current page.south)!0.33!(current page.north)$) {\includegraphics[width=1.5cm]{#3.png}};
+      \node (logo_img) at ($(current page.north east) -(2.5cm,2.5cm)$) {\includegraphics[width=3cm]{logo.png}};
+
+          \node [ 
+            rectangle, 
+            draw = none,
+            minimum width=20cm,
+            minimum height = 2.5cm,
+            text width = 20cm,
+           ] (box) at ($(current page.center)!0.50!(current page.north)$) {};
+
+           \node [ 
+             rectangle, 
+             fill=vo_green, 
+             text=black, 
+             draw=none,
+             minimum width=12cm,
+             minimum height = 2.5cm,
+             text width = 10cm,
+             inner sep = 0cm,
+             outer sep = 0cm,
+             align=right,
+             anchor=east
+            ] at ($(box.center) +(1cm,0cm)$) { 
+              \amatica\fontsize{30pt}{25pt}\selectfont{ 
+              \textcolor{white}{\contour{black}{\mbox{#4}}}%
+              } 
+            \arial\small \tcversion{} (\today)};
+          \node [ 
+            font=\amatica\fontsize{1.6cm}{1.2cm}\selectfont,
+            anchor = north west,
+            align = left,
+          ] at ($(box.north) + (1.5cm,0cm)$) {#1};
+          \node [ 
+            font=\amatica\fontsize{0.7cm}{0.6cm}\selectfont,
+            anchor = south west,
+            align = left,
+          ] at ($(box.south) + (1.5cm,0cm)$) {#2};
+          \node [ 
+            anchor = south east,
+            align = left,
+          ] at (current page.south east) {\copyright 2021-2025 1V/Oct. All rights reserved.
+          };
+  \end{tikzpicture}
+  \end{titlepage}
+\thispagestyle{empty}
+}
