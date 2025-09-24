@@ -1,14 +1,14 @@
-\documentclass[table]{article}
-\input{preamble.tex}
+\documentclass{article}
 
-% The \LANG macro is passed from the Makefile.
-% It will contain the language code, e.g., "en", "pl", "de".
-\newcommand{\includefile}[1]{%
-    \subfile{pages/#1/content.tex}%
-}
+
+% Load the preamble, which in turn loads fonts.tex
+% This must be done early, especially before babel, to set up fontspec correctly.
+\input{preamble.tex}
 
 \begin{document}
 
-\expandafter\includefile\expandafter{\LANG}
+% Include the content file based on the language
+% This assumes your content files are located at pages/<lang>/content.tex
+\input{pages/\LANG/content.tex}
 
 \end{document}

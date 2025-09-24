@@ -54,10 +54,49 @@
 \usepackage{placeins}
 \usepackage{amssymb}
 
+
+\usepackage{babel} % Load babel without language options initially
+
+
 \providecommand{\tcversion}{v1.0.0}
 
-\newcommand\underlinedlink[1]{\underline{\nameref{section:mod#1}}}
+% Set default language to English if LANG is not defined by the build command
+\ifdefined\LANG\else
+    \def\LANG{en}
+\fi
 
+
+% Load babel with the correct language option based on the LANG variable
+% For Chinese, we use the xeCJK package which is designed for fontspec/xelatex.
+% For other languages, we fall back to babel.
+\IfStrEq{\LANG}{zh-hans}{
+    \usepackage{xeCJK}
+    \babelprovide[main,import]{chinese-simplified}
+    \setCJKmainfont{NotoSansSC-VariableFont_wght.ttf}[Path=../fonts/]
+    \setCJKsansfont{NotoSansSC-VariableFont_wght.ttf}[Path=../fonts/]
+}{\IfStrEq{\LANG}{zh-hant}{
+    \usepackage{xeCJK}
+    \babelprovide[main,import]{chinese-traditional}
+    \setCJKmainfont{NotoSansTC-VariableFont_wght.ttf}[Path=../fonts/]
+    \setCJKsansfont{NotoSansTC-VariableFont_wght.ttf}[Path=../fonts/]
+}{% For all other languages, select the language in babel and provide remapping
+    % Use a case structure to map LANG code to babel language name
+    \IfStrEqCase{\LANG}{
+        {en}{\def\BabelLangName{english}}%
+        {de}{\def\BabelLangName{german}}%
+        {fr}{\def\BabelLangName{french}}%
+        {es}{\def\BabelLangName{spanish}}%
+        {it}{\def\BabelLangName{italian}}%
+        {pl}{\def\BabelLangName{polish}}%
+        {pt}{\def\BabelLangName{portuguese}}%
+        {ru}{\def\BabelLangName{russian}}%
+        {nl}{\def\BabelLangName{dutch}}%
+    }[\def\BabelLangName{\LANG}]% Default to LANG itself if no match
+    \expandafter\babelprovide\expandafter[main,import]{\BabelLangName}
+}
+}
+
+\newcommand\underlinedlink[1]{\underline{\nameref{section:mod#1}}}
 
 \geometry{a4paper, lmargin=6mm, rmargin=6mm, tmargin=2.5cm, bmargin=1.5cm}
 
@@ -69,19 +108,49 @@
   Path = ../fonts/,
   Scale=1.0
   ] {RacingSansOne-Regular.ttf}
-  % ] {Eras-Bold-ITC.ttf}
+%   % ] {Eras-Bold-ITC.ttf}
+
+% \newfontfamily\amatica[
+%   Path = ../fonts/,
+%   Scale=1.0
+%   ] {HanyiSentyPagoda Regular.ttf}
+
+% \newfontfamily{amatica}{HanyiSentyPagoda Regular.ttf}[Path=../fonts/, Scale=1.0]
 \newfontfamily\arial[Scale=1.0]{Arial}
-\setmainfont[]{PT Sans}
+\input{fonts.tex}
 
-\pgfdeclarelayer{background}
-\pgfsetlayers{background,main}
-
+% Define fonts only once to prevent "already defined" errors on subsequent LaTeX passes.
+% Use \ifdefined to check if the font command exists before defining it.
+% Use \providecommand to define the family command. This is more robust for multi-pass compilations.
+  \IfStrEqCase{\LANG}{
+    {zh-hans}{%
+        \ifcsdef{titlefontcjk}{}{\newfontfamily\titlefontcjk{Fontquan-XinYiGuanHeiTi Regular.ttf}[Path=../fonts/]}
+        \setCJKfamilyfont{titlefontCJK}{Fontquan-XinYiGuanHeiTi Regular.ttf}[Path=../fonts/]
+        \providecommand{\titlefontfamily}{\titlefontcjk\CJKfamily{titlefontCJK}}
+        % \setmainfont{Fontquan-XinYiGuanHeiTi Regular.ttf}[Path=../fonts/]
+        \ifcsdef{racingsansone}{}{\newfontfamily\racingsansone{HanyiSentyPagoda Regular.ttf}[Path=../fonts/]}
+        \setCJKfamilyfont{racingsansoneCJK}{HanyiSentyPagoda Regular.ttf}[Path=../fonts/]
+        \providecommand{\racingsansonefamily}{\racingsansone\CJKfamily{racingsansoneCJK}}
+        }%
+    {zh-hant}{%
+        \ifcsdef{titlefontcjk}{}{\newfontfamily\titlefontcjk{Fontquan-XinYiGuanHeiTi Regular.ttf}[Path=../fonts/]}
+        \setCJKfamilyfont{titlefontCJK}{Fontquan-XinYiGuanHeiTi Regular.ttf}[Path=../fonts/]
+        \providecommand{\titlefontfamily}{\titlefontcjk\CJKfamily{titlefontCJK}}
+        \ifcsdef{racingsansone}{}{\newfontfamily\racingsansone{HanyiSentyPagoda Regular.ttf}[Path=../fonts/]}
+        \setCJKfamilyfont{racingsansoneCJK}{HanyiSentyPagoda Regular.ttf}[Path=../fonts/]
+        \providecommand{\racingsansonefamily}{\racingsansone\CJKfamily{racingsansoneCJK}}}%
+}[% Fallback for non-CJK languages
+    \ifcsdef{racingsansone}{}{\newfontfamily\racingsansone{RacingSansOne-Regular.ttf}[Path=../fonts/]}
+    \providecommand{\racingsansonefamily}{\racingsansone}%
+    \ifcsdef{titlefontlatin}{}{\newfontfamily\titlefontlatin{RacingSansOne-Regular.ttf}[Path=../fonts/]}
+    \providecommand{\titlefontfamily}{\titlefontlatin}%
+]
 
 \usepackage{fancyhdr}
 
 \fancypagestyle{plain}{
 \fancyhf{} % clear all header and footer fields
-\fancyfoot[R]{\amatica\fontsize{19pt}{19pt}\selectfont\thepage} % except the center
+\fancyfoot[R]{\titlefontfamily\fontsize{19pt}{19pt}\selectfont\thepage} % except the center
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}}
 \pagestyle{plain}
@@ -105,7 +174,7 @@
         outer sep=3mm, 
         color=white, 
         anchor=base west,
-        font=\amatica\fontsize{14}{14}\selectfont
+        font=\titlefontfamily\fontsize{14}{14}\selectfont
       ] at (current page.west) (counter) {\thecontentslabel \hskip0.75ex #1};
         \begin{pgfonlayer}{background}
             \draw[fill=black] (current bounding box.north -| current page.west) rectangle (current page.east |- current bounding box.south);
@@ -125,7 +194,7 @@
     text = white, 
     minimum width=19cm, 
     minimum height=30mm, 
-    font=\amatica\fontsize{17}{17}\selectfont,
+    font=\titlefontfamily\fontsize{17}{17}\selectfont,
     anchor = north
   ] at (current page.north) {#1};
   \end{tikzpicture}%
@@ -157,7 +226,7 @@
     fill=none, 
     draw = none, 
     text = white, 
-    font=\amatica\fontsize{25}{25}\selectfont,
+    font=\titlefontfamily\fontsize{25}{25}\selectfont,
     anchor = north west,
   ] at (partbox.north west) {#1};
 
@@ -168,7 +237,7 @@
     fill=none, 
     draw = none, 
     text = black, 
-    font=\amatica\fontsize{25}{25}\selectfont,
+    font=\titlefontfamily\fontsize{25}{25}\selectfont,
     anchor = south west,
   ] at (partbox.north west) {Part \thepart};
   \end{tikzpicture}%
