@@ -70,37 +70,36 @@
 % For Chinese, we use the xeCJK package which is designed for fontspec/xelatex.
 % For other languages, we fall back to babel.
 \IfStrEq{\LANG}{zh-hans}{
-    \usepackage{xeCJK}
-    \babelprovide[main,import]{chinese-simplified}
-    \setCJKmainfont{NotoSansSC-VariableFont_wght.ttf}[Path=../fonts/]
-    \setCJKsansfont{NotoSansSC-VariableFont_wght.ttf}[Path=../fonts/]
+  \usepackage{xeCJK}
+  \babelprovide[main,import]{chinese-simplified}
+  \setCJKmainfont{NotoSansSC-VariableFont_wght.ttf}[Path=../fonts/]
+  \setCJKsansfont{NotoSansSC-VariableFont_wght.ttf}[Path=../fonts/]
 }{\IfStrEq{\LANG}{zh-hant}{
-    \usepackage{xeCJK}
-    \babelprovide[main,import]{chinese-traditional}
-    \setCJKmainfont{NotoSansTC-VariableFont_wght.ttf}[Path=../fonts/]
-    \setCJKsansfont{NotoSansTC-VariableFont_wght.ttf}[Path=../fonts/]
+  \usepackage{xeCJK}
+  \babelprovide[main,import]{chinese-traditional}
+  \setCJKmainfont{NotoSansTC-VariableFont_wght.ttf}[Path=../fonts/]
+  \setCJKsansfont{NotoSansTC-VariableFont_wght.ttf}[Path=../fonts/]
 }{\IfStrEq{\LANG}{jp}{
-    \usepackage{xeCJK}
-    \babelprovide[main,import]{japanese}
-    \setCJKmainfont{ZenOldMincho-Regular.ttf}[Path=../fonts/]
-    \setCJKsansfont{ZenOldMincho-Regular.ttf}[Path=../fonts/]
-}}{% For all other languages, select the language in babel and provide remapping
-    % Use a case structure to map LANG code to babel language name
-    \IfStrEqCase{\LANG}{
-        {en}{\def\BabelLangName{english}}%
-        {de}{\def\BabelLangName{german}}%
-        {fr}{\def\BabelLangName{french}}%
-        {es}{\def\BabelLangName{spanish}}%
-        {it}{\def\BabelLangName{italian}}%
-        {jp}{\def\BabelLangName{japanese}}%
-        {pl}{\def\BabelLangName{polish}}%
-        {pt}{\def\BabelLangName{portuguese}}%
-        {ru}{\def\BabelLangName{russian}}%
-        {nl}{\def\BabelLangName{dutch}}%
-    }[\def\BabelLangName{\LANG}]% Default to LANG itself if no match
-    \expandafter\babelprovide\expandafter[main,import]{\BabelLangName}
+  \usepackage{xeCJK}
+  \babelprovide[main,import]{japanese}
+  \setCJKmainfont{ZenOldMincho-Regular.ttf}[Path=../fonts/]
+  \setCJKsansfont{ZenOldMincho-Regular.ttf}[Path=../fonts/]
+}{% For all other languages, select the language in babel and provide remapping
+  % Use a case structure to map LANG code to babel language name
+  \IfStrEqCase{\LANG}{
+      {en}{\def\BabelLangName{english}}%
+      {de}{\def\BabelLangName{german}}%
+      {fr}{\def\BabelLangName{french}}%
+      {es}{\def\BabelLangName{spanish}}%
+      {it}{\def\BabelLangName{italian}}%
+      {pl}{\def\BabelLangName{polish}}%
+      {pt}{\def\BabelLangName{portuguese}}%
+      {ru}{\def\BabelLangName{russian}}%
+      {nl}{\def\BabelLangName{dutch}}%
+  }[\def\BabelLangName{\LANG}]% Default to LANG itself if no match
+  \expandafter\babelprovide\expandafter[main,import]{\BabelLangName}
+}}
 }
-} 
 
 \newcommand\underlinedlink[1]{\underline{\nameref{section:mod#1}}}
 
@@ -123,14 +122,14 @@
 
 % \newfontfamily{amatica}{HanyiSentyPagoda Regular.ttf}[Path=../fonts/, Scale=1.0]
 \newfontfamily\arial[Scale=1.0]{Arial}
-\input{fonts.tex}
+\input{../shared/fonts.tex}
 
 % Define fonts only once to prevent "already defined" errors on subsequent LaTeX passes.
 % Use \ifdefined to check if the font command exists before defining it.
 % Use \providecommand to define the family command. This is more robust for multi-pass compilations.
   \IfStrEqCase{\LANG}{
     {zh-hans}{%
-        \ifcsdef{titlefontcjk}{}{\newfontfamily\titlefontcjk{Fontquan-XinYiGuanHeiTi Regular.ttf}[Path=../fonts/]}
+        \ifcsdef{titlefontcjk}{}{\newfontfamily\titlefontcjk{RacingSansOne-Regular.ttf}[Path=../fonts/]}
         \setCJKfamilyfont{titlefontCJK}{Fontquan-XinYiGuanHeiTi Regular.ttf}[Path=../fonts/]
         \providecommand{\titlefontfamily}{\titlefontcjk\CJKfamily{titlefontCJK}}
         % \setmainfont{Fontquan-XinYiGuanHeiTi Regular.ttf}[Path=../fonts/]
@@ -313,3 +312,4 @@
 \graphicspath{{images/}}
 
 \input{../shared/titlepage.tex}
+\input{../shared/commands.tex}

@@ -26,22 +26,22 @@
              inner sep = 0cm,
              outer sep = 0cm,
              align=right,
-             anchor=east
-            ] at ($(box.center) +(1cm,0cm)$) { 
-              \amatica\fontsize{30pt}{25pt}\selectfont{ 
-              \textcolor{white}{\contour{black}{\mbox{#4}}}%
-              } 
-            \arial\small \tcversion{} (\today)};
+             anchor=east,
+             text width=10cm
+            ] at ($(box.center) +(1cm,0cm)$) {
+            \begin{tabular}{r}            \titlefontfamily{\fontsize{30pt}{25pt}\selectfont\textcolor{white}{\contour{black}{#4}}} \\
+            \arial\small\tcversion{} (\today) \\            \end{tabular}
+            };
           \node [ 
-            font=\amatica\fontsize{1.6cm}{1.2cm}\selectfont,
+            font=\fontsize{1.6cm}{1.2cm}\selectfont,
             anchor = north west,
             align = left,
-          ] at ($(box.north) + (1.5cm,0cm)$) {#1};
+          ] at ($(box.north) + (1.5cm,0cm)$) {\titlefontfamily{#1}};
           \node [ 
-            font=\amatica\fontsize{0.7cm}{0.6cm}\selectfont,
+            font=\fontsize{0.7cm}{0.6cm}\selectfont,
             anchor = south west,
             align = left,
-          ] at ($(box.south) + (1.5cm,0cm)$) {#2};
+          ] at ($(box.south) + (1.5cm,0cm)$) {\titlefontfamily{#2}};
           \node [ 
             anchor = south east,
             align = left,

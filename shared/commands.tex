@@ -1,0 +1,21 @@
+% This file contains custom LaTeX commands used throughout the document.
+
+% This command selects the dual language string 
+% but has to be selected manually here change #1 or #2
+\newcommand{\dl}[2]{{#1}}
+
+\newcommand{\qrdlink}[3][]{
+  \begin{minipage}{\textwidth}
+    \begin{center}
+      \centering\Large #3\normalsize
+      \paragraph*{}#1\paragraph*{}
+      \centering\textbf{\textit{Scan below QR Code or click link}}
+    \end{center}
+    \begin{center}
+      \centering\qrcode{#2}
+      \paragraph*{}
+      \underline{\url{#2}}
+    \end{center}   
+  \end{minipage}
+  \paragraph*{}
+}
