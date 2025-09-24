@@ -79,7 +79,12 @@
     \babelprovide[main,import]{chinese-traditional}
     \setCJKmainfont{NotoSansTC-VariableFont_wght.ttf}[Path=../fonts/]
     \setCJKsansfont{NotoSansTC-VariableFont_wght.ttf}[Path=../fonts/]
-}{% For all other languages, select the language in babel and provide remapping
+}{\IfStrEq{\LANG}{jp}{
+    \usepackage{xeCJK}
+    \babelprovide[main,import]{japanese}
+    \setCJKmainfont{ZenOldMincho-Regular.ttf}[Path=../fonts/]
+    \setCJKsansfont{ZenOldMincho-Regular.ttf}[Path=../fonts/]
+}}{% For all other languages, select the language in babel and provide remapping
     % Use a case structure to map LANG code to babel language name
     \IfStrEqCase{\LANG}{
         {en}{\def\BabelLangName{english}}%
@@ -87,6 +92,7 @@
         {fr}{\def\BabelLangName{french}}%
         {es}{\def\BabelLangName{spanish}}%
         {it}{\def\BabelLangName{italian}}%
+        {jp}{\def\BabelLangName{japanese}}%
         {pl}{\def\BabelLangName{polish}}%
         {pt}{\def\BabelLangName{portuguese}}%
         {ru}{\def\BabelLangName{russian}}%
@@ -94,7 +100,7 @@
     }[\def\BabelLangName{\LANG}]% Default to LANG itself if no match
     \expandafter\babelprovide\expandafter[main,import]{\BabelLangName}
 }
-}
+} 
 
 \newcommand\underlinedlink[1]{\underline{\nameref{section:mod#1}}}
 
@@ -306,4 +312,4 @@
 
 \graphicspath{{images/}}
 
-\input{titlepage.tex}
+\input{../shared/titlepage.tex}
