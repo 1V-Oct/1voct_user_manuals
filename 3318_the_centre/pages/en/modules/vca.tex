@@ -1,0 +1,69 @@
+\def\vcaset{
+  {{Audio Output}/{Output of VCA}/{Audio Output of processed signal by VCA. Signal has amplitude modulated by sum of two modulators: Level and Sidechain. \newline See: \underline{\nameref{section:audiooutputs}}}},
+  {{Audio Input}/{Audio signal to be modulated}/{Audio signal (can be any signal) that will have amlitude (level) modulated with modulator Input: Level}}%
+}
+
+\def\vcainp{
+  {{Level}/{Modulation of sound level}/{Modulation of level of sound. Amplitude mopdulation with Unipolar (only positive) modulator (usually envelope)}},
+  {{Sidechain}/{Opposite modulation of level}/{Sidechain is a reverse signal to damp the level of primary signal modulation.
+  \newline$\bigstar$
+  Usually used to duck the amplitude of bassline when kick drum comes in to remove interferring frequencies}}%
+}
+
+\def\vcaout{
+  {{NONE}/{}/{}}%
+}
+
+\def\refcardvca{
+  \makereferencecard{
+    NA,
+  }{
+    \textcolor{black}{\textbf{[ON/OFF]}} Turning module On or Off (Bypass),
+    \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+  }{
+    Adjust Level of Amplification,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{
+    Adjust attenuation of CV input for Level,
+    NA,
+    NA,
+    NA,
+    Select source of Level Modulation,
+    NA,
+    Select Input of VCA,
+   }
+}
+
+\def\modnameshortvca{VCA}
+\def\modnamelongvca{Voltage Controlled Amplifier}
+
+\newcommand{\modvca}{
+  \newpage
+  \modmakesection{vca}
+
+  \paragraph*{}Voltage Controlled Amplifier modulates level of signal with level of modulator.  
+  
+  \showrefcardsection{vca}
+
+  \subsection{Operation}
+  VCA performs simple Amplitude Modulation of those signal resulting in reduced volume (level) of audio signal. The signal coming in Audio Input is then modulated (attenuated) with a modulator taken from Input:Modulation. In fact VCA operates using principle of Amplitude Modulation however it only takes positive unipolar CV signal to modulate Audio Signal.
+  \newline$\bigstar$ Usually modulator signal is coming from Envelope Generator (ENV) in from of AD, ADSR or AHDSR envelopes and applied to the uadio signal coming from audio source like oscillator will result in the plucking or raising sound.
+  \subsection{Sidechain}
+  Sidechain is the technique to duck (reduce) audio signal when another audio signal needs to be more prominent. The sidechain modulator is an envelope of the prominent signal and is substracted from envelope of audio signal coming to VCA to reduce level of the secondary signal.
+  \newline$\bigstar$ Sidechaining is used to reduce level of bassline when kickdrum is being played. Very often both kickdrum/bassdrum and bassline share the same low frequencies and if mixed together they result in muffled sound. By loweering the amplitude of bassline at the point kickdrum plays, kickdrum envelope is send to sidechain input of VCA and VCA will reduce level of bassline by the amount of sidechain. This way low frequencies of kickdrum will be heard over the bassline.
+  
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\vcaset}{{Settings}}
+  \tableofoptionsnew{\vcainp}{{Inputs}}
+  \tableofoptionsnew{\vcaout}{{Outputs}}
+}
+

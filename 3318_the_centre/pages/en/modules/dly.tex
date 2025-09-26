@@ -1,0 +1,64 @@
+\def\dlyset{
+  {{Audio Output}/{Audio Output of Delay}/{Audio Output of processed signal by Delay. Audio Output is Audio Input signal summed with buffered delayed signal\newline See: \underline{\nameref{section:audiooutputs}}}},
+  {{Audio Input}/{Audio Input signal to be delayed}/{Audio signal that will be delayed and summed with buffered and attenuated signal to produce echo.}}%
+}
+
+\def\dlyinp{
+  {{Delay}/{Delay Period Length}/{Length of Delay period betwen 0s and 4s. Delay is the size of the buffer.}},
+  {{Echo}/{Level of Echo}/{Percentage of level of signal to be buffered for further layering}}%
+}
+
+\def\dlyout{
+  {{NONE}/{}/{}}%
+}
+
+\def\refcarddly{
+  \makereferencecard{
+    \textcolor{black}{\textbf{[CLICK]}} Exit
+    }{
+    \textcolor{black}{\textbf{[ON/OFF]}} Turning module On or Off (Bypass),
+    \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+  }{
+    \textcolor{black}{\textbf{[DLY]}} Delay time 0s to 4s,
+    \textcolor{black}{\textbf{[ECH]}} Percentage of echo added after delay period,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{%
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[AUDIO IN]}} Select Audio Input Source,
+    \textcolor{black}{\textbf{[AUDIO OUT]}} Select Audio Outpur Destination,
+  }
+}
+
+\def\modnameshortdly{DLY}
+\def\modnamelongdly{Delay}
+
+\newcommand{\moddly}{
+  \newpage
+  \modmakesection{dly}
+
+  \paragraph*{}
+  Delay (DLY) Effect Processor buffers signal and sums it with buffer to provide delayed echo effect.
+  \showrefcardsection{dly}
+
+  \subsection{Operation}
+  \paragraph*{} Delay (DLY) Effect Processor takes input signals and buffers it for requested period of time based on Input:Delay parameter and then sums it with buffered signal at attenuated level givent by Input:Echo parameter. Delay creates audible echo effect.
+
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\dlyset}{{Settings}}
+  \tableofoptionsnew{\dlyinp}{{Inputs}}
+  \tableofoptionsnew{\dlyout}{{Outputs}}
+}
+

@@ -1,0 +1,76 @@
+\def\rngset{
+  {{Pattern Length}/{Length of pattern in bars}/{Length of pattern in bars. Each pattern is divided into number of steps configured by Inputs:Pulses}},
+  {{Gate length}/{Length of gate}/{
+    \makesupopt{{
+      {{Trigger}/{Trigger only}/{Unsustained signal when the pulse occurs}}%
+    }}%
+  }}%
+}
+
+\def\rnginp{
+  {{Clock}/{Clock CV Source}/{Clock source to generate notes automatically and measure length of notes}},
+  {{Trigger}/{Trigger CV Source}/{Triggers generation of next note, if Trigger is not connected notes and rests get generated automatically upon their period ends}}%
+}
+
+\def\rngout{
+  {{Pitch}/{Pitch Output of generated note}/{Output of generated random pitch limited by setting of selected musical scale}},
+  {{Gate}/{Gate Output of generated note}/{Output of Poly Rhythm setting gate to high upon beat}},
+  {{Velocity}/{Velocity Output of generated note}/{Output of Poly Rhythm setting gate to high upon beat}}%
+}
+
+
+\def\refcardrng{
+  \makereferencecard{
+    \textcolor{black}{\textbf{[ROTATE]}} Move between scale selector and note lengths
+    \newline\textcolor{black}{\textbf{[CLICK]}} Turn on Scale Selector or Enable Note/Rest Lengths for generation
+    }{
+    \textcolor{black}{\textbf{[ON/OFF]}} Turning module On or Off (Bypass),
+    \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+  }{
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{%
+    \textcolor{black}{\textbf{[SCL]}} Select Scale,
+    \textcolor{black}{\textbf{[NOTES]}} Select note lengths that will be included in randomiser,
+    \textcolor{black}{\textbf{[RESTS]}} Select rests lengths to be included in randomiser,
+    NA,
+    \textcolor{black}{\textbf{[TRG]}} Select Trigger CV - Ignores CLOCK,
+    \textcolor{black}{\textbf{[PLEN]}} Select pattern length,
+    NA,
+    NA,
+  }
+}
+
+
+\def\modnameshortrng{RNG}
+\def\modnamelongrng{Rendom Note Generator}
+
+\newcommand{\modrng}{
+  \newpage
+  \modmakesection{rng}
+
+  \paragraph*{}
+  Rendom Note Generator (RNG) produces random notes.
+
+  \showrefcardsection{rng}
+
+  \subsection{Operation}
+  \paragraph*{} Random Note Generator (RNG) produces random values for output of pitch, gate length and velocity. The randomistaion happens every time upon receiving trigger signal at Input:Trigger. The randomisation process can be controlled by selecting range of available notes and rests as well as predefines musical scale to limit generated pitches. 
+  \newline$\blacksquare$ Without clock source the BPM is fixed at 120 BPM the pattern
+  \newline$\bigstar$ The musical scale selection is not necessary as routing output of RNG through QNT (Quantiser) and limit available pitch there gives much better flexibility.
+
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\rngset}{{Settings}}
+  \tableofoptionsnew{\rnginp}{{Inputs}}
+  \tableofoptionsnew{\rngout}{{Outputs}}
+}
+

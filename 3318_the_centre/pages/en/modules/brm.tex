@@ -1,0 +1,65 @@
+\def\brmset{
+  {{Audio Output}/{Output of BRM}/{Audio Output of processed signal by BRM. Signal has amplitude modulated by sum of two modulators: Level and Sidechain. \newline See: \underline{\nameref{section:audiooutputs}}}},
+  {{Audio Input 1}/{Input of the first Audio Signal}/{Audio signal (can be any signal) That will be combined with the second signal}},
+  {{Audio Input 2}/{Input of the second Audio Signal}/{Audio signal (can be any signal) That will be combined with the first signal}}%
+}
+
+\def\brminp{
+  {{Balance}/{Balance between signals}/{The ratio between two signals when combining them. The volume level of the signals will be adjusted respectively before combining)}}%
+}
+
+\def\brmout{
+  {{NONE}/{}/{}}%
+}
+
+\def\refcardbrm{
+  \makereferencecard{
+    NA,
+  }{
+    \textcolor{black}{\textbf{[ON/OFF]}} Turning module On or Off (Bypass),
+    \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+  }{
+    Adjust Level of Cross modulation,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{
+    Adjust attenuation of CV input for Modulation,
+    NA,
+    NA,
+    NA,
+    Select source of Level Modulation,
+    Select the first Audio Input,
+    Select the first Audio Input,
+    Select the Audio Output of combined signal by Ring Modulator,
+   }
+}
+
+
+\def\modnameshortbrm{BRM}
+\def\modnamelongbrm{Balanced Ring Modulator}
+
+\newcommand{\modbrm}{
+  \newpage
+  \modmakesection{brm}
+
+  \paragraph*{}Balanced Ring Modulator takes two Audio signals and mcombines them to gether producing output signal.
+  
+  \showrefcardsection{brm}
+
+  \subsection{Operation}
+  BRM performs cross modulation of two signals by combining Aduio Input 1 with Audio Input 2. The Input:Balance setting is the ratio between those two signals.
+  
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\brmset}{{Settings}}
+  \tableofoptionsnew{\brminp}{{Inputs}}
+  \tableofoptionsnew{\brmout}{{Outputs}}
+}
+

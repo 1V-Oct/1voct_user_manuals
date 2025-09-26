@@ -1,0 +1,102 @@
+\def\mixset{
+  {{ChanAudio Outputnel}/{Audio Output of Mixer}/{Audio Output of Mixed 4 channels from Input Sources}},
+  {{Audio Input 1-4}/{Audio Input for Channel 1 to 4}/{Source of Audio Input for corresponding channel number. \newline$\bigstar$Please note that channel must be enabled or input source has no effect}},
+  {{Enable 1-4}/{Input Enable for Channel 1 to 4}/{Enables corresponding channel for mixing}},
+  {{Downmix}/{Downmix of polyphony}/{Enable or disable downmix of polyphony channels into dual stereo output. \newline$\bigstar$Please note that downmix only works in VOUT mode by outputting left channel in VOUT1 and right in VOUT2. Downmix is disabled in monophonic mode or when output is directed to VBuf}},
+} 
+
+\def\mixinp{
+  {{LVL1-4}/{Level for channels 1-4}/{CV input for channel 1-4 volume level (AM)}},
+  {{PAN1-4}/{Balance for channels 1-4}/{CV input for balance of channels 1-4 }},
+}
+
+\def\mixout{
+  {{MIX}/{Mixed output level}/{Level of mixed channels}},
+}
+
+
+\def\refcardmix{
+  \makereferencecard{\textcolor{black}{\textbf{[ROTATE]}} Select channel\newline\textcolor{black}{\textbf{[CLICK]}} Enter/exit channel\newline\textcolor{black}{\textbf{[ROTATE]}} Select Source
+    }{
+      \textcolor{black}{\textbf{[ON/OFF]}} Turning channel On or Off,
+      \textcolor{black}{\textbf{[SET]}} Settings of the module,
+      \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+      \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+    }{
+    \textcolor{black}{\textbf{\mbox{[LVL 1]}}} Adjusts volume level for channel 1,
+    \textcolor{black}{\textbf{\mbox{[PAN 1]}}} Adjusts balance for channel 1,
+    \textcolor{black}{\textbf{\mbox{[LVL 2]}}} Adjusts volume level for channel 2,
+    \textcolor{black}{\textbf{\mbox{[PAN 2]}}} Adjusts balance for channel 2,
+    \textcolor{black}{\textbf{\mbox{[LVL 3]}}} Adjusts volume level for channel 3,
+    \textcolor{black}{\textbf{\mbox{[PAN 3]}}} Adjusts balance for channel 3,
+    \textcolor{black}{\textbf{\mbox{[LVL 4]}}} Adjusts volume level for channel 4,
+    \textcolor{black}{\textbf{\mbox{[PAN 4]}}} Adjusts balance for channel 4
+}{%
+    \textcolor{black}{\textbf{\mbox{[AUDIO INPUT 1]}}} Select input source for channel 1,
+    \textcolor{black}{\textbf{\mbox{[AUDIO INPUT 2]}}} Select input source for channel 2,
+    \textcolor{black}{\textbf{\mbox{[AUDIO INPUT 3]}}} Select input source for channel 3,
+    \textcolor{black}{\textbf{\mbox{[AUDIO INPUT 4]}}} Select input source for channel 4,
+    \textcolor{black}{\textbf{[DOWNMIX]}} Enable Downmix,
+    NA,
+    NA
+    \textcolor{black}{\textbf{[OUT]}} Select Audio Output Destination,
+}
+}
+
+\def\modnameshortmix{MIX}
+\def\modnamelongmix{Mixer}
+
+\newcommand{\modmix}{
+  \newpage
+  \modmakesection{mix}
+
+  \paragraph*{}
+  Mixer (MIX) is a stereo 4 channel mixer that allows mixing (prefereably virtual buffers - VBuf) of 4 input modules into single output 
+  while applying levels and panning. Levels and panning can be controlled by CV. 
+  In fact Mixer module is a quad stereo VCA.
+  \showrefcardsection{mix}
+
+  \subsection{Operation}
+  \paragraph*{} Mixer (MIX) starts with 4 panels (channels) in off mode.
+  \textbf{SELECT} encodser allows navigating over those 4 channels. 
+  By pressing \textbf{SELECT} down we are entering control of channel. Now encoder allows to select a source for that channel.
+  Alternative method of controlling input source of channel is to select channel with encoder, enable channel by pressing button \textbf{On/Off} and then use coresponding attenuator knob ATT1-4 to select input source for different channel.
+
+  Level and stereo balance (left-right panning) can be achieved by using coresponding LVL knobs.
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{mix1.png}
+    \caption{MIX with all channels disabled}
+    \label{fig:mixpolyphony}
+  \end{figure}
+
+  \FloatBarrier
+  \paragraph*{}$\blacksquare$ Mixer starts with all channels off. Rotate encode \textbf{SELECT} and press \textbf{On/Off} button to enable channels.
+  \paragraph*{}$\blacksquare$ Use Attenuator ATT8 to select output of mixed channels.
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{mix2.png}
+    \caption{MIX with all channels enabled}
+    \label{fig:mixpolyphony}
+  \end{figure}
+
+  \FloatBarrier
+  $\blacksquare$ There are hints on every channel to use Level and Attenuator knobs to control channel. For example for channel 1: L1 controls Level, L2 pan and A1 allows selecting input source.
+
+  \subsection{Polyphony and Downmix}
+  \paragraph*{} Mixer (MIX) in Polyphony mode will mix 4 inputs each consisting of 4 channels of polyphony and output 4 channels of polyphony or \textbf{downmix} of polyphony to stereo output available in VOUT1 and VOUT2 outputs. 
+  Downmix can be enabled either in Settings or by using attenuator A5 on Mixer module screen.
+
+  \paragraph*{}$\blacksquare$ Downmix is disabled when output is directed into VBuf or when module is in monophonic mode.
+  \paragraph*{}$\blacksquare$ Downmix is disabled by default and needs to be enabled to allow downmixing otherwise output is quad polyphonic individual channels.
+  
+
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\mixset}{{Settings}}
+  \tableofoptionsnew{\mixinp}{{Inputs}}
+  \tableofoptionsnew{\mixout}{{Outputs}}
+}
+

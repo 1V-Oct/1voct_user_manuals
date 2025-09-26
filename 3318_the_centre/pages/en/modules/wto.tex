@@ -1,0 +1,176 @@
+% \def\lfsbutmain{
+%    {Edit}/{Invokes Shape Editor},
+%    {Set}/{Open Settings},
+%    {Inputs}/{Open Inputs},
+%    {Back}/{Return to Patch Menu}
+% }
+
+
+
+\def\wtoset{
+  {{Audio Output}/{Audio Output of WTO - Stereo}/{Selects audio output destination for WTO. All oscillators including Polyphony mode are output through single channel (Mono or Stereo). \newline See: \underline{\nameref{section:audiooutputs}}}},
+  {{Polyphony}/{Paraphony mode for WTO oscillator}/{
+    \makesupopt{{
+      {{1}/{Paraphony disabled, one pitch control for WTO}},
+      {{2, 3, 4}/{Paraphony of 2, 3 or 4 oscillators running different pitch. If oscillator 1 pitch comes from V/OCT1 input then pitch for following oscillators will come from corresponding V/OCT2 - V/OCT4 inputs}}%
+    }}
+  }},
+  {{Glide Scaled}/{Scaling of Glide Time by distance of pitch}/{
+    \makesupopt{{
+      {{Off}/{Glide Time will be same for pitch portamento between any notes}},
+      {{On}/{Glide Time will change depending on disatnce of pitch. Glide Time set by Input Glide Time (see below in Inputs) will be for disatnce between pitch of one octave. For notes played within same octave with will be in fraction of semitones separating pitch of following notes}}%
+    }}
+  }},
+  {{Warp Mode}/{\label{wtoset:warpmode}Function used to process waveform during oscillation}/{Warp Mode specifies extra function that is used to process waveform according to modulation that is supplied via Input \textbf{\textit{Warp Mode}}. Currently only one function is enabled.
+  \newline
+  \makesupopt{{
+    {{Off}/{No processing of waveform}},
+    {{FM}/{Warp Mode Input will modulate frequency (FM) of waveform}}%
+  }}
+  }}%
+    % {{Running Mode}/{Select type of running mode of low frequency shape}/{
+    %    \makesupopt{{
+    %      {{Continuous}/{Oscillator keeps running and never stops. Gate High (Trigger) signal will reset oscillator phase to 0.}},
+    %      % \item [\tikz{\node[text=white, fill=black] {Continuous};}] Oscillator keeps running and never stops. Gate High (Trigger) signal will reset oscillator phase to 0.\
+    %      {{Trigger}/{Oscillator runs once upon the gate signal high and runs complete shape once and stops generation when phase of shape ends. Another trigger signal will reset phase to 0.}},
+    %      {{Gate length}/{Oscillator runs as long as gate signal is high. Stops immediatelly when signal goes to low.}}%
+    %   }}
+    % }},
+    % {{Timing Mode}/{Select timing mode for LFS}/{Timing for LFS can be either selected to be calculated in Hz for more time based experience or tied to BPM and measured in length of notes or bars.
+    % \makesupopt{{
+    %    {{BPM}/{Timing based on note duration}},
+    %    {{Hz}/{Timing based on frequency}}%
+    % }}
+    % }},
+    % {{Polarity}/{Polarity of output}/{
+    %    \makesupopt{{
+    %      {{Bipolar}/{Outputs shape in range -5V to +5V. Good for Ring Modulation or FM}},
+    %      {{Unipolar}/{Outputs shape in range 0V to +5V. Good for VCA}}%
+    %   }}
+    % }}%
+}
+% \def\inpclock{
+%    {{Clock}/{Clock for timing oscillator's phase duration in BPM mode (otherwise 120BPM is used)}/{}}
+% }
+
+\def\wtoinp{
+  {{NOTE}/{Pitch control of oscillator}/{Note controls pitch or frequency of oscillator.
+  \newline See: \underline{\nameref{section:pitchcontrol}}
+  \makesupopt{{
+    {{VOCT}/{1V/Oct input for note control/}},
+    {{OCT}/{Tuning note by octaves +/- 8 octaves}},
+    {{NOTE}/{Tuning note by semitones +12 semitones (one octave)}},
+    {{FINE}/{Tuning note by cents +/- one semitone}}%
+  }}%
+  }},
+  {{Unison}/{Unison mode (1-16 voices)}/{Enables unison mode and controls number of oscillators running in parallel.}},
+  {{Detune}/{Detune oscillators}/{Detunes oscillators in Unison mode by spreading them equally in Detune range. With detune set at maximum the spread range is 2 semi-tones. With odd number of oscillators the centre oscillator will always be following pitch from Note Input. For even number of oscillators there is no oscillator followin Note and each oscillator is detuned +/- from the center note. \newline $\bigstar$ \textit{With Unison running two oscillators, detune set to maximum (1.0) and pitch set at note D there is one oscillator playing note C\# and one playing note D\# (no oscillator is actually playing note C)}}}%
+}
+\def\wtoinpi{
+  {{Wavetable}/{Wavetable position}/{Adjusts position of waveform in wavetable. When controlled by CV allows changing texture of sound by scanning through set of waveforms contained in wavetable}},
+  {{Reset Osc}/{Reset Oscillator CV input}/{When connected with CV input and set to high level it resets phase of oscillator to 0. Useful to run oscillators in Sync}},
+  {{AM}/{Amplitude Modulation}/{Amplitude modulation changes sound level. Connected with CV signal of Envelope acts as VCA. Connected with LFO creates ring modulator}},
+  {{Detune WT}/{Detune Wavetable Position for oscillators in Unison mode}/{In Unison mode this parameter will detune position of waveform in wavetable for individual oscillators. Each oscillator will reproduce different waveform thus creating more textured sound.\newline$\bigstar$ \textit{A wavetable with 3 waveforms (triangle, sine, square) and Unison of 3 oscillators and Detune WT parameter set at 1.0, each oscillator will play unique waveform: triangle, sine, square - respectively}}},
+  {{Frequency Coarse}/{Adjust Frequency of oscillator in big steps}/{Adjusts frequency of oscillator in range of 0Hz to 100Hz (in frequency mode) or between 1/256 note and 8bar (in BPM/note duration mode)}},
+  {{Frequency Fine}/{Fine tune frequency of oscillator}/{Adjust frequency of oscillator in very small steps}},
+  {{Glide Time}/{Portamento (pitch glide) time}/{Time to glide from one pitch to another upon change of pitch (Note). Glide time is in range of 0s to 1s. \newline $\blacksquare$ This parameter is affected by Setting *Glide Scaled*. With Glide Scaled set to OFF the time that it takes to glide between two notes is constant and defined by Glide Time, with Glide Scaled turned ON, time is determined by pitch distance of notes played.}},
+  {{Warp Mode}/{Modulation parameter for waveform modulator}/{Warp Mode is modulation parameter usually via CV to be used with Warp Mode function selected in Settings \underline{\hyperref[wtoset:warpmode]{Warp Mode}} parameter}}%
+ %  {{Trigger}/{Trigger CV input}/{Trigger or gate signal that initiates or resets oscillator}},
+  %  {\inpclock},
+  %  {{Frequency Coarse}/{Adjust Frequency of oscillator (coarse)}/{Adjusts frequency of oscillator in range of 0Hz to 100Hz (in frequency mode) or between 1/256 note and 8bar (in BPM/note duration mode)}},
+  %  {{Frequency Fine}/{Fine tune frequency of oscillator}/{Adjust frequency of oscillator in very small steps}}%
+}
+
+    
+    % {}/{}/{}%
+    % {}/{}/{}%
+    % {}/{}/{}%
+
+\def\wtoout{
+    {{OUT}/{Output of WTO}/{Output of wavetable oscillator}},
+    {{RST}/{Oscillator reset}/{Set to high when oscillator phase resets}}%
+}
+
+
+
+\def\refcardwto{
+  \makereferencecard{
+    \textcolor{black}{\textbf{[ROTATE]}} Navigate between wavetables in current directory\newline\textcolor{black}{\textbf{[CLICK]}} Enter File Browser to change to chosen wavetable and to change browsing directory\newline\textcolor{black}{\textbf{[LONG PRESS]}} Enter Wavetable Editor
+    }{
+      \textcolor{black}{\textbf{[2D/3D]}} Switch between display of wavetable,
+      \textcolor{black}{\textbf{[SET]}} Settings of the module,
+      \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+      \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+    }{
+      \textcolor{black}{\textbf{[WT]}} Wavetable Position - position of wave in wavetable. If controlled by CV moves through the table.,
+      \textcolor{black}{\textbf{[UNI]}} Unison mode. Creates multiple (up to 16) oscillators.,
+      \textcolor{black}{\textbf{[DET]}} Detune. Detunes oscillators in unison mode with maximum range +/- semitone,
+      \textcolor{black}{\textbf{[AM]}} Amplitude Modulation Level (can be use as VCA),
+      \textcolor{black}{\textbf{[DTWT]}} Detune Wavetable element.,
+      \textcolor{black}{\textbf{[FRQC]}} Frequency Coarse,
+      \textcolor{black}{\textbf{[FRQF]}} Frequency Fine,
+      \textcolor{black}{\textbf{[GLDT]}} Glide Time,
+    }{
+      Smooting \- Changes the way of wavetable reproduction,
+      NA,
+      NA,
+      NA,
+      \textcolor{black}{\textbf{[NOTE-OCT]}} Tune note by octave (+/- 8 octaves),
+      \textcolor{black}{\textbf{[NOTE-NOTE]}} Tune sound by semitone (+12 semitones one octave),
+      \textcolor{black}{\textbf{[NOTE-FINE]}} Fine-tune note in cents (+/- semitone),
+      Select Audio Output Destiantion,
+    }
+}
+
+\def\modnameshortwto{WTO}
+\def\modnamelongwto{Wavetable Oscillator}
+
+\newcommand{\modwto}{
+  \newpage
+  \modmakesection{wto}
+
+  \paragraph*{}
+Wavetable Oscillator (WTO) is the main building block of The Centre sound. WTO consists of 1 to 16 oscillators working in Unison mode and reproducing loaded wavetable with possibility to detune pitch of oscillators and detune played waveforms at different positions in wavetable. 
+  
+  \showrefcardsection{wto}
+
+  \newpage
+  \subsection{Unison and Detune}
+  \paragraph*{}
+  Wavetable Oscillator (WTO) consists of 16 oscillators that can be put in Unison mode (use \textbf{[L2]} to increase number of oscillatrs) and Detuned (use \textbf{[L3]} to detune osciallators of up to one semitone)
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{det1.png}
+    \caption{Detuned oscillators}
+    \label{fig:detune}
+  \end{figure}
+
+
+\subsubsection{Overload Protection}
+\paragraph*{} The Centre is a digital module with CPU that has limited capability. When there is too much going in the patch especially in 
+Polyphony Mode it is very easy to overload CPU. Adding big number of unison oscillator voices can overload CPU. Upon such overload an "OVERLOAD" bar will be shown
+on the screen. 
+
+\paragraph*{}To recover from Overload mode it is recommended reduce unison voices.
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.35\linewidth]{overload1.png}
+  \caption{Overload protection screen}
+  \label{fig:overloadunison}
+\end{figure}
+\FloatBarrier
+
+
+  \newpage
+  \section*{\modname}  
+  \tableofoptionsnew{\wtoset}{{Settings}}
+  \tableofoptionsnew{\wtoinp}{{Inputs}}
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\wtoinpi}{{Inputs}}
+  \tableofoptionsnew{\wtoout}{{Outputs}}
+}
+
+
+

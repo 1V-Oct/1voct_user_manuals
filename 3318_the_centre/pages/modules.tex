@@ -1,0 +1,308 @@
+\newcommand{\tableofoptionsnew}[2]{
+  \begin{tabularx}{\linewidth}{@{}>{\hsize=0.2\hsize \columncolor{gray!10}[0pt]}XX@{}}%
+    \amatica\fontsize{19pt}{19pt}\selectfont\center
+    \makebox[0pt]{\rotatebox{90}{#2}} &
+    \begin{description}[font =\sffamily, after=\vspace*{-\topsep}, itemsep=3mm]
+      \foreach \param/\descshort/\desclong in #1 {
+          \item[\fontsize{15pt}{15pt}\selectfont{\param}] \textit{\descshort} \newline\desclong
+      }
+    \end{description}
+  \end{tabularx}%
+}
+
+
+
+\newcommand{\tableofbuttons}[1]{
+   \foreach \buttonname/\buttondesc in {#1} {
+      \begin{tabularx}{\linewidth}{@{}>{\hsize=0.2\hsize \columncolor{gray!10}[0pt]}XX@{}}%
+         \buttonname & \smallskip 
+         \begin{description}[font =\sffamily, after=\vspace*{-\topsep}] 
+            \item \textit{\buttondesc}
+         \end{description}
+      \end{tabularx}
+   }
+}
+
+
+
+\ExplSyntaxOn
+
+\NewDocumentCommand{\newlistx}{mm}{
+  \clist_clear_new:c { l_walfi_list_#1_clist }
+  \clist_set:cn  { l_walfi_list_#1_clist } { #2 }
+}
+
+\NewDocumentCommand{\looplist}{mm}
+ {
+  \cs_gset:Nn \__walfi_list_loop:n { #2 }
+  \clist_map_function:cN  { l_walfi_list_#1_clist } \__walfi_list_loop:n
+ }
+
+\ExplSyntaxOff
+
+\newcommand{\makerow}[2]{\textbf{#1} & #2 \\}
+\newcommand{\makeitem}[2]{\item[#1] #2}
+
+\newcommand{\tableofset}[2]{
+    \begin{tabularx}{\linewidth}{@{}>{\hsize=0.2\hsize \columncolor{gray!10}[0pt]}XX@{}}%
+        #2 & \smallskip 
+        \begin{description}[font =\sffamily, after=\vspace*{-\topsep}]
+            \looplist{#1}{\makeitem#2}
+         \end{description}
+    \end{tabularx}
+% }
+}
+
+
+
+% \usepackage[labelwidth]{enumitem}
+
+\NewDocumentCommand{\specialitem}{O{white} O{black} m}{%
+  \item[\colorbox{#2}{\textcolor{#1}{{#3}}}]%
+}
+
+\newcommand{\makesupopt}[1]{%
+   \begin{description}[leftmargin = !,labelwidth=6em]%
+      \foreach \sublabel\subdesc in #1 {%
+         \specialitem{\sublabel} \subdesc% 
+      }%
+   \end{description}%
+}
+
+
+\usepackage{listofitems}
+\usepackage{ragged2e} % allow ragged-right with proper hyphenation
+
+
+\newcommand{\addtabs}[1]{%
+  {\noexpandarg\StrSubstitute{#1}{E}{ZZZ}}%
+}
+
+
+
+
+\usetikzlibrary{arrows}
+% \input{arrowsnew}
+
+
+\newcommand{\makereferencecard}[4]{
+  \begin{center}
+      \begin{tikzpicture}[remember picture, node distance=1mm and 1mm, inner sep=0, 
+          every node/.style={font=\fontsize{8}{8}\selectfont, inner sep=0, outer sep=0, distance=1mm and 1mm},
+          bignode/.style     = {font=\fontsize{7}{7}\selectfont},
+          mymatrix/.style={matrix of nodes, nodes=typetag, outer ysep=2mm, row sep=1mm, anchor=south west},
+          mycontainer/.style={inner sep=1ex},
+          typetag/.style={bignode, draw=m_lightgray, text=m_green, inner sep=1mm,  minimum height=1cm}
+          ]
+
+          \node (main_img) at (0,0) {\includegraphics[width=5.5cm]{bg_image_the_centre.png}};
+
+          \setsepchar{,}
+          \readlist\itemdefs{#1}
+          \readlist\itemgb{#2}
+          \readlist\itempb{#3}
+          \readlist\itemrb{#4}
+
+          \matrix[
+            matrix of nodes,
+            % nodes=typetag,
+            nodes={draw=m_lightgray, text=m_purple, minimum width=6cm, minimum height = 1.2cm, outer sep=0mm, align=right, text width=5.6cm},
+            outer sep=2mm,
+            inner sep=1mm,
+            row sep=1mm,
+            anchor=east,
+            ] (pb_mxl) at (main_img.west){
+            \setitemcol{\hfill \itempb[1]} \\
+            \setitemcol{\hfill \itempb[2]} \\
+            \setitemcol{\hfill \itempb[3]} \\
+            \setitemcol{\hfill \itempb[4]} \\%
+          };
+   
+    \matrix[
+        matrix of nodes,
+        % nodes=typetag,
+        column 1/.style={anchor=base west},
+        nodes={draw=m_lightgray, text=m_purple, minimum width=6cm, minimum height = 1.2cm, text width=5.6cm, align=left},
+        outer sep=2mm,
+        inner sep=1mm,
+        row sep=1mm,
+        anchor=west,
+        ] (pb_mxr) at (main_img.east){
+         \setitemcol{\itempb[8] \hfill} \\
+         \setitemcol{\itempb[7] \hfill} \\
+         \setitemcol{\itempb[6] \hfill} \\
+         \setitemcol{\itempb[5] \hfill} \\%
+     };
+    \matrix[
+        % mymatrix, 
+        matrix of nodes,
+        column 1/.style={anchor=south west},
+        nodes={draw=m_lightgray, text=m_green, minimum height = 1.0cm, align=right, inner sep=1mm},
+        row 1/.style={minimum width=9.5cm, text width=9.2cm}, 
+        row 2/.style={minimum width=9cm, text width=8.7cm}, 
+        row 3/.style={minimum width=8.5cm, text width=8.2cm},
+        outer ysep=2mm,
+        outer xsep=1mm,
+        inner sep=1mm,
+        row sep=1mm,
+        anchor=south west,
+        ] (gb_mxl) at (pb_mxl.north west){
+         \setitemcol{\hfill \itemgb[3]} \\
+         \setitemcol{\hfill \itemgb[2]} \\
+         \setitemcol{\hfill \itemgb[1]} \\%
+    };
+    \matrix[
+        matrix of nodes, 
+        column 1/.style={anchor=south west},
+        nodes={draw=m_lightgray, text=m_green, minimum height = 1.0cm, align=left, inner sep=1mm},
+        row 1/.style={minimum width=8.5cm, text width=8.2cm}, 
+        outer ysep=2mm,
+        outer xsep=1mm,
+        inner sep=1mm,
+        row sep=1mm,
+        anchor=north east
+        ] (gb_mxr) at (gb_mxl.north-|pb_mxr.east){
+         \setitemcol{\itemgb[4] \hfill} \\%
+    };
+
+    \matrix[
+        matrix of nodes,
+        % nodes=typetag,
+        column 1/.style={anchor=base west},
+        nodes={draw=m_lightgray, text=m_orange, minimum width=5.75cm, minimum height = 2.0cm, text width=7.6cm, align=left, inner sep=1mm},
+        outer sep=2mm,
+        inner sep=1mm,
+        anchor=east,
+        ] (ob_mx) at ($(gb_mxr.south east)!0.5!(pb_mxr.north east)$){
+        % ] (ob_mx) at (pb_mxr.north east){
+         \setitemcol{\itemdefs[1] \hfill} \\%
+    };
+
+    \matrix[
+      matrix of nodes,
+      % nodes=typetag,
+      column 1/.style={anchor=base west},
+        nodes={draw=m_lightgray, text=m_red, minimum height = 1.0cm, align=right, inner sep=1mm},
+        row 1/.style={minimum width=7.6cm, text width=7.4cm}, 
+        row 2/.style={minimum width=8.1cm, text width=7.9cm}, 
+        row 3/.style={minimum width=8.6cm, text width=8.4cm},
+        row 4/.style={minimum width=9.1cm, text width=8.9cm},
+            outer ysep=2mm,
+        outer xsep=1mm,
+        inner sep=1mm,
+        row sep=1mm,
+        anchor=north west,
+      ] (rb_mxl) at (pb_mxl.south west){
+         \setitemcol{\hfill \itemrb[1]} \\
+         \setitemcol{\hfill \itemrb[2]} \\
+         \setitemcol{\hfill \itemrb[3]} \\
+         \setitemcol{\hfill \itemrb[4]} \\%
+   };
+
+  \matrix[
+    matrix of nodes,
+    column 1/.style={anchor=base east},
+    nodes={draw=m_lightgray, text=m_red, minimum height = 1.0cm, align=left, inner sep=1mm},
+    row 1/.style={minimum width=7.6cm, text width=7.4cm}, 
+    row 2/.style={minimum width=8.1cm, text width=7.9cm}, 
+    row 3/.style={minimum width=8.6cm, text width=8.4cm},
+    row 4/.style={minimum width=9.1cm, text width=8.9cm},
+    outer ysep=2mm,
+    outer xsep=1mm,
+    inner sep=1mm,
+    row sep=1mm,
+    anchor=north east,
+    ] (rb_mxr) at (pb_mxr.south east){
+      \setitemcol{\itemrb[8] \hfill} \\
+      \setitemcol{\itemrb[7] \hfill} \\
+      \setitemcol{\itemrb[6] \hfill} \\
+      \setitemcol{\itemrb[5] \hfill} \\%
+};
+
+
+  \selannotationcol{\itempb[1]}{m_purple}
+  \draw[-{Circle},thick] (pb_mxl-1-1.center -|pb_mxl-1-1.east) +(0,-1.0em) -- (-1.83, 0.69); % node[sloped] {};
+  \selannotationcol{\itempb[2]}{m_purple}
+  \draw[-{Circle} ,thick] (pb_mxl-2-1.center -|pb_mxl-2-1.east) +(0,0.0em)-- (-1.54, -0.10); % node[sloped] {};
+  \selannotationcol{\itempb[3]}{m_purple}
+  \draw[-{Circle} ,thick] (pb_mxl-3-1.center -|pb_mxl-3-1.east) +(0,-0.5em)-- (-0.95, -0.20); % node[sloped] {};
+  \selannotationcol{\itempb[4]}{m_purple}
+  \draw[-{Circle} ,thick] (pb_mxl-4-1.center -|pb_mxl-4-1.east) +(0,1.0em)-- (-0.35, -0.25); % node[sloped] {};
+  \selannotationcol{\itempb[8]}{m_purple}
+  \draw[-{Circle} ,thick] (pb_mxr-1-1.center -|pb_mxr-1-1.west) +(0,-1.0em) -- (1.76, 0.69); % node[sloped] {};
+  \selannotationcol{\itempb[7]}{m_purple}
+  \draw[-{Circle} ,thick] (pb_mxr-2-1.center -|pb_mxr-2-1.west) +(0,0.0em)  -- (1.54, -0.10); % node[sloped] {};
+  \selannotationcol{\itempb[6]}{m_purple}
+  \draw[-{Circle} ,thick] (pb_mxr-3-1.center -|pb_mxr-3-1.west) +(0,-0.5em) -- (0.95, -0.20); % node[sloped] {};
+  \selannotationcol{\itempb[5]}{m_purple}
+  \draw[-{Circle} ,thick] (pb_mxr-4-1.center -|pb_mxr-4-1.west) +(0,1.0em)  -- (0.35, -0.25); % node[sloped] {};
+
+    \draw[{Circle[scale=1.3]}-, m_orange, thick] (1.615,1.305) coordinate (b1) -- (b1 |- ob_mx-1-1.south);
+
+
+    \selannotationcol{\itemgb[4]v}{m_green}
+    \draw[{Circle}-, thick] (0.7,0.1) coordinate (b1) -- (b1 |- gb_mxr-1-1.south);
+    \selannotationcol{\itemgb[3]}{m_green}
+    \draw[{Circle}-, thick] (0.2,0.1) coordinate (b1) -- (b1 |- gb_mxl-1-1.south);
+    \selannotationcol{\itemgb[2]}{m_green}
+    \draw[{Circle}-, thick] (-0.25,0.1) coordinate (b1) -- (b1 |- gb_mxl-2-1.south);
+    \selannotationcol{\itemgb[1]}{m_green}
+    \draw[{Circle}-, thick] (-0.73,0.1) coordinate (b1) -- (b1 |- gb_mxl-3-1.south);
+
+    \selannotationcol{\itemrb[5]}{mred}
+    \draw[{Circle[scale=0.9]}-, thick] (0.23,-1.1) coordinate (b1) -- (b1 |- rb_mxr-4-1.north);
+    \selannotationcol{\itemrb[6]}{mred}
+    \draw[{Circle[scale=0.9]}-, thick] (0.725,-1.1) coordinate (b1) -- (b1 |- rb_mxr-3-1.north);
+    \selannotationcol{\itemrb[7]i}{mred}
+    \draw[{Circle[scale=0.9]}-, thick] (1.20,-1.1) coordinate (b1) -- (b1 |- rb_mxr-2-1.north);
+    \selannotationcol{\itemrb[8]ii}{mred}
+    \draw[{Circle[scale=0.9]}-, thick] (1.695,-1.1) coordinate (b1) -- (b1 |- rb_mxr-1-1.north);
+    \selannotationcol{\itemrb[4]}{mred}
+    \draw[{Circle[scale=0.9]}-, thick] (-0.23,-1.1) coordinate (b1) -- (b1 |- rb_mxl-4-1.north);
+    \selannotationcol{\itemrb[3]}{mred}
+    \draw[{Circle[scale=0.9]}-, thick] (-0.725,-1.1) coordinate (b1) -- (b1 |- rb_mxl-3-1.north);
+    % \draw[{Circle}-, m_red, thick] (0.22,-1.1) coordinate (b1) -- (b1 |- rb_mxr-4-1.north);
+    % \draw[{Circle}-, m_red, thick] (0.72,-1.1) coordinate (b1) -- (b1 |- rb_mxr-3-1.north);
+    % \draw[{Circle}-, m_red, thick] (1.2,-1.1) coordinate (b1) -- (b1 |- rb_mxr-2-1.north);
+    % \draw[{Circle}-, m_red, thick] (1.7,-1.1) coordinate (b1) -- (b1 |- rb_mxr-1-1.north);
+    % \draw[{Circle}-, m_red, thick] (-0.22,-1.1) coordinate (b1) -- (b1 |- rb_mxl-4-1.north);
+    % \draw[{Circle}-, m_red, thick] (-0.72,-1.1) coordinate (b1) -- (b1 |- rb_mxl-3-1.north);
+    % \draw[{Circle}-, m_red, thick] (-1.2,-1.1) coordinate (b1) -- (b1 |- rb_mxl-2-1.north);
+    % \draw[{Circle}-, m_red, thick] (-1.7,-1.1) coordinate (b1) -- (b1 |- rb_mxl-1-1.north);
+   \end{tikzpicture}
+  \end{center}
+}
+
+\newcommand\modnamelink[1]{\underline{\nameref{section:mod#1}}}
+\newcommand{\modmakesection}[1]{\section{\csname modnameshort#1\endcsname{ - }\csname modnamelong#1\endcsname}\label{section:mod#1}\def\modname{\csname modnameshort#1\endcsname{ - }\csname modnamelong#1\endcsname}}
+
+%this one is used to show reference card inside user's manual
+\newcommand{\showrefcardsection}[1]{\subsection{Mapping of Controls}\csname refcard#1\endcsname}
+\newcommand{\showrefcardsubsection}[1]{\subsubsection{Mapping of Controls}\csname refcard#1\endcsname}
+\newcommand{\modrefcard}[1]{\newpage\modmakesection{#1}\csname refcard#1\endcsname}
+
+
+\input{modules/wto.tex}
+\input{modules/vco.tex}
+\input{modules/lfs.tex}
+\input{modules/lfo.tex}
+\input{modules/env.tex}
+\input{modules/vca.tex}
+\input{modules/brm.tex}
+\input{modules/smp.tex}
+\input{modules/noi.tex}
+\input{modules/dly.tex}
+\input{modules/dst.tex}
+\input{modules/vcf.tex}
+\input{modules/drc.tex}
+\input{modules/clk.tex}
+\input{modules/gat.tex}
+\input{modules/euc.tex}
+\input{modules/ply.tex}
+\input{modules/rng.tex}
+\input{modules/qnt.tex}
+\input{modules/arp.tex}
+\input{modules/chd.tex}
+\input{modules/mid.tex}
+\input{modules/mix.tex}
+\input{modules/out.tex}

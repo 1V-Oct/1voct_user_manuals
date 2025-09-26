@@ -1,0 +1,99 @@
+\def\smpset{
+  {{Audio Output}/{Audio Output of SMP - Stereo}/{Selects audio output destination for SMP. All oscillators including Polyphony mode are output through single channel (Mono or Stereo). \newline See: \underline{\nameref{section:audiooutputs}}}},
+  {{Running Mode}/{Select type of running mode of low frequency shape}/{
+    \makesupopt{{
+      {{Continuous}/{Sample playback keeps looping. Gate High (Trigger) signal will reset sample playback to start position.}},
+      % \item [\tikz{\node[text=white, fill=black] {Continuous};}] Oscillator keeps running and never stops. Gate High (Trigger) signal will reset oscillator phase to 0.\
+      {{Trigger}/{Sample plays once upon the gate signal high and runs complete shape once and stops at the end position. Another trigger during playback signal will reset playback to start position}},
+      {{Gate length}/{Sample plays as long as gate signal is high. Stops immediatelly when signal goes to low.}}%
+   }}
+ }},
+}
+
+\def\smpinp{
+  {{NOTE}/{Pitch control of oscillator}/{Note controls pitch or frequency of oscillator.
+  \newline See: \underline{\nameref{section:pitchcontrol}}
+  \makesupopt{{
+    {{VOCT}/{1V/Oct input for note control/}},
+    {{OCT}/{Tuning note by octaves +/- 8 octaves}},
+    {{NOTE}/{Tuning note by semitones +12 semitones (one octave)}},
+    {{FINE}/{Tuning note by cents +/- one semitone}}%
+  }}%
+  }},
+  {{Gate}/{Gate CV input}/{Gate or Trigger signal that initiates or resets playback of sample}},
+  {{AM}/{Amplitude Modulation}/{Amplitude modulation changes sound level. Connected with CV signal of   Envelope acts as VCA. Connected with LFO creates ring modulator}},
+  {{Sample Start}/{Start position of sample}/{The starting position of sample that sample player starts playing upon receiving gate or trigger signals}},
+  {{Loop Start}/{Start of loop}/{The restarting position of loop upon completing single phase of playback}},
+  {{Loop End}/{End of loop}/{The final position of sample that will trigger restart of playback from Loop Start}},
+}
+\def\smpout{
+    {{OUT}/{Output of SMP}/{Output of wavetable oscillator}},
+    {{RST}/{Oscillator reset}/{Set to high when oscillator phase resets}}%
+}
+
+
+
+\def\refcardsmp{
+  \makereferencecard{
+    \textcolor{black}{\textbf{[ROTATE]}} Navigate between samples in current directory
+    \newline\textcolor{black}{\textbf{[CLICK]}} Enter File Browser to change to chosen sample and to change browsing directory
+    \newline\textcolor{black}{\textbf{[LONG PRESS]}} Enter Wavetable Editor
+    }{
+      \textcolor{black}{\textbf{[2D/3D]}} Switch between display of wavetable,
+      \textcolor{black}{\textbf{[SET]}} Settings of the module,
+      \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+      \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+      }{
+      \textcolor{black}{\textbf{[AM]}} Amplitude Modulation Level (can be used as VCA),
+      NA,
+      NA,
+      Control the window in ZOOM mode,
+      \textcolor{black}{\textbf{[START]}} Adjust start pointer of the sample,
+      \textcolor{black}{\textbf{[LOOP-START]}} Adjust loop start pointer of the sample,
+      \textcolor{black}{\textbf{[LOOP-END]}} Adjust loop end of the sample,
+      Zoom to the actual pointer for fine tuning,
+    }{
+      \textcolor{black}{\textbf{[RUN]}} Select running mode (Trigger Continuous Gate Length),
+      \textcolor{black}{\textbf{[GATE]}} Select Gate CV,
+      NA,
+      \textcolor{black}{\textbf{[NOTE-VOCT]}} Select VOCT input,
+      \textcolor{black}{\textbf{[NOTE-OCT]}} Tune note by octave (+/- 8 octaves),
+      \textcolor{black}{\textbf{[NOTE-NOTE]}} Tune sound by semitone (+12 semitones one octave),
+      \textcolor{black}{\textbf{[NOTE-FINE]}} Fine-tune note in cents (+/- semitone),
+      Select Audio Output Destiantion,
+    }
+}
+
+\def\modnameshortsmp{SMP}
+\def\modnamelongsmp{Sample Player}
+
+\newcommand{\modsmp}{
+  \newpage
+  \modmakesection{smp}
+
+  \paragraph*{}
+  \modnamelongsmp{ }(SMP) is the sound source generating sound by playing samples at requested pitch.
+  
+  \showrefcardsection{smp}
+
+  \subsection{Operation}
+  
+  \modnamelongsmp{ }reproduces samples at given pitch provided by Inputs:Note and trigerred by Inputs:Gate. Samples can be loaded from SD Card by pressing encoder (SELECT) down. After the sample is loaded from directory, rotating the encoder allows loading next and previous samples from the same directory.
+  \subsection{Looping Samples and Grains}%
+  \paragraph*{}Sample Player allows creating loops of samples controlled by CV thus converting it into granular sample player. The sample player can be looped by changing Loop Start and Loop End parameters via CV inputs effectively converting it into granular synthesiser. To control loop use knobs:
+  \begin{itemize}
+    \item \textbf{[LVL5 - Start]} start position of sample. When gate signal triggers sample it will start playing from this position. If Start is bigger than Loop Start then Loop Start becomes starting position for sample.
+    \item \textbf{[LVL6 - Loop Start]} loop start position, after reaching loop end, sample will start playing from this point
+    \item \textbf{[LVL7 - Loop End]} If loop end is set to value above 0 the sample looping will be enabled.
+  \end{itemize}
+  \paragraph*{}By adding CV control to any of the above parameters the size of grain can be modified during play with CV input for example LFO or LFS.
+
+  \newpage
+  \section*{\modname}  
+  \tableofoptionsnew{\smpset}{{Settings}}
+  \tableofoptionsnew{\smpinp}{{Inputs}}
+  \tableofoptionsnew{\smpout}{{Outputs}}
+}
+
+
+

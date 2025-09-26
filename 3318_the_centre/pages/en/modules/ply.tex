@@ -1,0 +1,80 @@
+\def\plyset{
+  {{Pattern Length}/{Length of pattern in bars}/{Length of pattern in bars. Each pattern is divided into number of steps configured by Inputs:Pulses}},
+  {{Gate length}/{Length of gate}/{
+    \makesupopt{{
+      {{Trigger}/{Trigger only}/{Unsustained signal when the pulse occurs}}%
+    }}%
+  }}%
+}
+
+\def\plyinp{
+  {{Clock}/{Clock CV Source}/{Clock source to synchronise Poly Rhythm with other modules.}},
+  {{Reset}/{Reset CV Source}/{Reset position for all channels in pattern upon trigger}},
+  {{Pulses 1}/{Number of pulses for channel 1}/{Number of steps that the pattern gets divided into and generating a beat at the beginning of each step}},
+  {{Pulses 2}/{Number of pulses for channel 2}/{Number of steps that the pattern gets divided into and generating a beat at the beginning of each step}},
+  {{Pulses 3}/{Number of pulses for channel 3}/{Number of steps that the pattern gets divided into and generating a beat at the beginning of each step}},
+  {{Pulses 4}/{Number of pulses for channel 4}/{Number of steps that the pattern gets divided into and generating a beat at the beginning of each step}}%
+}
+
+\def\plyout{
+  {{Gate 1}/{Gate 1 Output}/{Output of Poly Rhythm setting gate to high upon beat}},
+  {{Gate 2}/{Gate 2 Output}/{Output of Poly Rhythm setting gate to high upon beat}},
+  {{Gate 3}/{Gate 3 Output}/{Output of Poly Rhythm setting gate to high upon beat}},
+  {{Gate 4}/{Gate 4 Output}/{Output of Poly Rhythm setting gate to high upon beat}}%
+}
+
+\def\refcardply{
+  \makereferencecard{
+    NA%\textcolor{black}{\textbf{[ROTATE]}} Turn note on or off and in Scale Selector turn to Scale Select mode
+  }{
+    \newline\textcolor{black}{\textbf{[RESET]}} Resets all channels in pattern upon release of button,
+    \newline\textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \newline\textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \newline\textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+  }{
+    Slect number of steps for channel 1,
+    Slect number of steps for channel 2,
+    Slect number of steps for channel 3,
+    Slect number of steps for channel 4,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{%
+    \textcolor{black}{\textbf{[PLEN]}} Select pattern length,
+    NA,
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[CLK]}} Select CLOCK source CV,
+    NA,
+    NA,
+    NA,
+  }
+}
+
+
+\def\modnameshortply{PLY}
+\def\modnamelongply{Polyrhythm}
+
+\newcommand{\modply}{
+  \newpage
+  \modmakesection{ply}  
+  \def\modname{PLY - Polyrhythm}% chktex 8
+  
+
+  \paragraph*{}
+  Polyrhythm (PLY) generates generates contrasting rhythms within a pattern.
+
+  \showrefcardsection{ply}
+
+  \subsection{Operation}
+  \paragraph*{} Polyrhythm generates 4 channels of rhythms by dividing pattern duration into equal number of steps decided by input parameter Inputs:Steps. Pattern is defined as period of time covering number of bars (4 beats or 4 quarternotes) at given BPM (beats). Number of steps in channel can be controlled via Inputs:Beats X (where X is the number of channel 1 to 4).
+  \newline$\blacksquare$ Without clock source the BPM is fixed at 120 BPM the pattern
+  
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\plyset}{{Settings}}
+  \tableofoptionsnew{\plyinp}{{Inputs}}
+  \tableofoptionsnew{\plyout}{{Outputs}}
+}
+

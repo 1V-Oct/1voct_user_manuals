@@ -1,0 +1,37 @@
+\section{Calibration}
+
+
+TL;DR: I came here to calibrate and not read poems... Here is YouTube video that shows Calibration of The Centre:
+
+% \href{https://www.youtube.com/watch?v=uEFr7RkuP7k}{https://www.youtube.com/watch?v=uEFr7RkuP7k}
+\underline{\url{https://www.youtube.com/watch?v=uEFr7RkuP7k}}
+
+\qrdlink
+  [This video shows how to calibrate The Centre]
+  {https://www.youtube.com/watch?v=uEFr7RkuP7k}
+  {Calibration of The Centre}
+
+\subsection{Why Calibrate?}
+In the ideal world things are well... ideal. Although in real world things are not perfect and this is where term tolerance kicks in. Every electronic component has tolerance. Usually measured in percentage and usually this tolerance is like \%1 for resistors and \%5 for capacitors. Each circuit contains multiple electronic components and tolerances of those components add together making quite a huge percentage tolerance of the circuit. When circuit is operating the tolerances of this circuit do not change. Tolerance just change component properties at manufacturing stage. Therefore the circuit is always stable but might be slightly off. 
+
+Of course there are different ways to deal with the non-ideal circuits. Some of them are expensive (on hardware level) and some of them are quite cheap. One of those methods is calibration.
+
+Calibration allows to establish default values returned by circuit under controlled environment and use them as reference points.
+
+\subsection{Calibration of music instruments}
+
+Many music instruments need calibration. Even tuning the piano or guitar. For digital or hybrid modules like The Centre the calibration process is to connect a well calibrated source of pitch that will provide stable value of voltages at two or more reference points. Usually two points are enough. The software will recalculate all the values and will apply proper algorithms to always generate correct pitch for voltages.
+
+\subsection{Calibrating The Centre}
+
+The Centre needs two voltages separated by 2V. In other words, the centre needs a Control Voltage (CV) for two C notes separated by 2 octaves. Ideally that would be C1 and C3 but many current MIDI keyboards supply only voltages between 0V and 5V which translates to C2 and C8. Yep, there is no standard for V/Oct assignemnt of voltage to notes so at 1V/OCT we assume that C2 is 0V. It does not matter anyway, because every V/Oct input has Octave and Note correction anyway.
+
+To calibrate V/OCT inputs press two middle buttons (button 2 + 3) and it will bring System Menu. From there select "Calibrate" and press encoder down (select).
+
+Now every channel can be calibrated individually or 4 inputs at the same time. Use encoder to select channel or all channels (when calibrating all channels use signal splitter to send CV voltage for calibration (pitch) to all inputs).
+
+Now follow instructions on screen. First send any note from your keyboard except note C (we calibrate by C notes) and press Start (button 1). Now press any low octave C note (lets say C3) wait 10 seconds for next instructions, move two octaves up and send note C5. Wait 10 seconds and your unit is fully calibrated.
+
+Now you can Save your calibration settings and enjoy your fully calibrated unit.
+
+

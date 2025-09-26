@@ -1,0 +1,87 @@
+\def\eucset{
+  {{Step Length}/{Length of single Step}/{Length of single step, patterns are consisting of arbitrary number of equal length}}%
+  % {{Gate length}/{Length of gate}/{
+  %   \makesupopt{{
+  %     {{Trigger}/{Trigger only}/{Unsustained signal when the pulse occurs}}%
+  %   }}%
+  % }}%
+}
+
+\def\eucinp{
+  {{Clock}/{Clock CV Source}/{Clock source to synchronise Poly Rhythm with other modules.}},
+  {{Reset}/{Reset CV Source}/{Reset position for all channels in pattern upon trigger}},
+  {{Steps 1}/{Number of Steps for Channel 1}/{Number of Steps within a channel.}},
+  {{Beats 1}/{Number of Beats for Channel 1}/{Number of beats within a channel.}},
+  {{Offset 1}/{Offest of first step for  Channel 1}/{Offset of first step for channel}},
+  {{Steps 2}/{Number of Steps for Channel 2}/{Number of Steps within a channel.}},
+  {{Beats 2}/{Number of Beats for Channel 2}/{Number of beats within a channel.}},
+  {{Offset 2}/{Offest of first step for  Channel 2}/{Offset of first step for channel}},
+  {{Steps 3}/{Number of Steps for Channel 3}/{Number of Steps within a channel.}},
+  {{Beats 3}/{Number of Beats for Channel 3}/{Number of beats within a channel.}},
+  {{Offset 3}/{Offest of first step for  Channel 3}/{Offset of first step for channel}},
+  {{Steps 4}/{Number of Steps for Channel 4}/{Number of Steps within a channel.}},
+  {{Beats 4}/{Number of Beats for Channel 4}/{Number of beats within a channel.}},
+  {{Offset 4}/{Offest of first step for  Channel 4}/{Offset of first step for channel}},
+}
+
+\def\eucout{
+  {{Gate 1}/{Gate 1 Output}/{Output of Channel 1 setting gate to high upon beat}},
+  {{Gate 2}/{Gate 2 Output}/{Output of Channel 2 setting gate to high upon beat}},
+  {{Gate 3}/{Gate 3 Output}/{Output of Channel 3 setting gate to high upon beat}},
+  {{Gate 4}/{Gate 4 Output}/{Output of Channel 4 setting gate to high upon beat}}%
+}
+
+\def\refcardeuc{
+  \makereferencecard{
+    NA%\textcolor{black}{\textbf{[ROTATE]}} Turn note on or off and in Scale Selector turn to Scale Select mode
+  }{
+    \textcolor{black}{\textbf{[RESET]}} Resets all channels in pattern to start position upon release of button),
+    \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+  }{
+    \textcolor{black}{\textbf{[STEP]}} Number of steps for Channel 1,
+    \textcolor{black}{\textbf{[BEAT]}} Number of beats for Channel 1,
+    \textcolor{black}{\textbf{[STEP]}} Number of steps for Channel 2,
+    \textcolor{black}{\textbf{[BEAT]}} Number of beats for Channel 2,
+    \textcolor{black}{\textbf{[STEP]}} Number of steps for Channel 3,
+    \textcolor{black}{\textbf{[BEAT]}} Number of beats for Channel 3,
+    \textcolor{black}{\textbf{[STEP]}} Number of steps for Channel 4,
+    \textcolor{black}{\textbf{[BEAT]}} Number of beats for Channel 4,
+  }{%
+    \textcolor{black}{\textbf{[OFFSET1]}} Starting offset for Channel 1,
+    \textcolor{black}{\textbf{[OFFSET2]}} Starting offset for Channel 2,
+    \textcolor{black}{\textbf{[OFFSET3]}} Starting offset for Channel 3,
+    \textcolor{black}{\textbf{[OFFSET4]}} Starting offset for Channel 4,
+    \textcolor{black}{\textbf{[CLK]}} Select CLOCK source CV,
+    \textcolor{black}{\textbf{[LEN]}} Adjust length of a Step,
+    NA,
+    NA,
+  }
+}
+
+
+
+\def\modnameshorteuc{EUC}
+\def\modnamelongeuc{Euclidean Rhythm Generator}
+
+\newcommand{\modeuc}{
+  \newpage
+  \modmakesection{euc}
+
+  \paragraph*{}
+  Euclidean Rhythm Generator (EUC) produces rhythmic pattern based on Euclid's algorithm to divide periods of time into equal parts.
+
+  \showrefcardsection{euc}
+
+  \subsection{Operation}
+  \paragraph*{} Polyrhythm generates 4 channels of rhythms by dividing pattern duration into equal steps. Pattern is defined as period of time covering number of bars (4 beats or 4 quarternotes) at given BPM (beats). Number of steps in channel can be controlled via Inputs:Beats X (where X is the number of channel 1 to 4).
+  \newline$\blacksquare$ Without clock source the BPM is fixed at 120 BPM the pattern
+  
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\eucset}{{Settings}}
+  \tableofoptionsnew{\eucinp}{{Inputs}}
+  \tableofoptionsnew{\eucout}{{Outputs}}
+}
+

@@ -1,0 +1,37 @@
+\section{Clocks}
+
+Many modules require clock to ensure synchronisation to given time interval requirements. Whether this is simple Random Note 
+Generator (RNG) or Low Frequency Shaper (LFS) the supplied clock ensures that duration of quarter note in one module
+ equals duration of quarter note in another module. There are multiple standards or just ad-hoc designs defining different 
+ number of clock pulses per beat. The most popular one is MIDI standard that estabilished 24 clocks per quarter note (24 PQN).
+
+The Centre by default uses 24 clocks per quarter note (beat) but this value can be changed globally for all modules. That setting can be adjusted in Global Settings and can vary between 24, 12, 6, 4, 3, 2 and 1 clocks per beat.
+
+\begin{enumerate}
+  \item[$\blacksquare$] \textit{When using MIDI to control The Centre it is recommended to keep 24 CPQN (Clocks Per Quarter Note) to adhere to MIDI standard.}
+\end{enumerate}
+
+\section{BPM}
+
+Beats Per Minute (BPM) is a measure used in electronic music to define time interval of music. Beat in electronic 
+music is equivalent to quarter note and there are 4 quarter notes to bar (4/4 tempo). The Centre by default configures all modules 
+to work at 120BPM. 120 Beats Per Minute thats 120 beats per 60 seconds and in the end one quarter note duration is 
+half second or 500 milliseconds (ms). To change default tempo it is necessary to provide modules with clock 
+input via Clock CV (CLK) on modules inputs. The clock can be submitted via CVY input, MIDI input or generated 
+internally via Clock Module (CLK). By adding CLK module we can generate Clock for other modules derived from 
+user defined tempo.
+
+
+
+% \begin{enumerate}
+%   \item Download latest firmware release from Github 
+% \url{https://github.com/1V-Oct/3318_the_centre_releases/releases}
+% %  - filename\: the_centre_v4.fwx
+%   \item  Copy downloaded firmware file into SD Card (make sure that the filename is: 'the\_centre\_v4.fwx' and it is in root directory of your card)
+%   \item Insert SD Card into The Centre
+%   \item Power on The Centre or perform Reset
+% %[[Reset|System Menu#Reset]]
+%   \item Go to [[System Menu]] and check firmware version. 
+%   \item[$\blacksquare$] \textit{NOTE: Sometimes Safari, Explorer and other browsers add some extra bits to the filename like  '(1)' or '\_1' to indicate that it is different file than already downloaded. Please rename the file to the correct name.}
+  
+% \end{enumerate}

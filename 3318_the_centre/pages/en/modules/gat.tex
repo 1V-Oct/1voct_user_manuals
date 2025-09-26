@@ -1,0 +1,81 @@
+\def\gatset{
+  {{NONE}/{}/{}}%
+}
+
+\def\gatinp{
+  {{Clock}/{Clock CV Source}/{Pulse CV source to base divisions on}},
+  {{Reset}/{Reset CV Source}/{Reset signal to synchronise position of all dividers by setting all positions to start}},
+  {{Intverval 1}/{Generated pulse interval}/{Interval between gate divisions whn the gate becomes high}},
+  {{Gate Len 1}/{Length of pulse}/{Number of beats within a channel.}},
+  {{Delay 1}/{Delay before triggering pulse}/{Delay is the duration before pulse signal turns gate high}},
+  {{Intverval 2}/{Generated pulse interval}/{Interval between gate divisions whn the gate becomes high}},
+  {{Gate Len 2}/{Length of pulse}/{Number of beats within a channel.}},
+  {{Delay 2}/{Delay before triggering pulse}/{Delay is the duration before pulse signal turns gate high}},
+  {{Intverval 3}/{Generated pulse interval}/{Interval between gate divisions whn the gate becomes high}},
+  {{Gate Len 3}/{Length of pulse}/{Number of beats within a channel.}},
+  {{Delay 3}/{Delay before triggering pulse}/{Delay is the duration before pulse signal turns gate high}},
+  {{Intverval 4}/{Generated pulse interval}/{Interval between gate divisions whn the gate becomes high}},
+  {{Gate Len 4}/{Length of pulse}/{Number of beats within a channel.}},
+  {{Delay 4}/{Delay before triggering pulse}/{Delay is the duration before pulse signal turns gate high}}%
+}
+
+\def\gatout{
+  {{Gate 1}/{Gate 1 Output}/{Output of Channel 1 pulse signal}},
+  {{Gate 2}/{Gate 1 Output}/{Output of Channel 2 pulse signal}},
+  {{Gate 3}/{Gate 1 Output}/{Output of Channel 3 pulse signal}},
+  {{Gate 4}/{Gate 1 Output}/{Output of Channel 4 pulse signal}}%
+}
+
+\def\refcardgat{
+  \makereferencecard{
+    \textcolor{black}{\textbf{[ROTATE]}}Select the Gate Divider Channel 1 to 4,
+    }{
+    \textcolor{black}{\textbf{[ON/OFF]}} Turning module On or Off (Bypass),
+    \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+  }{
+    \textcolor{black}{\textbf{[INTV1]}} Interval for Channel 1,
+    \textcolor{black}{\textbf{[GLEN1]}} Gate length for Channel 1,
+    \textcolor{black}{\textbf{[INTV2]}} Interval for Channel 2,
+    \textcolor{black}{\textbf{[GLEN2]}} Gate length for Channel 2,
+    \textcolor{black}{\textbf{[INTV3]}} Interval for Channel 3,
+    \textcolor{black}{\textbf{[GLEN3]}} Gate length for Channel 3,
+    \textcolor{black}{\textbf{[INTV4]}} Interval for Channel 4,
+    \textcolor{black}{\textbf{[GLEN4]}} Gate length for Channel 4,
+  }{%
+    \textcolor{black}{\textbf{[DLY1]}} Delay for Channel 1,
+    \textcolor{black}{\textbf{[DLY2]}} Delay for Channel 2,
+    \textcolor{black}{\textbf{[DLY3]}} Delay for Channel 3,
+    \textcolor{black}{\textbf{[DLY4]}} Delay for Channel 4,
+    \textcolor{black}{\textbf{[CLK]}} Select CLOCK source CV,
+    \textcolor{black}{\textbf{[RST]}} Select RESET source CV,
+    NA,
+    NA,
+  }
+}
+
+\def\modnameshortgat{GAT}
+\def\modnamelonggat{Gate Divider}
+
+\newcommand{\modgat}{
+  \newpage
+  \modmakesection{gat}
+
+  \paragraph*{}
+  Gate Divider (GAT) divides pulse clock signal (clock) into longer period pulse clock signals.
+
+  \refcardgat%
+
+  \subsection{Operation}
+  \paragraph*{} Gate Divider (GAT) generates pulse signal (square wave with different phase width) upon disecting and dividing input pulse signal (usually clock). The input signal triggers counter in 4 channels and based on set parameters creates longer pulse signals with modified width of phase (both negative and positive). 
+  \newline$\blacksquare$ Such division can be seen as turning clock signal into evenly spaced notes with evenly spaced rests or evenly spaced notes triggers with particulat notes lengths.
+  \newline$\bigstar$ Divided gates are great source of repetetive patterns to be used as repetetive thythm gereator (drum machine). Triggering drum samples from gate divider and setting gate divider divisions to different notes can create regular beat pattern.
+
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\gatset}{{Settings}}
+  \tableofoptionsnew{\gatinp}{{Inputs}}
+  \tableofoptionsnew{\gatout}{{Outputs}}
+}
+

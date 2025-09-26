@@ -1,0 +1,75 @@
+\def\outset{
+  % {{Audio Output}/{Audio Output of Drum Rack}/{Selects audio output destination for OUT. All 4 sample slots are sharing the same audio output where they get downmixed \newline See: \underline{\nameref{section:audiooutputs}}}},
+}
+
+\def\outinp{
+  {{Release}/{Release for Limiter}/{Release rate for limiter}}%
+}
+
+\def\outout{
+  % {{Gate 1}/{Gate 1 Output}/{Output of Channel 1 setting gate to high upon beat}},
+  % {{Gate 2}/{Gate 2 Output}/{Output of Channel 2 setting gate to high upon beat}},
+  % {{Gate 3}/{Gate 3 Output}/{Output of Channel 3 setting gate to high upon beat}},
+  % {{Gate 4}/{Gate 4 Output}/{Output of Channel 4 setting gate to high upon beat}}%
+}
+
+\def\refcardout{
+  \makereferencecard{
+    % \textcolor{black}{\textbf{[ROTATE]}} Select sample slot
+    % \newline\textcolor{black}{\textbf{[CLICK]}} Enter file browser to select sample from SD card
+    NA
+  }{
+    % \textcolor{black}{\textbf{[On/Off]}} Controls module on and off,
+    % \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    % \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    % \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{
+    \textcolor{black}{\textbf{[RELEASE]}} Release speed of limiter,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{%
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }
+}
+
+
+
+\def\modnameshortout{OUT}
+\def\modnamelongout{Output}
+
+\newcommand{\modout}{
+  \newpage
+  \modmakesection{out}
+
+  \paragraph*{}
+  Output (OUT) is a limiter and clipper for oversteered audio levels.
+
+  \showrefcardsection{out}
+
+  \subsection{Operation}
+  \paragraph*{} Output module acts as limiter and when the audio signal exceeds reproducible range it ducks (limits) audio signal with instant reaction (quick Attack mode) and then releases ducking according to \textbf{RELEASE} input setting. The high value of Release (short time) will bring the audio level back quickly thus making limiter behave like a siplistic compressor. Longer Release rates (smaller value) will make limiter produce slightly wobbly sound for audio levels that peak above limit.
+  % \newline$\blacksquare$ Without clock source the BPM is fixed at 120 BPM the pattern
+  
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\outset}{{Settings}}
+  \tableofoptionsnew{\outinp}{{Inputs}}
+  \tableofoptionsnew{\outout}{{Outputs}}
+}
+

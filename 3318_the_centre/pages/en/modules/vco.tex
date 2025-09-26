@@ -1,0 +1,111 @@
+% \def\lfsbutmain{
+%    {Edit}/{Invokes Shape Editor},
+%    {Set}/{Open Settings},
+%    {Inputs}/{Open Inputs},
+%    {Back}/{Return to Patch Menu}
+% }
+
+
+
+\def\vcoset{
+  {{Audio Output}/{Audio Output of VCO}/{Selects audio output destination for VCO.
+  \newline See: \underline{\nameref{section:audiooutputs}}}},
+  {{Waveform}/{Selection of Waveform}/{
+    \makesupopt{{
+      {{Triangle}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      {{Square}/{Standard square waveform.  The waveform is affected by Input: Skew that modifies PWM (Pulse Width Modulation) of the waveform}},
+      {{Sine}/{Standard sine waveform.  The waveform is affected by Input: Skew that modifies it to two assymetric sine phases.
+      \newline$\blacksquare$ Adjusting certain ratios of negative and positive half sines by modifying Skew parameter will add very interestic harmonics that go well with Diode Ladder filter.
+      }}%
+    }}
+  }},
+}
+% \def\inpclock{
+%    {{Clock}/{Clock for timing oscillator's phase duration in BPM mode (otherwise 120BPM is used)}/{}}
+% }
+
+% \def\vcoinp{
+%   {{Unison}/{Unison mode (1-16 voices)}/{Enables unison mode and controls number of oscillators running in parallel.}},
+%   {{Detune}/{Detune oscillators}/{Detunes oscillators in Unison mode by spreading them equally in Detune range. With detune set at maximum the spread range is 2 semi-tones. With odd number of oscillators the centre oscillator will always be following pitch from Note Input. For even number of oscillators there is no oscillator followin Note and each oscillator is detuned +/- from the center note. \newline $\bigstar$ \textit{With Unison running two oscillators, detune set to maximum (1.0) and pitch set at note D there is one oscillator playing note C\# and one playing note D\# (no oscillator is actually playing note C)}}},
+%   {{Wavetable}/{Wavetable position}/{Adjusts position of waveform in wavetable. When controlled by CV allows changing texture of sound by scanning through set of waveforms contained in wavetable}},
+%   {{Reset Osc}/{Reset Oscillator CV input}/{When connected with CV input and set to high level it resets phase of oscillator to 0. Useful to run oscillators in Sync}}%
+% }
+
+\def\vcoinp{
+  {{NOTE}/{Pitch control of oscillator}/{Note controls pitch or frequency of oscillator.
+  \newline See: \underline{\nameref{section:pitchcontrol}}
+  \makesupopt{{
+    {{VOCT}/{1V/Oct input for note control/}},
+    {{OCT}/{Tuning note by octaves +/- 8 octaves}},
+    {{NOTE}/{Tuning note by semitones +12 semitones (one octave)}},
+    {{FINE}/{Tuning note by cents +/- one semitone}}%
+  }}%
+  }},
+  {{AM}/{Amplitude Modulation}/{Amplitude modulation changes sound level. Connected with CV signal of Envelope acts as VCA. Connected with LFO creates ring modulator}},
+  {{FM}/{Frequency Modulation}/{Frequency modulation is a change of frequency by modulation.
+  \newline$\blacksquare$  Adding a modulator to CV input of FM and having it running at certain ratio of frequency to the actual VCO will create interesting sound texture}},
+  {{Skew}/{Modify assymetry of waveform}/{Skew affects assymetry of waveform by turning Triangle into Saw or Ram or modyfying PWM of Square wave. See above in Settings: Waveform}},
+  {{Hard Sync}/{Reset phase of oscillator}/{Resets phase of oscillator and starts oscillating from the beginning of waveform. 
+  \newline$\bigstar$ By connecting two VCOs detuned slightly through VCO1 Ooutput: Reset to VCO2 Input: Hard Sync we can create ver rich texture of simple oscillation}},
+  {{PM}/{Phase Modulation}/{Phase modulation allows modulator to modify phase of oscillator. Unlike FM (Frequency Modulation) Phase Modulation can operate oscillator in reverse mode by turning its direction.}}%
+} 
+
+\def\vcoout{
+    {{OSC}/{Output of VCO}/{Output of oscillator signal}},
+    {{RST}/{Oscillator reset}/{Set to high when oscillator phase resets}}%
+}
+
+\def\refcardvco{
+  \makereferencecard{
+    \textcolor{black}{\textbf{[ROTATE]}} Switches between waveforms (Triangle Square Sine),
+  }{
+    \textcolor{black}{\textbf{[ON/OFF]}} Turning module On or Off (Bypass),
+    \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+  }{
+    \textcolor{black}{\textbf{[SKEW]}} Adjust level of PWM or PWM-Style effect on waveform,
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[AM]}} Amplitude Modulation Level (can be use as VCA),
+    \textcolor{black}{\textbf{[FM]}} Frequency Modulation Level,
+    \textcolor{black}{\textbf{[PM]}} Phase Modulation Level,
+    NA,
+    NA,
+  }{
+    NA,
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[NOTE-VOCT]}} Select CV input for note's V/OCT,
+    \textcolor{black}{\textbf{[NOTE-OCT]}} Tune note by octave (+/- 8 octaves),
+    \textcolor{black}{\textbf{[NOTE-NOTE]}} Tune sound by semitone (+12 semitones one octave),
+    \textcolor{black}{\textbf{[NOTE-FINE]}} Fine-tune note in cents (+/- semitone),
+    Select Audio Output Destiantion,
+    }
+}
+
+\def\modnameshortvco{VCO}
+\def\modnamelongvco{Voltage Controlled Oscillator}
+
+\newcommand{\modvco}{
+  \newpage
+  \modmakesection{vco}
+
+  \paragraph*{}
+Voltage Controlled Oscillator is a sound source generating oscillations of waveforms.
+  
+  \showrefcardsection{vco}
+
+  \subsection{Waveforms}
+  \paragraph*{}VCO takes basic shapes: Sine, Triangle and Square and oscillates the single phase of those waveforms at given frequency. Each \textbf{Waveform} can be modified by bending it's pivot params with the Input:Skew CV input. Applying Skew parameter to triangle turns it into either \textit{Ramp} or \textit{Saw}. For Square, Skew parameter adjusts PWM (Pulse Width Modulation) which modifies length of square pulse. For Sine, Skew parameter changes the ratio of phase for positive and negative parts of Sine wave.
+
+
+  \newpage
+  \section*{\modname}  
+  \tableofoptionsnew{\vcoset}{{Settings}}%
+  \tableofoptionsnew{\vcoinp}{{Inputs}}%
+  \tableofoptionsnew{\vcoout}{{Outputs}}%
+}
+
+
+

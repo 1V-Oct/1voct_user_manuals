@@ -1,0 +1,137 @@
+\def\midset{
+  {{Channel}/{MIDI Channel to receive messages}/{
+    \makesupopt{{
+      {{ALL}/{Listen on all channels and any note arriving on any channel will trigger gate action}},
+      {{1-16}/{Selected MIDI channel}}%
+   }}
+  }},
+  {{MODE}/{Mode of MIDI operation}/{
+    Switch between different modes of operation
+    \makesupopt{{
+      {{Single Note}/{Operation in mono mode with every new note generating outputs on NTE1, GAT1 and VEL1 outpus}},
+      {{Polyphonic}/{Switches outputs to 4 outputs and consecutive notes on on 4 channels arriving will generate signals on outpus NTE1-4, GAT1-4 and VEL1-4}},
+      {{Drum Rack}/{Drum rack mode when NOTE is being matched with output channel number and on MIDI NOTE ON the gate and velocity are set}}%
+   }}%
+  }},
+  {{Drum Note 1-4}/{Assigned note to output in Drum mode}/{
+    Assigns note to channel in Drum Rack mode. The note when matched only will allow Gate (GATx) and Velocity (VELx) of channel to be set.
+  }}%
+} 
+
+\def\midinp{
+  {{Level 1-4}/{Volume Level for channel}/{Volume Level for channel or Amplitude Modulation Level}}%
+  {{Pan 1-4}/{Balance for channel}/{Balance (Left-Right panning) for channel 1-4}}%
+}
+
+\def\midout{
+  {{NTE1-4}/{Pitch Output of received note}/{Note coresponding to MIDI note on given channel}},
+  {{GTE1-4}/{Gate Output of received note}/{Output of gate}},
+  {{VEL1-4}/{Velocity Output of received note}/{Output of velocity}}%
+}
+
+
+\def\refcardmid{
+  \makereferencecard{\textcolor{black}{\textbf{[ROTATE]}} Alternate between MIDI modes (Single, Poly, Drum)\newline\textcolor{black}{\textbf{[CLICK]}} N/A
+    }{
+      NA,
+      NA,
+      NA,
+      NA
+  }{
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA
+}{%
+    \textcolor{black}{\textbf{\mbox{[NOTE 1]}}} In Drum Rack selects note trigger for output 1,
+    \textcolor{black}{\textbf{\mbox{[NOTE 2]}}} In Drum Rack selects note trigger for output 2,
+    \textcolor{black}{\textbf{\mbox{[NOTE 3]}}} In Drum Rack selects note trigger for output 3,
+    \textcolor{black}{\textbf{\mbox{[NOTE 4]}}} In Drum Rack selects note trigger for output 4,
+    \textcolor{black}{\textbf{[MIDI-CH]}} Change MIDI channel,
+    NA,
+    NA,
+    NA
+}
+}
+
+\def\modnameshortmid{MID}
+\def\modnamelongmid{MIDI}
+
+\newcommand{\modmid}{
+  \newpage
+  \modmakesection{mid}
+
+  \paragraph*{}
+  MIDI (MID) Allows processing external MIDI input and converting it into internal signals
+  \showrefcardsection{mid}
+
+  \subsection{Operation}
+  \paragraph*{} MIDI (MID) is an utility that allows converting external MIDI input into NOTE, GATE and VELOCITY signals. External MIDI input requires extension for The Centre. 
+  Those extensions currently are 1V/Oct's Tamar and Taipo modules.
+  \newline$\blacksquare$ MIDI Note velocity will be sent on Output VEL
+  \newline$\blacksquare$ There can be multiple MIDI modules running at the same time responding on different channels
+
+  \newpage
+  \subsection{Operating Modes}
+  Use \textcolor{black}{\textbf{[ROTATE]}} to alternate between MIDI modes: Single Note, Polyphony, Drum Rack.
+  \newline$\blacksquare$ Intensity of GREEN colour indicates the velocity of the note.
+
+  \subsubsection{Single Note}
+  In this mode every new incoming MIDI note replaces current note and generates single output of pitch, gate and velocity.
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{mid1.png}
+    \caption{MIDI module in Single Note mode}
+    \label{fig:midsinglenote}
+  \end{figure}
+
+  \subsubsection{Polyphony}
+  Polyphonic mode allows 4 MIDI notes to be processed at the time and generate for outputs consisting of note pitch, gate and velocity named NTEx, GATx, VELx with x being respectfully within 1 and 4. 
+  The notes won't be replaced and will occupy the given output until the MIDI note is released (send MIDI NOTE OFF message). That means pressing 5th and subsequent notes on MIDI controller will 
+  not replace notes unlike Single Note mode.
+  \newline$\bigstar$ Create 4 WTO modules each one Note-VOCT input routed from MID.NTEx All 4 
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{mid2.png}
+    \caption{MIDI module in Polyphony mode}
+    \label{fig:midpolyphony}
+  \end{figure}
+
+  \subsubsection{Drum Rack}
+  Drum Rack allows allocating (fixing) the notes that will respond to MIDI notes being sent. This means 4 channel output consisting of NTEx, GATx and VELx (with x being in range 1 to 4) will be only triggered
+  when the requested note is being sent. For example setting note C2 (General MIDI - Bass Drum 1 as on below picture) in output number 1, will only trigger gate when that note is being sent by MIDI.
+  Please be aware that BeatStep Pro from Arturia sends different notes in Drum mode and D is sent as C-sharp, E as D, etc.
+  Each output can be then routed to different modules, for example 4 Sample (SMP) modules playing different samples of drums.
+  \newline$\blacksquare$ In Drum Rack mode attention need to be paid to select a MIDI channel that Drum Rack operates on to not pickup notes from other channels.
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{mid3.png}
+    \caption{MIDI module in Drum Rack mode}
+    \label{fig:middrumrack}
+  \end{figure}
+
+  % \FloatBarrier
+  % \newpage
+  % \begin{wrapfigure}{r}{0.5\textwidth}
+  %   \centering
+  %   \includegraphics[width=0.7\linewidth]{mid1.png}
+  %   \caption{Arpeggiator with rest set on STEP 1}
+  %   \label{fig:midrests}
+  % \end{wrapigure}
+
+  \FloatBarrier
+  $\blacksquare$ In Drum Rack menu use ATT1-4 knobs to change notes for each drum channel respectively. Use ATT5 to change MIDI channel.
+
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\midset}{{Settings}}
+  \tableofoptionsnew{\midinp}{{Inputs}}
+  \tableofoptionsnew{\midout}{{Outputs}}
+}
+

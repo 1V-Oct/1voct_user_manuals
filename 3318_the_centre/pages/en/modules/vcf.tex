@@ -1,0 +1,139 @@
+% \def\lfsbutmain{
+%    {Edit}/{Invokes Shape Editor},
+%    {Set}/{Open Settings},
+%    {Inputs}/{Open Inputs},
+%    {Back}/{Return to Patch Menu}
+% }
+
+
+
+\def\vcfset{
+  {{Audio Output}/{Audio Output of VCF}/{Selects audio output destination for sound flitered through VCF.
+  \newline See: \underline{\nameref{section:audiooutputs}}}},
+  {{Audio Input}/{Audio signal to be filtered through VCF}/{Audio signal (can be any signal) tthat will be filtered through different type of filter}},
+  {{Filter Type}/{Selection of Filter}/{
+    \makesupopt{{
+      {{OP Lowpass, OP Highpass}/{One Pole filters.}/{The simpliest filter with single pole but giving nice results in reducing high frequency}},
+      % {{OP Highpass}/{One Pole High Pass filter.}/{The simpliest filter with single pole but giving nice results in reducing low frequency}},
+      {{BQ Lowpass, Highpass, Bandpass, Low Shelf, High Shelf, Peaking, Notch, Allpass}/{Biquad filters}},
+      % {{BQ Highpass}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{BQ Bandpass}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{BQ Low Shelf}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{BQ High Shelf}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{BQ Peaking}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{BQ Notch}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{BQ Allpass}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      {{DL Ladder}/{Diode Ladder filter}},
+      {{MG Ladder}/{MG Type Ladder filter}},
+      {{LD Lowpass 12, Highpass 12, Bandpass 12, Lowpass 24, Highpass 24, Bandpass 24}/{Ladder filters 12dB and 24dB versions}},
+      % {{LD Lowpass 24}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{LD Highpass 12}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{LD Highpass 24}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{LD Bandpass 12}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{LD Bandpass 24}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}}%
+    }}%
+  }}%
+}
+% \def\inpclock{
+%    {{Clock}/{Clock for timing oscillator's phase duration in BPM mode (otherwise 120BPM is used)}/{}}
+% }
+
+% \def\vcfinp{
+%   {{Unison}/{Unison mode (1-16 voices)}/{Enables unison mode and controls number of oscillators running in parallel.}},
+%   {{Detune}/{Detune oscillators}/{Detunes oscillators in Unison mode by spreading them equally in Detune range. With detune set at maximum the spread range is 2 semi-tones. With odd number of oscillators the centre oscillator will always be following pitch from Note Input. For even number of oscillators there is no oscillator followin Note and each oscillator is detuned +/- from the center note. \newline $\bigstar$ \textit{With Unison running two oscillators, detune set to maximum (1.0) and pitch set at note D there is one oscillator playing note C\# and one playing note D\# (no oscillator is actually playing note C)}}},
+%   {{Wavetable}/{Wavetable position}/{Adjusts position of waveform in wavetable. When controlled by CV allows changing texture of sound by scanning through set of waveforms contained in wavetable}},
+%   {{Reset Osc}/{Reset Oscillator CV input}/{When connected with CV input and set to high level it resets phase of oscillator to 0. Useful to run oscillators in Sync}}%
+% }
+
+
+
+\def\vcfinp{
+  {{NOTE}/{Pitch control of oscillator}/{Note controls pitch or frequency of oscillator.
+  \newline See: \underline{\nameref{section:pitchcontrol}}
+  \makesupopt{{
+    {{VOCT}/{1V/Oct input for note control}},
+    {{OCT}/{Tuning note by octaves +/- 8 octaves}},
+    {{NOTE}/{Tuning note by semitones +12 semitones (one octave)}},
+    {{FINE}/{Tuning note by cents +/- one semitone}}%
+  }}%
+  }},
+  {{Cutoff}/{Cutoff Frequency}/{Frequency boundary at which filter starts filtering out the signal}},
+  {{Resonance}/{Resonance}/{A level of suppression or enhancement of signal}},
+  {{Gain}/{Pre-Gain of Signal}/{Amplification of signal prior to filtering}},
+} 
+
+\def\vcfout{
+  {{NONE}/{}}%
+}
+  
+\def\refcardvcf{
+  \makereferencecard{
+    \textcolor{black}{\textbf{[ROTATE]}} Switch between filter types
+  }
+  {
+    \textcolor{black}{\textbf{[ON/OFF]}} Turning module On or Off (Bypass),
+    \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu
+  }
+  {
+    \textcolor{black}{\textbf{[CTO]}} Adjust Cutoff Level,
+    \textcolor{black}{\textbf{[RES]}} Adjust Resonance,
+    \textcolor{black}{\textbf{[GAI]}} Adjust Gain of filter,
+    NA,
+    \textcolor{black}{\textbf{[VOCT]}} Attenuation of Key Tracking CV,
+    \textcolor{black}{\textbf{[VOCT]}} Select Keytracking CV,
+    NA,
+    NA,
+  }
+  {
+    \textcolor{black}{\textbf{[CTO]}} Attanuate Cutoff CV,
+    \textcolor{black}{\textbf{[RES]}} Attanuate Resonance CV,
+    \textcolor{black}{\textbf{[GAI]}} Attanuate Gain of filter CV,
+    \textcolor{black}{\textbf{[CTO]}} Cutoff CV,
+    \textcolor{black}{\textbf{[RES]}} Resonance CV,
+    \textcolor{black}{\textbf{[GAI]}} Gain of filter CV,
+    Select Audio Input,
+    Select Audio Output,
+  }
+}
+    
+
+
+\def\modnameshortvcf{VCF}
+\def\modnamelongvcf{Voltage Controlled Filter}
+
+\newcommand{\modvcf}{
+  \newpage
+  \modmakesection{vcf}
+
+  \paragraph*{}
+Voltage Controlleed Filter (VCF) is a set of digital filters with control of Cutoff, Resonance and Gain.
+
+\showrefcardsection{vcf}
+% \subsubsection*{LFS Settings}
+\subsection{Operation}Voltage Controlled Filter (VCF) is a set of different filters implemented in digital domain to allow control on limiting frequencies of sound. 
+
+\subsection{Tracking} VCF implements cutoff frequency tracking mechanism that can be controlled in multiple ways however there are 3 standard parameters to control Cufoff Frequency.
+
+Cutoff CV \- this is part of Input:Cutoff parameter and control voltage either external or internal can be assigned to modulate base cutoff frequency.
+
+Tracking V/OCT and Tracking CV are two voltage controlled parameters that are part of the same input controll Input:Tracking. Tracking V/OCT can be assigned to pitch from external (V/OCT jack) or internal (NOTE Output of internal modules) and adjusted with its attenuator. Tracking CV in contrary is to be assigned to CV modulator like Envelope or LFO.
+\newline$\bigstar$ Assigning the same V/OCT to Input:Tracking of VCF and to Input:NOTE pitch control of VCO or WTO allows to follow the key of played note creating punchy sounds on change of pitch when using Low Pass filters.
+
+
+  
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\vcfset}{{Settings}}%
+  \tableofoptionsnew{\vcfinp}{{Inputs}}%
+  \tableofoptionsnew{\vcfout}{{Outputs}}%
+% \section*{\top}
+
+% \subsubsection*{LFS Settings}
+
+% \tableofoptionsnew{\vcoinpi}{{Inputs}}
+}
+
+
+

@@ -1,0 +1,80 @@
+\def\drcset{
+  {{Audio Output}/{Audio Output of Drum Rack}/{Selects audio output destination for DRC. All 4 sample slots are sharing the same audio output where they get downmixed \newline See: \underline{\nameref{section:audiooutputs}}}},
+}
+
+\def\drcinp{
+  {{Gate 1}/{Gate CV Input for Slot 1}/{Gate or trigger signal that initiates sample playback}},
+  {{Pitch 1}/{Pitch Adjustment for Slot 1}/{relative pitch adjustment for sample playback}},
+  {{Level 1}/{Amplitude (Level) for Slot 1}/{Level (Amplitude Modulation) for sample playback}},
+  {{Steps 2}/{Number of Steps for Channel 2}/{Number of Steps within a channel.}},
+  {{Beats 2}/{Number of Beats for Channel 2}/{Number of beats within a channel.}},
+  {{Offset 2}/{Offest of first step for  Channel 2}/{Offset of first step for channel}},
+  {{Steps 3}/{Number of Steps for Channel 3}/{Number of Steps within a channel.}},
+  {{Beats 3}/{Number of Beats for Channel 3}/{Number of beats within a channel.}},
+  {{Offset 3}/{Offest of first step for  Channel 3}/{Offset of first step for channel}},
+  {{Steps 4}/{Number of Steps for Channel 4}/{Number of Steps within a channel.}},
+  {{Beats 4}/{Number of Beats for Channel 4}/{Number of beats within a channel.}},
+  {{Offset 4}/{Offest of first step for  Channel 4}/{Offset of first step for channel}},
+}
+
+\def\drcout{
+  % {{Gate 1}/{Gate 1 Output}/{Output of Channel 1 setting gate to high upon beat}},
+  % {{Gate 2}/{Gate 2 Output}/{Output of Channel 2 setting gate to high upon beat}},
+  % {{Gate 3}/{Gate 3 Output}/{Output of Channel 3 setting gate to high upon beat}},
+  % {{Gate 4}/{Gate 4 Output}/{Output of Channel 4 setting gate to high upon beat}}%
+}
+
+\def\refcarddrc{
+  \makereferencecard{
+    \textcolor{black}{\textbf{[ROTATE]}} Select sample slot
+    \newline\textcolor{black}{\textbf{[CLICK]}} Enter file browser to select sample from SD card
+  }{
+    \textcolor{black}{\textbf{[On/Off]}} Controls module on and off,
+    \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+  }{
+    \textcolor{black}{\textbf{[PITCH]}} Pitch Control for Slot 1,
+    \textcolor{black}{\textbf{[PITCH]}} Pitch Control for Slot 2,
+    \textcolor{black}{\textbf{[PITCH]}} Pitch Control for Slot 3,
+    \textcolor{black}{\textbf{[PITCH]}} Pitch Control for Slot 4,
+    \textcolor{black}{\textbf{[LEVEL]}} Level (Amplitude) Control for Slot 1,
+    \textcolor{black}{\textbf{[LEVEL]}} Level (Amplitude) Control for Slot 2,
+    \textcolor{black}{\textbf{[LEVEL]}} Level (Amplitude) Control for Slot 3,
+    \textcolor{black}{\textbf{[LEVEL]}} Level (Amplitude) Control for Slot 4,
+  }{%
+    \textcolor{black}{\textbf{[GATE]}} Select Gate CV for Slot 1,
+    \textcolor{black}{\textbf{[GATE]}} Select Gate CV for Slot 2,
+    \textcolor{black}{\textbf{[GATE]}} Select Gate CV for Slot 3,
+    \textcolor{black}{\textbf{[GATE]}} Select Gate CV for Slot 4,
+    \textcolor{black}{\textbf{[OUT]}} Select Audio Output Destination,
+    NA,
+    NA,
+  }
+}
+
+
+
+\def\modnameshortdrc{DRC}
+\def\modnamelongdrc{Drum Rack}
+
+\newcommand{\moddrc}{
+  \newpage
+  \modmakesection{drc}
+
+  \paragraph*{}
+  Drum Rack (DRC) is a 4 slot simple sample player with pitch adjustment and volume level control (amplitude modulation).
+
+  \showrefcardsection{drc}
+
+  \subsection{Operation}
+  \paragraph*{} Drum rack consists of 4 slots for loading samples. Upon receiving trigger or gare signal on \textbf{GATE} input the sample starts as signle shot. Thera re only two parameters currently to be adjusted and both can be controlled either via setting static value or using CV to modulate them. Those parameters as Volume Level (Amplitude) and Pitch Correction. Pitch correction adjusts pitch of sample by +/- two octaves.
+  % \newline$\blacksquare$ Without clock source the BPM is fixed at 120 BPM the pattern
+  
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\drcset}{{Settings}}
+  \tableofoptionsnew{\drcinp}{{Inputs}}
+  \tableofoptionsnew{\drcout}{{Outputs}}
+}
+

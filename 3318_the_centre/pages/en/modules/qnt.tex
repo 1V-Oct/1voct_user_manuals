@@ -1,0 +1,159 @@
+\def\qntset{
+  {{Mode}/{Mode of Operation}/{
+    \makesupopt{{
+      {{Simple}/{Mode of operation in which quantisation is based on selectiing notes that the incoming pitch will be aligned to}},%
+      {{Advanced}/{Mode of operation when quantisation is based on Scala (SCL) file}}%
+    }}%
+  }},
+  {{Scale}/{Musical Scale in Simple Mode}/{
+    \makesupopt{{
+      {{Custom}/{User selected notes}},
+      {{Chromatic}/{Chormatic Scale}},
+      {{Major}/{Major Scale}}
+      {{Natural Minor}/{Natural Major Scale}}
+      {{Harmonic Minor}/{Harmonic Major Scale}}
+      {{Melodic Minor}/{Melodic Major Scale}}
+    }}%
+  }},
+  {{Key}/{Change Key for a selected Scale (except for custom scale)}}%
+}
+
+\def\qntinp{
+  {{NOTE}/{Note input for quantisation}/{Mote input that will be quantised. The incoming note can be adjusted and tuned before quantisation.
+  \newline See: \underline{\nameref{section:pitchcontrol}}
+  \makesupopt{{
+    {{VOCT}/{1V/Oct input for note control/}},
+    {{OCT}/{Tuning note by octaves +/- 8 octaves}},
+    {{NOTE}/{Tuning note by semitones +12 semitones (one octave)}},
+    {{FINE}/{Tuning note by cents +/- one semitone}}%
+  }}%
+  }}%
+}
+
+\def\qntout{
+  {{NOTE}/{Quantised Note}/{Quantised note (note that has been aligned to the closest pitch of quantisation scale)}}%
+}
+
+\def\refcardqnt{
+  \makereferencecard{\textcolor{black}{\textbf{[ROTATE]}} Turn note on or off and in Scale Selector turn to Scale Select mode}{%
+  \newline\textcolor{black}{\textbf{[Mode]}} Switch between Simple and Advanced mode,
+  \newline\textcolor{black}{\textbf{[SET]}} Settings of the module,
+  \newline\textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+  \newline\textcolor{black}{\textbf{[Back]}} Return back to Patch Menu}{
+    \textcolor{black}{\textbf{[SCALE]}} Select one of preconfigured musical scales,
+    \textcolor{black}{\textbf{[C\#]}} Enable/Disable Note C\#,
+    \textcolor{black}{\textbf{[D\#]}} Enable/Disable Note D\#,
+    NA,
+    \textcolor{black}{\textbf{[F\#]}} Enable/Disable Note F\#,
+    \textcolor{black}{\textbf{[G\#]}} Enable/Disable Note G\#,
+    \textcolor{black}{\textbf{[A\#]}} Enable/Disable Note A\#,
+    \textcolor{black}{\textbf{[KEY]}} Change KEY for Scale / Change Base Frequency
+    }
+    {%
+      \textcolor{black}{\textbf{[C]}} Enable/Disable Note C,
+      \textcolor{black}{\textbf{[D]}} Enable/Disable Note D,
+      \textcolor{black}{\textbf{[E]}} Enable/Disable Note E,
+      \textcolor{black}{\textbf{[F]}} Enable/Disable Note F,
+      \textcolor{black}{\textbf{[G]}} Enable/Disable Note G,
+      \textcolor{black}{\textbf{[A]}} Enable/Disable Note A,
+      \textcolor{black}{\textbf{[B]}} Enable/Disable Note B,
+      \textcolor{black}{\textbf{[NOTE]}} Select NOTE CV Input,
+  }
+}
+
+\def\refcardqntadv{
+  \makereferencecard{\textcolor{black}{\textbf{[ROTATE]}} Select between SCL files in current directory\newline\textcolor{black}{\textbf{[CLICK]}} Enter file browser}{%
+  \newline\textcolor{black}{\textbf{[Mode]}} Switch to Simple mode,
+  \newline\textcolor{black}{\textbf{[SET]}} Settings of the module,
+  \newline\textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+  \newline\textcolor{black}{\textbf{[Back]}} Return back to Patch Menu}{
+    \textcolor{black}{\textbf{[FREQ]}} Adjust base frequency (coarse),
+    \textcolor{black}{\textbf{[FREQ]}} Adjust base frequency (fine),
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA%
+  }
+  {%
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[NOTE]}} Select NOTE CV Input%
+  }
+}
+
+
+\def\modnameshortqnt{QNT}
+\def\modnamelongqnt{Quantiser}
+
+\newcommand{\modqnt}{
+  \newpage
+  \modmakesection{qnt}
+  
+  \paragraph*{} Quantiser (QNT) aligns incoming pitch to the predefined required pitches. Quantiser limits the incoming pitch to the requested ongoing limited and predefined set of pitches.
+  
+  \subsection{Operation}%
+  \paragraph*{}Quantiser (QNT) allows correcting incoming pitch into a selected set of outgoing pitches. Usually it is used to limit number of notes to the notes available only in given musical scale. 
+  Quantiser takes pitch from Input:NOTE and finds the closest corresponding pitch in the scale by method of approximation.
+  
+  \subsection{Operating Modes}%
+  \paragraph*{}Quantiser can operate in either \textbf{\underline{\hyperref[qnt:smpmode]{Simple}}} or \textbf{\underline{\hyperref[qnt:advmode]{Advanced}}} mode. In Simple mode 
+  
+  \subsection{Simple Mode}%
+  \label{qnt:smpmode}
+  \label{refcard:qnt}
+  \showrefcardsubsection{qnt}%
+  \subsubsection{Operiation in Simple Mode}%
+
+  \begin{center}
+    \includegraphics[width=0.4\linewidth]{qnt2.png}
+  \end{center}
+
+  \paragraph*{} In simple mode quantiser is visible as a one octave keyboard that can use either predefined scales and key to set the quantised notes or use custom scale. On the left and right side are displayed notes in and quantised notes out (on the picture it is 4 voice polyphony so it shows 4 notes in on the left and 4 notes out on the right). As can be seen note F2 got quantised to F\#2 as note F2 is turned off on the keyboard (gray key).
+
+  \subsubsection{Musical Scales}
+  \paragraph*{} Currently there are only a few musical scales preconfigured in Quantiser. The preconfigured scale can be selected by clicking and then rortting Encoder \textbf{[SELECT]} or using using \textbf{[LVL1]} knob. Each preconfigured scale can be also adjusted to the correct \textbf{Key} (using \textbf{[LVL8]} knob or through settings).
+
+  \subsubsection{Custom Scales}
+  \paragraph*{} Custom scale is a set of notes configured by user. By turning any knobs corresponding to notes (as pictured on the \underline{\hyperref[refcard:qnt]{reference card}}) the note will be turned ON and OFF. The note configuration can be also done by rotating Encoder \textbf{[SELECT]} knob and performing pressing down Encoder on selected notes.
+  \newline$\blacksquare$ Turning knobs or clicking on notes automatically switches module into Custom Scale.
+  \newline$\bigstar$ If there is only one note selected in the quantiser, for example note C and the input note is E4 then output note will be C4. However for note G4 the output note will be C5 as C5 is closer to G4 than C4 (approximation).
+
+  \subsection{Advanced Mode}%
+  \label{qnt:advmode}
+  \showrefcardsubsection{qntadv}%
+  \paragraph*{}Advanced mode uses Scala (SCL) files that are industry standard for tuning and microtuning synthesisers. The biggest database of of Scala files contains over 5000 files.
+  \newline$\blacksquare$ \textbf{WARNING:} The Centre has limited memory and cannot read folders with huge amount of files per folder. Please use Scala prepared files from The Centre repository.%
+  \newline$\bigstar$ Visit: \underline{\url{https://github.com/1V-Oct/the_centre_waveforms/releases/tag/0.0.2}} to download scala files broken into individual folders that suit The Centre
+  \begin{center}
+    \centering\textbf{\textit{Scan below QR Code to visit download location}}
+  \end{center}
+  \begin{center}
+    \qrcode{https://github.com/1V-Oct/the_centre_waveforms/releases/tag/0.0.2}
+  \end{center}
+  \paragraph*{} In this mode user selects the SCL file from the SD card and the screen will show the notes' ratios predefined in the SCL file.  
+  Use knobs \textbf{LVL1 - Coarse} and \textbf{LVL2 - Fineı} to adjust base frequency.
+%    \subsection*{LFS \- Low Frequency Shaper (Low Frequency Oscillator generating irregular shapes)}
+% This module creates low frequency oscillations of irregular shapes. The shapes can be either edited by user or imported from .shp (Serum) and .vitallfo (Vital) formats.
+
+% To load a shape press \textbf{[SELECT]} (Encoder down) and navigate in file browser to directory with shapes and press \textbf{[SELECT]} again to load the desired shape.
+
+% Rotating Encoder cycles through shapes in current directory.
+
+% \subsubsection*{Main Menu}
+
+% \tableofbuttons{\lfsbutmain}
+\newpage
+\section*{\modname}
+\tableofoptionsnew{\qntset}{{Settings}}
+\tableofoptionsnew{\qntinp}{{Inputs}}
+\tableofoptionsnew{\qntout}{{Outputs}}
+% \setshowall{\lfsinfo}
+}
+

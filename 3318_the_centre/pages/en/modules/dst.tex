@@ -1,0 +1,64 @@
+\def\dstset{
+  {{Audio Output}/{Audio Output of Distortion}/{Audio Output of distorted signal. Audio Output is Audio Input signal distorted with selected algorithm\newline See: \underline{\nameref{section:audiooutputs}}}},
+  {{Audio Input}/{Audio Input signal to be delayed}/{Audio signal that will be delayed and summed with buffered and attenuated signal to produce echo.}}%
+}
+
+\def\dstinp{
+  {{Drive}/{Signal Gain}/{Level of gain on Audio Input Signal while processing Distortion making effect more prominent}},
+  {{Mix}/{Dry/Wet Mix}/{Amount of unprocessed (original) Ainput Signal mixed with Distorted Audio Signal}}%
+}
+
+\def\dstout{
+  {{NONE}/{}/{}}%
+}
+
+\def\refcarddst{
+  \makereferencecard{
+    \textcolor{black}{\textbf{[CLICK]}} Exit
+    }{
+    \textcolor{black}{\textbf{[ON/OFF]}} Turning module On or Off (Bypass),
+    \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+  }{
+    \textcolor{black}{\textbf{[DRV]}} Drive - Signal Gain,
+    \textcolor{black}{\textbf{[MIX]}} Percentage of Wet to Dry Signal for Mixing,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{%
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[AUDIO IN]}} Select Audio Input Source,
+    \textcolor{black}{\textbf{[AUDIO OUT]}} Select Audio Outpur Destination,
+  }
+}
+
+\def\modnameshortdst{DST}
+\def\modnamelongdst{Distortion}
+
+\newcommand{\moddst}{
+  \newpage
+  \modmakesection{dst}
+
+  \paragraph*{}
+  Distortion (DST) Effect Processor distorts and damages signal to add rough texture.
+  \showrefcardsection{dst}
+
+  \subsection{Operation}
+  \paragraph*{} Distortion (DST) Effect Processor takes input signal and distorts it by using selected algorithm. Wet Signal (distorted input signal) is then mixed with Dry Signal (unprocessed input signal) by ratio controlled via Input:Mix parameter.
+
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\dstset}{{Settings}}
+  \tableofoptionsnew{\dstinp}{{Inputs}}
+  \tableofoptionsnew{\dstout}{{Outputs}}
+}
+

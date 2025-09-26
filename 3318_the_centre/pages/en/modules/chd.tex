@@ -1,0 +1,124 @@
+\def\chdset{
+  % {{Timing Mode}/{Duration of chdeggiator pattern}/{
+  %   \makesupopt{{
+  %     {{BPM}/{Timing based on note duration calculated from BPM which is controlled by steps}},
+  %     {{Hz}/{Frequency at which pattern repeats}}%
+  %  }}
+  % }},
+  % {{Note Length}/{Fixed note or pattern length}/{
+  %   Switch between fixed note or pattern duration
+  %   \makesupopt{{
+  %     {{Off}/{Fixed \textbf{Pattern} length is selected, note duration is pattern duration divided by number of steps}},
+  %     {{On}/{Fixed \textbf{Note} length is selected, pattern duration equals note duration times number of steps}}%
+  %  }}%
+  % }}%
+} 
+
+\def\chdinp{
+  {{NOTE}/{Base note}/{Input note that is a base note for chord generator to create chord.
+  \newline See: \underline{\nameref{section:pitchcontrol}}
+  \makesupopt{{
+    {{NOTE}/{1V/Oct input for note control/}},
+    {{OCT}/{Tuning note by octaves +/- 8 octaves}},
+    {{NOTE}/{Tuning note by semitones +12 semitones (one octave)}},
+    {{FINE}/{Tuning note by cents +/- one semitone}}%
+  }}%
+  }},
+  {{Trigger}/{Trigger CV Source}/{Source of trigger to advance to next chord on the list and generate resulting notes for taht chord}},
+  {{Steps}/{Number of Chords}/{Changes number of chords in chord progression}},
+  {{Reset}/{Reset CV Source}/{Reset position to step 0}}%
+}
+
+\def\chdout{
+  {{NTE1}/{Pitch Output of root note}/{Output of root notes's pitch adjusted by value of NOTE input}},
+  {{GTE1}/{Gate Output of root note}/{Output of gate for root note as detected}},
+  {{NTE2}/{Pitch Output of 1st chord note}/{Output of given notes step's pitch calculated by adding chord's 1st semitones to played note}},
+  {{GTE2}/{Gate Output of 1st chord gate}/{Output of gate for given note in chord if available}},
+  {{NTE3}/{Pitch Output of 2nd chord note}/{Output of given notes step's pitch calculated by adding chord's 2nd semitones to played note}},
+  {{GTE3}/{Gate Output of 2nd chord gate}/{Output of gate for given note in chord if available}},
+  {{NTE4}/{Pitch Output of 3rd chord note}/{Output of given notes step's pitch calculated by adding chord's 3rd semitones to played note}},
+  {{GTE4}/{Gate Output of 3rd chord gate}/{Output of gate for given note in chord if available}}%
+}
+
+\def\refcardchd{
+  \makereferencecard{\textcolor{black}{\textbf{[ROTATE]}} Navigate between steps\newline\textcolor{black}{\textbf{[CLICK]}} Cycle through chords for selected step
+    }{
+    \textcolor{black}{\textbf{[ON/OFF]}} Turning module On or Off (Bypass),
+    \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+  }{
+    \textcolor{black}{\textbf{\mbox{[STEP 1]}}} Change chord for a given step,
+    \textcolor{black}{\textbf{\mbox{[STEP 2]}}} Change chord for a given step,
+    \textcolor{black}{\textbf{\mbox{[STEP 3]}}} Change chord for a given step,
+    \textcolor{black}{\textbf{\mbox{[STEP 4]}}} Change chord for a given step,
+    \textcolor{black}{\textbf{\mbox{[STEP 5]}}} Change chord for a given step,
+    \textcolor{black}{\textbf{\mbox{[STEP 6]}}} Change chord for a given step,
+    \textcolor{black}{\textbf{\mbox{[STEP 7]}}} Change chord for a given step,
+    \textcolor{black}{\textbf{\mbox{[STEP 8]}}} Change chord for a given step,
+    }{%
+    \textcolor{black}{\textbf{[STEPS]}} Adjusts number of steps (between 1 and 8),
+    NA,
+    \textcolor{black}{\textbf{[TIMING]}} Changes timing of pattern between time based (Hz) and note duration based (BPM),
+    \textcolor{black}{\textbf{[NOTE-VOCT]}} Select CV input for note's V/OCT,
+    \textcolor{black}{\textbf{[NOTE-OCT]}} Tune note by octave (+/- 8 octaves),
+    \textcolor{black}{\textbf{[NOTE-NOTE]}} Tune sound by semitone (+12 semitones one octave),
+    \textcolor{black}{\textbf{[NOTE-FINE]}} Fine-tune note in cents (+/- semitone),
+    NA,
+  }
+}
+
+\def\modnameshortchd{CHD}
+\def\modnamelongchd{Chords Generator}
+
+\newcommand{\modchd}{
+  \newpage
+  \modmakesection{chd}
+
+  \paragraph*{}
+  Chords Generator (CHD) creates chords from given note
+  \showrefcardsection{chd}
+
+  \subsection{Operation}
+  \paragraph*{} Chords Genertor (CHD) is a pitch manipulation utility that takes root note and outputs pitch of generated notes for up to 4 notes. 
+  It takes predefined chords and uses them to add semitones to root note and create melodic chords.
+  \newline$\blacksquare$ Every time trigger comes (usually caused by gate) Chords Generator will generate gate signal that will last
+   as long as input gate signal for notes available in chords.
+  \newline$\blacksquare$ Trigger advances chord progression to next chord. If there is only one chord on the list it will retrigger chord generation.
+  \newpage
+  \subsection{Chords Generator Screen}
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{chd1.png}
+    \caption{Chord Generator with multiple chords visibla and notes generated for current step}
+    \label{fig:chdrests}
+  \end{figure}
+  % \FloatBarrier
+  % \newpage
+  % \begin{wrapfigure}{r}{0.5\textwidth}
+  %   \centering
+  %   \includegraphics[width=0.7\linewidth]{chd1.png}
+  %   \caption{Chdeggiator with rest set on STEP 1}
+  %   \label{fig:chdrests}
+  % \end{wrapigure}
+
+  Chords menu description:
+  \begin{itemize}
+    \item \textbf{DARG GREEN} - Generated chord
+    \item \textbf{YELLOW} - Shows list of active chords in chord progression
+    \item \textbf{ORANGE} - Current chord
+  \end{itemize}
+  To change number of chords use \textbf{ATT1} (STEPS) to adjust between 1 and 8 chords.
+  Use  \textbf{ATT3} and \textbf{ATT4} to change source of Trigger CV and NOTE CV respectively.
+\FloatBarrier
+
+  \subsection{Duration}%
+  \paragraph*{}%
+  Duration of chord is connected with duration of gate send to Trigger input.
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\chdset}{{Settings}}
+  \tableofoptionsnew{\chdinp}{{Inputs}}
+  \tableofoptionsnew{\chdout}{{Outputs}}
+}
+

@@ -1,0 +1,134 @@
+\def\arpset{
+  {{Timing Mode}/{Duration of arpeggiator pattern}/{
+    \makesupopt{{
+      {{BPM}/{Timing based on note duration calculated from BPM which is controlled by steps}},
+      {{Hz}/{Frequency at which pattern repeats}}%
+   }}
+  }},
+  {{Note Length}/{Fixed note or pattern length}/{
+    Switch between fixed note or pattern duration
+    \makesupopt{{
+      {{Off}/{Fixed \textbf{Pattern} length is selected, note duration is pattern duration divided by number of steps}},
+      {{On}/{Fixed \textbf{Note} length is selected, pattern duration equals note duration times number of steps}}%
+   }}%
+  }}%
+} 
+
+\def\arpinp{
+  {{NOTE}/{Base note}/{Input note that is a base note for arpeggiator to create sequence.
+  \newline See: \underline{\nameref{section:pitchcontrol}}
+  \makesupopt{{
+    {{VOCT}/{1V/Oct input for note control/}},
+    {{OCT}/{Tuning note by octaves +/- 8 octaves}},
+    {{NOTE}/{Tuning note by semitones +12 semitones (one octave)}},
+    {{FINE}/{Tuning note by cents +/- one semitone}}%
+  }}%
+  }},
+  {{Clock}/{Clock CV Source}/{Clock source to synchronise with other modules.}},
+  {{Reset}/{Reset CV Source}/{Reset position to step 0}},
+  {{Duration}/{Length of Pattern}/{Duration of pattern measured either in frequency (Hz) or note duration (BPM)}},
+  {{Position}/{Position CV Source for pattern step}/{External CV to control position of pattern}}%
+}
+
+\def\arpout{
+  {{NTE}/{Pitch Output of generated note}/{Output of current step's pitch  calculated by adding step's semitones to played note}},
+  {{GTE}/{Gate Output of generated note}/{Output of Poly Rhythm setting gate to high upon beat}},
+  {{VEL}/{Velocity Output of generated note}/{Output of velocity/modulation parameter associated with current step}}%
+}
+
+\def\refcardarp{
+  \makereferencecard{\textcolor{black}{\textbf{[ROTATE]}} Alternate between editing pattern's semitones and velocity values\newline\textcolor{black}{\textbf{[CLICK]}} Exit
+    }{
+    \textcolor{black}{\textbf{[ON/OFF]}} Turning module On or Off (Bypass),
+    \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+  }{
+    \textcolor{black}{\textbf{\mbox{[STEP 1]}}} Adjusts step in semitones (-24 to +24) or Modulation (Velocity),
+    \textcolor{black}{\textbf{\mbox{[STEP 2]}}} Adjusts step in semitones (-24 to +24) or Modulation (Velocity),
+    \textcolor{black}{\textbf{\mbox{[STEP 3]}}} Adjusts step in semitones (-24 to +24) or Modulation (Velocity),
+    \textcolor{black}{\textbf{\mbox{[STEP 4]}}} Adjusts step in semitones (-24 to +24) or Modulation (Velocity),
+    \textcolor{black}{\textbf{\mbox{[STEP 5]}}} Adjusts step in semitones (-24 to +24) or Modulation (Velocity),
+    \textcolor{black}{\textbf{\mbox{[STEP 6]}}} Adjusts step in semitones (-24 to +24) or Modulation (Velocity),
+    \textcolor{black}{\textbf{\mbox{[STEP 7]}}} Adjusts step in semitones (-24 to +24) or Modulation (Velocity),
+    \textcolor{black}{\textbf{\mbox{[STEP 8]}}} Adjusts step in semitones (-24 to +24) or Modulation (Velocity),
+    }{%
+    \textcolor{black}{\textbf{[STEPS]}} Adjusts number of steps (between 1 and 8),
+    \textcolor{black}{\textbf{[DURATION]}} Adjust duration of the arpeggiator sequence,
+    \textcolor{black}{\textbf{[TIMING]}} Changes timing of pattern between time based (Hz) and note duration based (BPM),
+    \textcolor{black}{\textbf{[CLK]}} Select CLOCK source CV,Select Trigger CV,
+    \textcolor{black}{\textbf{[NOTE-OCT]}} Tune note by octave (+/- 8 octaves),
+    \textcolor{black}{\textbf{[NOTE-NOTE]}} Tune sound by semitone (+12 semitones one octave),
+    \textcolor{black}{\textbf{[NOTE-FINE]}} Fine-tune note in cents (+/- semitone),
+    \textcolor{black}{\textbf{[NOTE-VOCT]}} Select CV input for note's V/OCT,
+  }
+}
+
+\def\modnameshortarp{ARP}
+\def\modnamelongarp{Arpeggiator}
+
+\newcommand{\modarp}{
+  \newpage
+  \modmakesection{arp}
+
+  \paragraph*{}
+  Arpeggiator (ARP) cycles though a set of notes defined in short pattern of defined duration.
+  \showrefcardsection{arp}
+
+  \subsection{Operation}
+  \paragraph*{} Arpeggiator (ARP) is a pitch manipulation utility that creates a repeptetive music pattern conisiting of up to 8 notes that are defined as a difference in semitones to the played note. The steps can be adjusted with knobs and the number of steps can vary between 1 and 8 steps. Duration of the pattern can be set by specyfying duration of whole pattern by frequency of oscillation of pattern in Hertz (Hz) or duration of pattern measured in length of notes or bars based on timing coming from clock source (BPM).
+  Use encoder (SELECT) to change between editing pattern's semitones and velocity values. 
+  \newline$\blacksquare$ Every step Arpeggiator will generate Gate signal that lasts for the whole duration of the step.
+  \newline$\blacksquare$ Velocity value is just an arbitrary value assigned to each step and can be used for modulating any parameter within The Centre.
+  \newpage
+  \subsection{Arpeggiator Screen}
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{arp1.png}
+    \caption{Arpeggiator with rest set on STEP 1}
+    \label{fig:arprests}
+  \end{figure}
+  % \FloatBarrier
+  % \newpage
+  % \begin{wrapfigure}{r}{0.5\textwidth}
+  %   \centering
+  %   \includegraphics[width=0.7\linewidth]{arp1.png}
+  %   \caption{Arpeggiator with rest set on STEP 1}
+  %   \label{fig:arprests}
+  % \end{wrapigure}
+
+  Arpeggiator menu description:
+  \begin{itemize}
+    \item \textbf{GRAY} - inactive steps
+    \item \textbf{YELLOW} - Active steps
+    \item \textbf{ORANGE} - Currently played note
+    \item \textbf{RED} - For velocity set to \textbf{OFF} the gate signal will not be set
+  \end{itemize}
+  Elements on the screen:
+  \begin{itemize}
+    \item \textbf{GREEN BAR} Duration of note or pattern depending on setting \textbf{SET:Note Length}
+    \item Note part contains a number of semitones that output note for given step will differ from input note
+    \item Below semitone parts it shows actual output note for the step
+    \item Velocity is the value assigned with note that can be used to modulate any parameter. If this value is set to OFF, the given step will not output GATE for this step.
+  \end{itemize}
+\FloatBarrier
+
+  \subsection{Control arpeggiator position from external source}
+  \paragraph*{}Arpeggiator position in default setting increases position with every step. Use Position CV to set position of arpeggiator according to external CV source.
+  \newline$\blacksquare$ By setting external CV source, arpeggiator will output only TRIGGER and not GATE signal on GATE Output. Furthermore CLOCK will be ignored and externally controlled position will determine position of arpeggiator.
+  \newline$\blacksquare$ Only positive values of CV input will affect position. Negative values will be clipped to position 0. Use either positive CV source or modify source with Attenution and Level.
+  \newline$\bigstar$ Use LFO TRIANGLE input with ATTENUATOR set to 0.5 and LEVEL set to 0.5 to create TRAINGULAR input for arpeggiator to work in PING-PONG mode.
+  \newline$\bigstar$ Change LFO to RAMP or SAW (LFO Skew) and arpeggiator will work either in ascending or descending mode respectively.
+
+  \subsection{Adding rests}%
+  \paragraph*{} Velocity (modulation) values can have range between 0 to 99 however when the editing knob is tuned fully to the left the velocity value will be marked as \textbf{OFF}. When Velocity is set to \textbf{OFF} the gate will not be set at this step.
+  \subsection{Duration}%
+  \paragraph*{}%
+  Arpeggiator operates in fixed length either for a sequence of notes or fixed length of note. Operation mode of arpeggiator can be selected by \textbf{Setting:Note Length}
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\arpset}{{Settings}}
+  \tableofoptionsnew{\arpinp}{{Inputs}}
+  \tableofoptionsnew{\arpout}{{Outputs}}
+}
+

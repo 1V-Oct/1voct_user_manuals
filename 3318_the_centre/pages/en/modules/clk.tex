@@ -1,0 +1,75 @@
+\def\clkset{
+  {{Clock Output}/{Clock Output}/{Selects audio output destination for CLK. The VOUT1-4 can carry clock out as they are DC coupled. Clock will output square clock signal through the selected output.\newline See: \underline{\nameref{section:audiooutputs}}}},
+  {{Sync}/{Sync clock with external clock}/{Sync will synchronise clock module with external clock's BPM rate.}},
+  {{Clocks PQN}/{Clocks Per Quarter Note for External Clock}/{Selection of clocks for external source of BPM. User needs to select the number of clocks per BPM the external source generates}}%
+}
+
+\def\clkinp{
+  {{BPM}/{Beats Per Minute}/{Selection of Beats Per Minute setting}},
+  {{Clock}/{External Clock Input}/{External Clock input used to calculate BPM of external source\newline$\blacksquare$ Use only with CVY1-4 inputs}}%
+}
+
+\def\clkout{
+  {{Clock}/{Clock signal}/{Output of generated clock signal relative to BPM}}%
+}
+
+
+\def\refcardclk{
+  \makereferencecard{
+    NA,
+    }{
+    \textcolor{black}{\textbf{[ON/OFF]}} Turning module On or Off (Bypass),
+    \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+  }{
+    \textcolor{black}{\textbf{[BPM]}} Adjust BPM Rate,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{%
+    \textcolor{black}{\textbf{[SYNC]}} Sync BPM to external BPM,
+    \textcolor{black}{\textbf{[PPQN]}} Pulses per quarter note [BPM] for extrnal clock,
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[EXT CLK]}} External clock CV input selector,
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[OUT]}} Select Audio Output Destination,
+  }
+}
+
+\def\modnameshortclk{CLK}
+\def\modnamelongclk{Clock Generator}
+
+\newcommand{\modclk}{
+  \newpage
+  \modmakesection{clk}
+
+  \paragraph*{}
+  Clock Generator (CLK) produces clock pulses based on BPM to synchronise modules.
+   
+  \showrefcardsection{clk}
+
+  \subsection{Operation}
+  \paragraph*{} Clock Generator (CLK) produces steady pulse signal of a rate related to the BPM (Beats Per Minute). Number of generated clocks vary depending on global Setting:Clocks Per Quarter Note (CPQN). BPM determines how many beats are per minute and CPQN determines how many clocks will be generated per beat.
+  \newline$\blacksquare$ MIDI standard sets 24 clocks per quarter note however this value can be modified as different equipment uses different assumptions.
+  \newline$\bigstar$ Clock should be supplied to modules like \modnamelink{lfs} or \modnamelink{ply} to change their default timing from 120 BPM to required one set in CLK
+  \subsection{External Clock}
+  \paragraph*{} When connecting Ext Clock Input \textbf{[INPUT:CLOCK]} the module will start displaying external clock BPM in accordance to configured CPQN (Clocks Per Quarter Note) in Settings of the module.
+  After turning \textbf{[SET:Sync]} to ON the internal BPM can no longer be configured with the \textbf{[Input:BPM]} but it will use the value of external clock BPM
+  \newline$\blacksquare$ When using external clock only usable are CVY1-4 inputs as those are low latency inputs. See: \underline{\nameref{section:connectors}}
+  \subsection{Clock Output}
+  \paragraph*{}Clock Module can provide master clock to external modules via Clock Output. Clock Output can be configured via settings to one of VOUT1-4 3.5mm outputs or to VBuf \underline{\nameref{section:audiooutputs}}
+
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\clkset}{{Settings}}
+  \tableofoptionsnew{\clkinp}{{Inputs}}
+  \tableofoptionsnew{\clkout}{{Outputs}}
+}
+

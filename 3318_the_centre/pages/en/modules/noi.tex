@@ -1,0 +1,77 @@
+\def\noiset{
+  {{Audio Output}/{Audio Output of Noise Generator}/{Selects audio output destination for Noise.
+  \newline See: \underline{\nameref{section:audiooutputs}}}},
+}
+% \def\inpclock{
+%    {{Clock}/{Clock for timing oscillator's phase duration in BPM mode (otherwise 120BPM is used)}/{}}
+% }
+
+% \def\noiinp{
+%   {{Unison}/{Unison mode (1-16 voices)}/{Enables unison mode and controls number of oscillators running in parallel.}},
+%   {{Detune}/{Detune oscillators}/{Detunes oscillators in Unison mode by spreading them equally in Detune range. With detune set at maximum the spread range is 2 semi-tones. With odd number of oscillators the centre oscillator will always be following pitch from Note Input. For even number of oscillators there is no oscillator followin Note and each oscillator is detuned +/- from the center note. \newline $\bigstar$ \textit{With Unison running two oscillators, detune set to maximum (1.0) and pitch set at note D there is one oscillator playing note C\# and one playing note D\# (no oscillator is actually playing note C)}}},
+%   {{Wavetable}/{Wavetable position}/{Adjusts position of waveform in wavetable. When controlled by CV allows changing texture of sound by scanning through set of waveforms contained in wavetable}},
+%   {{Reset Osc}/{Reset Oscillator CV input}/{When connected with CV input and set to high level it resets phase of oscillator to 0. Useful to run oscillators in Sync}}%
+% }
+
+\def\noiinp{
+  {{LPF}/{Low Pass Filter}/{Low Pass Filter controlled by CV}},
+  {{HPF}/{High Pass Filter}/{High Pass Filter controlled by CV}}%
+} 
+
+\def\noiout{
+    {{OSC}/{Output of NOI}/{Output of noise signal}},
+}
+
+\def\refcardnoi{
+  \makereferencecard{
+    \textcolor{black}{\textbf{[ROTATE]}} Switches between waveforms (Triangle Square Sine),
+  }{
+    \textcolor{black}{\textbf{[ON/OFF]}} Turning module On or Off (Bypass),
+    \textcolor{black}{\textbf{[SET]}} Settings of the module,
+    \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+    \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+  }{
+    \textcolor{black}{\textbf{[LPF]}} Low Pass Filter Cutoff Frequency - adjusts colour of noise,
+    \textcolor{black}{\textbf{[HPF]}} High Pass Filter Cutoff Frequency - adjusts colour of noise,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{
+    \textcolor{black}{\textbf{[LPF]}} Attenuate CV input for Low Pass Filter,
+    \textcolor{black}{\textbf{[HPF]}} Attenuate CV input for High Pass Filter,
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[LPF]}} Select CV input for Low Pass Filter,
+    \textcolor{black}{\textbf{[HPF]}} Select CV input for High Pass Filter,
+    NA,
+    Select Audio Output Destiantion for Noise,
+    }
+}
+
+\def\modnameshortnoi{NOI}
+\def\modnamelongnoi{Noise Generator}
+
+\newcommand{\modnoi}{
+  \newpage
+  \modmakesection{noi}
+
+Noise Generator is a sound source that produces noise of different colour.
+  
+  \showrefcardsection{noi}
+
+  \subsection{Waveforms}
+  \paragraph*{} Noise generator produces White Noise as a base for further filtering. With two incorporated filters (Low Pass Filter and High Pass Filter) the colour of noise can be adjusted with the help of CV Inputs.
+
+
+  \newpage
+  \section*{\modname}  
+  \tableofoptionsnew{\noiset}{{Settings}}%
+  \tableofoptionsnew{\noiinp}{{Inputs}}%
+  \tableofoptionsnew{\noiout}{{Outputs}}%
+}
+
+
+

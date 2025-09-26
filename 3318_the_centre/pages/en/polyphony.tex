@@ -1,0 +1,69 @@
+\section{Polyphony}
+
+
+% \href{https://www.youtube.com/watch?v=uEFr7RkuP7k}{https://www.youtube.com/watch?v=uEFr7RkuP7k}
+% \underline{\url{https://www.youtube.com/watch?v=uEFr7RkuP7k}}
+
+\subsection{Introduction to polyphony}
+
+\paragraph*{}The Centre firmware version 3 introduces polyphony. The polyphony changes behaviour of the whole patch to create multiple voices from the same modules. To keep general compatibility with operation of The Centre as well as with old patches the polyphony has been implemented by turning a whole patch intu multi voice generator.
+Each module that generates audio output will produce 4 channels of audio. When in Virtual Buffer (VBuf) mode this is fully transparent. However in VOUT mode each module will output each voice on separate output of VOUT.
+
+The whole polyphony concept is based that very VBuf becomes quad-VBuf with every note in separate buffer. Use Mixer Module to MIX multiple Polyphony inputs (several osciallotors) to mix their VBufs or downmix to stereo channels
+
+\paragraph*{}$\blacksquare$ \nameref{section:modmix} Module is critical with polyphony operation as it can either output 4 separate monophonic channels or 
+
+\paragraph*{}$\blacksquare$It is stronly recommended to use VBuf everywhere in the patch for polyphonic modules. Most of the processing The Centre does on Stereo channels and using stereo VBuf also known as [V|V] allows to use full 4 channels of stereo polyphony. When using VOUTs in polyphony mode not only stereo 
+
+\subsection{General operation}
+\paragraph*{}In the polyphonic mode it is important to define number of polyphony channels at the beginning. This setting cannot be changed but also this setting affects performance of the module. Every channel of polyphony takes same amount of time for processing so 3 channels of polyphony can contain more spohisticated patch than 4 channels.
+
+\subsection{Control Voltage Modules}
+\paragraph*{} Many modules are providing Control Voltages (CV) and those are modules like LFO, LFS, etc. 
+In Polyphonic mode those modules also provide multi voice output so for example if LFO timing is set to key 
+tracking of notes from MIDI then every voice of LFO will have different frequency and those LFO values 
+can be used to modulate other modules (like VCA-Level).
+
+\subsection{EXAMPLE}
+
+\paragraph*{} This is the simpliest implementation of polyphonic patch. Please note that VCO should not output polyphonic 
+voices directly into VOUT but to VBuf and then there shoud be Mixer (MIX) that does volume limiting and downmixing. This is less
+important with monophonic output like VCO but is extremely important for stereo output like WTO because VBufs can be stereo in polyphonic mode
+while VOUTs are mono only. MIX will properly take into account stereo inputs and will output proper stereo downmix.
+
+\begin{enumerate}
+\item To create patch in Polyphony mode, go to Manage - Init and Init patch with desired number of polyphony voices. Let's select 3. Now we have patch with 3 polyphony voices.
+
+\begin{center}
+  \includegraphics[width=0.4\linewidth]{poly1.png}
+  \includegraphics[width=0.4\linewidth]{poly2.png}
+\end{center}
+
+\item Go to Manage - Add and add MID (MIDI module) and VCO (VCO module)
+
+\begin{center}
+\includegraphics[width=0.4\linewidth]{poly3.png}
+\end{center}
+
+\item Change output of VCO (in Manage screen) use A8 to select 1 instead of V (Vbuf)
+
+\begin{center}
+  \includegraphics[width=0.4\linewidth]{poly4.png}
+\end{center}
+
+\item Go to VCO -> Inputs and change NOTE input to MID-NTE1
+
+
+\begin{center}
+  \includegraphics[width=0.4\linewidth]{poly5.png}
+  \includegraphics[width=0.4\linewidth]{poly6.png}
+\end{center}
+
+
+\item Now in VCO screen there are notes clearly visible for 3 voices of polyphony. Send 3 note chord by MIDI and you will get 3 voices output. If necessary adjust octave by turning ATT5.
+
+\begin{center}
+  \includegraphics[width=0.4\linewidth]{poly7.png}
+\end{center}
+
+\end{enumerate}

@@ -1,0 +1,131 @@
+\section{Patch}\label{section:oppatch}%
+\subsection{Overview}
+Patch aka Preset is the basic operation mode in The Centre where the sound can be built. Upon starting The Centre user is presented with \textbf{Patch Edit} menu where individual modules can be added, removed and controlled.
+\subsection{Basic Operation}
+The main screen of Patch Edit contains list of modules.
+\newline$\blacksquare$ The modules in The Centre are executed in the order they are in \textbf{Patch Edit} menu.
+\newline$\blacksquare$ Patch should contain Module \nameref{section:modout}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.35\linewidth]{pch1.png}
+      \caption{Main Menu of Patch Edit}
+      \label{fig:oppatcheditmain}
+  \end{figure}
+
+\paragraph*{}By pressing \textbf{[Manage]} button we change operation mode to Patch Management.
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{pch3.png}
+    \caption{Patch Management Menu of Patch Edit}
+    \label{fig:oppatcheditmanage}
+  \end{figure}
+
+\subsubsection{Initialising Patch}
+\paragraph*{}The \textbf{[Init]} button will open System Init dialog that allows setting The Centre to clean state and selecting working mode. Two working modes in The Centre are available \textbf{Patch} which is described in this section and \underline{\nameref{section:multipatch}} 
+  
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{set2.png}
+    \caption{Initialiasing Patch or Multi-Patch}
+    \label{fig:oppatchInit}
+  \end{figure}
+  
+  \FloatBarrier
+  
+
+
+  \subsubsection{Adding and Removing Modules}
+\paragraph*{}User can add module by pressing \textbf{[Add]} button. The module will be inserted \textit{before} selected module. By pressing \textbf{[Del]} the selected module gets deleted. 
+
+To add module press \textbf{[Add]} button that will open Module selection screen and by selecting module with encoder \textbf{[SELECT]} the module will get inserted into the selected position of patch editor.
+
+\begin{figure}[hbt!]
+  \centering
+  \begin{tabular}{ll}
+    \includegraphics[width=0.35\linewidth]{pch4.png}
+    &
+    \includegraphics[width=0.35\linewidth]{pch5.png}
+  \end{tabular}
+  \caption{Adding module by Add functions results in inserting module at selected position}
+  \label{fig:oppatcheditaddmod}
+\end{figure}
+\FloatBarrier
+
+
+
+\subsubsection{Overload Error}
+\paragraph*{} The Centre is a digital module with CPU that has limited capability. When there is too much going in the patch especially in 
+Polyphony Mode it is very easy to overload CPU. 
+The top right corner of status bar shows CPU utilisation. If the CPU utilisation hits unmanageable limit the "OVERLOAD" 
+info shows on screen and patch will be executed only partially protecting system from crashing.
+This may also happen when selecting filter with higher CPU usage or adding to many unison oscillators to WTO.
+
+\paragraph*{}To recover from Overload mode it is recommended to delete some modules from the patch, reduce polyphony count or change expensive filters or reduce unison mode.
+
+\begin{figure}[hbt!]
+  \centering
+  \begin{tabular}{ll}
+    \includegraphics[width=0.35\linewidth]{overload1.png}
+    &
+    \includegraphics[width=0.35\linewidth]{overload2.png}
+  \end{tabular}
+  \caption{Overload protection screens}
+  \label{fig:overloadmessage}
+\end{figure}
+\FloatBarrier
+
+
+
+\newpage
+\clearpage
+\section{Multi-Patch aka Set}\label{section:multipatch}%
+\paragraph*{}%
+\subsection{Overview}%
+Multi-Patch also called \textbf{Set} is a special mode in an attempt to provide easier access to multi-timbral functionalities of The Centre. Since The Centre has potential (from computation resources side) to run multiple voices also it is designed with 4 Gates, 4 V/OCT and 4 Audio Outputs to be able to provide multi-timbral voice generation.
+\subsection{Operation}%
+To switch to Multi-Patch mode go to Patch Menu, select \textbf{Manage -> Init} and then from selection dialog select \textbf{Set}
+\begin{figure}[h]
+  \centering
+  \begin{tabular}{ll}
+  \includegraphics[width=0.35\linewidth]{set1.png}
+  &
+  \includegraphics[width=0.35\linewidth]{set2.png}
+  \end{tabular}
+  \caption{Left: Select Init from Manage submenu. Right: Select Set from dialog box}
+  \label{Fig:initset}
+\end{figure}
+\subsubsection{Operating Set Menu}
+After initialising module in the Multi-Patch (Set) mode the user is presented with below screen:
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.35\linewidth]{set3.png}
+      \caption{Multi-Patch Menu with Set Options}
+      \label{fig:setmain}
+  \end{figure}
+\paragraph*{}%
+The top line contains the name of the set and when the cursor is positioned on top line the buttons assignment changes and present user with options to Save Set, Init and Auto.
+
+User can select \textbf{[Save]} and \textbf{[Save As]} functions to save Set. 
+\newline$\blacksquare$ Set is saved in VXS file format while Patch is saved in VXP file format. See \underline{\nameref{section:fileformats}}
+
+\FloatBarrier
+
+\subsubsection*{}
+
+The Multi-Patch manu contains 4 slots for patches where standard \underline{\nameref{section:patch}} in VXP format can be loaded from the SD Card or edited in Patch Edit menu.
+Rotating encode and pressing \textbf{[SELECT]} on one of the 4 slots user can enter \underline{\nameref{section:patch}} menu for editing Patch in the selected slot.
+
+\begin{figure}[htb!]
+  \centering
+  \includegraphics[width=0.35\linewidth]{set4.png}
+  \caption{Multi-Patch menu available options for each slot}
+  \label{fig:setpatch}
+\end{figure}
+
+\FloatBarrier
+
+\paragraph*{}%
+The top line contains the name of the set and when the cursor is positioned on top line the buttons assignment changes and present user with options to Save Set, Init and Auto.
+
+\FloatBarrier

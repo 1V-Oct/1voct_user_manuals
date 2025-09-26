@@ -1,0 +1,204 @@
+\def\lfsbutmain{
+   {Edit}/{Invokes Shape Editor},
+   {Set}/{Open Settings},
+   {Inputs}/{Open Inputs},
+   {Back}/{Return to Patch Menu}
+}
+
+
+
+\def\lfsset{
+    {{Running Mode}/{Select type of running mode of low frequency shape}/{
+       \makesupopt{{
+         {{Continuous}/{Oscillator keeps running and never stops. Gate High (Trigger) signal will reset oscillator phase to 0.}},
+         % \item [\tikz{\node[text=white, fill=black] {Continuous};}] Oscillator keeps running and never stops. Gate High (Trigger) signal will reset oscillator phase to 0.\
+         {{Trigger}/{Oscillator runs once upon the gate signal high and runs complete shape once and stops generation when phase of shape ends. Another trigger signal will reset phase to 0.}},
+         {{Gate length}/{Oscillator runs as long as gate signal is high. Stops immediatelly when signal goes to low.}}%
+      }}
+    }},
+    {{Timing Mode}/{Select timing mode for LFS}/{Timing for LFS can be either selected to be calculated in Hz for more time based experience or tied to BPM and measured in length of notes or bars.
+    \makesupopt{{
+       {{BPM}/{Timing based on note duration}},
+       {{Hz}/{Timing based on frequency}}%
+    }}
+    }},
+    {{Polarity}/{Polarity of output}/{
+       \makesupopt{{
+         {{Bipolar}/{Outputs shape in range -5V to +5V. Good for Ring Modulation or FM}},
+         {{Unipolar}/{Outputs shape in range 0V to +5V. Good for VCA}}%
+      }}
+    }},
+    {{Audio output}/{Output of shape as waveform}/{
+      Enables output of shape as waveform. This allows the output to be sent out to VOUT directly or for audio processing (for example Ring Modulation (BRM))
+      \newline $\blacksquare$ Enabling waveform output increases CPU processing and is not recommended when not needed
+       \makesupopt{{
+         {{Disabled}/{Default. Doesn't output shape in any form}},
+         {{Enabled}/{Outputs shape as waveform to be sent out to VOUT or used for audio processing}}%
+      }}
+    }}%
+}
+
+\def\lfsinp{
+   {{Trigger}/{Trigger CV input}/{Trigger or gate signal that initiates or resets oscillator}},
+   {{Clock}/{Clock for timing oscillator's phase duration in BPM mode (otherwise 120BPM is used)}/{}},
+   {{Frequency Coarse}/{Adjust Frequency of oscillator in big steps}/{Adjusts frequency of oscillator in range of 0Hz to 100Hz (in frequency mode) or between 1/256 note and 8bar (in BPM/note duration mode)}},
+   {{Frequency Fine}/{Fine tune frequency of oscillator}/{Adjust frequency of oscillator in very small steps}}%
+}
+
+    
+    % {}/{}/{}%
+    % {}/{}/{}%
+    % {}/{}/{}%
+
+\def\lfsout{
+    {{SHP}/{Output of }/{Output of shape oscillator that can be used to modulate other signals}}%
+}
+
+
+\def\refcardlfs{
+  \makereferencecard{\textcolor{black}{\textbf{[ROTATE]}} Navigate between shapes in current directory%
+      \newline\textcolor{black}{\textbf{[CLICK]}} Enter File Browser to change to chosen shape and to change browsing directory
+   }{
+      \textcolor{black}{\textbf{[Edit]}} Enter Shape Editor
+      \textcolor{black}{\textbf{[SET]}} Settings of the module,
+      \textcolor{black}{\textbf{[Inputs]}} Configure Inputs of the module,
+      \textcolor{black}{\textbf{[Back]}} Return back to Patch Menu,
+   }{
+      \textcolor{black}{\textbf{[FRQC]}} Frequency Coarse for LFO (HZ: 0 - 100Hz or BPM: 1/256 to 8bar),
+      \textcolor{black}{\textbf{[FRQF]}} Frequency fine tune,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+   }{
+      \textcolor{black}{\textbf{[TRIG]}} Select running mode (Trigger Continuous Gate Length),
+      Select timing mode: BPM or Hz
+      NA,
+      NA,
+      \textcolor{black}{\textbf{[CLK]}} Select CLOCK source CV,Select Trigger CV,
+      NA,
+      Select Shape Output Destination,
+   }
+}
+
+\def\refcardlfsedit{
+  \makereferencecard{\textcolor{black}{\textbf{[ROTATE]}} Move between points of shape%
+      \newline\textcolor{black}{\textbf{[CLICK]}} Align two points of shape horizonally - to the previous point
+   }{
+      \textcolor{black}{\textbf{[Add]}} Add point and create segment of shape,
+      \textcolor{black}{\textbf{[Del]}} Delete current point,
+      \textcolor{black}{\textbf{[Free/Quant]}} Switch between free and quantised edit,
+      \textcolor{black}{\textbf{[Back]}} Return back to Shape Menu,
+   }{
+      NA,
+      NA,
+      \textcolor{black}{\textbf{[Y]}} Adjust vertical position of point,
+      \textcolor{black}{\textbf{[X]}} Adjust horizontal position of point,
+      \textcolor{black}{\textbf{[BEND-]}} Change curvature of shape before selected point,
+      \textcolor{black}{\textbf{[BEND+]}} Change curvature of shape after selected point,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+   }{
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+   }
+}
+
+\def\modnameshortlfs{LFS}
+\def\modnamelonglfs{Low Frequency Shaper}
+
+\newcommand{\modlfs}{
+   \newpage
+   \modmakesection{lfs}
+   \def\modname{\modnameshortlfs - \modnamelonglfs}% chktex 8
+   % \section{\modname}\label{section:modlfs}
+
+   \subsection*{LFS \- Low Frequency Shaper (Low Frequency Oscillator generating irregular shapes)}
+   \paragraph*{} 
+This module creates low frequency oscillations of irregular shapes. The shapes can be either edited by user or imported from .shp (Serum) and .vitallfo (Vital) formats.
+
+   \showrefcardsection{lfs}
+
+   \subsection{Loading Shapes}
+To load a shape press \textbf{[SELECT]} (Encoder down) and navigate in file browser to directory with shapes and press \textbf{[SELECT]} again to load the desired shape.
+Rotating Encoder cycles through shapes in current directory.
+
+
+   \newpage
+   \section*{\modname}
+   \tableofoptionsnew{\lfsset}{{Settings}}
+   \tableofoptionsnew{\lfsinp}{{Inputs}}
+   \tableofoptionsnew{\lfsout}{{Outputs}}
+
+   \newpage
+   \section{LFS - Shape Editor}\label{section:shapeedit}
+   \showrefcardsection{lfsedit}
+   \subsection{Editing Shapes}
+   To edit current shape press \textbf{Edit} in LFS Screen. Now you can use buttons \textbf{Add} and \textbf{Del} to add points to the shape (point will be added to between current points - in the middle). Use \textbf{LVL3} and \textbf{LVL5} to adjust vertical and horizonal position of the point accordignly (NOTE: first and last point horizontal positions cannot be adjusted). \textbf{LVL5} will adjust curvature of shape segment prior to selected point and \textbf{LVL6} will adjust curvature of segment after selected point.
+   \subsection{Position Quantisation}
+   By pressing button \textbf{Free} you can change the mode to Free Editing and then by pressign button \textbf{Quant} (the same button) you witch mode to Quantised editing where vertical positions are quantised (aligned) to division of 12 (simulate semitones) and horizontal positions are aligned to divisions of 32 to provide aligment simulating notes lengths. 
+   \newline $\blacksquare$ Aligment or quantisation does not really align on notes or semitones just helps to have better alignment when the shape is played at the speeds of BPM. 
+   \newline $\bigstar$ Aligned shape can be fed into frequency of VCO or WTO to crteate arpeggiator effect.
+
+}
+
+
+
+
+
+% **Audio Output** - Output of generated shape for usage with external modules. See [[Inputs and Outputs|Inputs and Outputs]]. For usage as modulation for internal modules it is good to set output to VBuf.
+
+% **Running Mode** - select from:
+
+%    `- Once (Trigger) - shape is generated upon trigger/gate level and stops when finished.`
+
+%    `- Continuous     - shape is generated as oscillator and keeps looping. Perfect usage as LFO with arbitrary shape.`
+
+%    `- Gate Length    - shape is generated as long as gate is ON.`
+
+% **Timing Mode**
+
+%    `- BPM - the timing is based on BPM and selected length of note 1/4 for quarter note, 1bar is of length of 1 bar.`
+
+%    `- Hz - the timing is based on Hertz as measurement. Setting oscillation frequency in Hertz.`
+
+% ### LFS Inputs
+
+% **Gate** - triggers generation of shape in "(Once) Trigger" or "Gate Length" modes - set in Settings.
+% **Clock** - Only use in BPM mode. Every 24 clocks one beat is generated to generate BPM. If not set BPM is set to 120bpm as default.
+% **Frequency Coarse** - sets timing in either Hertz or Note Lengths
+% **Frequency Fine** - tune the frequency
+
+
+% _Hz vs BPM modes of LFS Generation_
+
+% ## Shape Editor Menu
+
+% * **Add**   - Splits segment in half adding one point in the middle of segment
+% * **Del**   - Deletes current segment
+% * **Curve** - Switches **[LVL8]** knob to help edit segment curvature
+% * **Len**.  - Switches **[LVL8]** knob to help adjust segment length
+% * **Back**  - Comes back to LFS Main Menu
+
+% In shape editor use encoder to navigate between points and segments. Pressing down **[SELECT]** (encoder down) will adjust position of neighbouring points to horizontal levelled position (change of Y coordinate) or to vertically levelled position (change of X coordinate).
+
+% Selecting point or segment and pressign **[SELECT]** has following result:
+
+% _**Segment**_  - the X coordinate of next point will be changed to X coordinate of current point creating vertical alignment. Below is illustration - the right point of the shape will get aligned to left point of shape creating vertical line after pressing **[SELECT]**.
+
+
+% _**Point**_.   - the Y coordinate (height) of _next_ point will get aligned to Y coordinate (height) of current selected point creating horizontal line. Below illustrated is selected segment length, then selection of start point and after pressing **[SELECT]** the segment becomes horizontal.
+
+% }
