@@ -1,5 +1,5 @@
 \ifdefined\USERMANUAL
-  \newcommand{\doctype}{BENUTZERHANDBUCH}
+  \newcommand{\doctype}{BEDIENUNGSANLEITUNG}
 \else
   \newcommand{\doctype}{REFERENZKARTEN}
 \fi
@@ -14,14 +14,14 @@
 \section{Übersicht}\label{section:installation}
 \subsection{Übersicht}
 \paragraph*{}
-\textbf{TAIPO} MIDI-Erweiterung für The Centre ermöglicht den Anschluss von The Centre
-an externe Geräte (einschließlich Computer) über ein Standard-MIDI-TRS-Typ-B-Kabel.
-\subsection{Was ist in der Box}
-\paragraph*{}\textbf{TAIPO} wird mit Standardzubehör geliefert. In der Box finden Sie:
+Die \textbf{TAIPO} MIDI-Erweiterung ermöglicht eine nahtlose Verbindung von The Centre mit externen Geräten, einschließlich Computern, über ein standardmäßiges MIDI-TRS-Kabel Typ B.
+\subsection{Lieferumfang}
+\paragraph*{}
+Das \textbf{TAIPO}-Paket enthält folgende Zubehörteile:
 \begin{enumerate}
   \item \textbf{TAIPO} Eurorack-Modul
-  \item Standard-Eurorack-Stromkabel (10-Pin auf 16-Pin)
-  \item MIDI-EX-Verbindungskabel zur Verbindung mit \textbf{THE CENTRE}
+  \item Standard-Eurorack-Stromkabel (10-polig auf 16-polig)
+  \item MIDI-EX-Verbindungskabel zur Anbindung an \textbf{The Centre}
 \end{enumerate}
 
 \newpage
@@ -30,7 +30,7 @@ an externe Geräte (einschließlich Computer) über ein Standard-MIDI-TRS-Typ-B-
 \section{Installation}
 \subsection{Installationsschritte}
 \paragraph*{}
-Die Installation von TAIPO folgt den Schritten zur Installation eines beliebigen Eurorack-Moduls im Gehäuse des Besitzers.
+Die Installation des \textbf{TAIPO}-Moduls folgt dem Standardverfahren für die Installation eines Eurorack-Moduls in Ihr Gehäuse.
 
 \begin{figure}[h]
   \centering
@@ -40,10 +40,10 @@ Die Installation von TAIPO folgt den Schritten zur Installation eines beliebigen
   \label{fig:midsinglenote}
 \end{figure}
 
-\subsection{Wichtige Installationshinweise}
+\subsection{Wichtige Hinweise zur Installation}
 \paragraph*{}
- Bitte beachten Sie die Reihenfolge der Farben auf beiden Seiten. Die Farbreihenfolge auf der Seite von The Centre sollte von oben nach unten \textbf{SCHWARZ, ROT, GELB, GRÜN} sein und auf der TAIPO-Seite umgekehrt: \textbf{GRÜN, GELB, ROT, SCHWARZ}
-\newline$\blacksquare$ WICHTIG: Auf der Seite von The Centre an den MIDI-EX-Anschluss anschließen, wie im Bild oben dargestellt. Der zweite Anschluss dient zum Verbinden des MIDI-Ausgangs von The Centre mit TWINS.
+Achten Sie bei der Installation auf die korrekte Ausrichtung des Kabels. Die Farbreihenfolge an der The Centre-Seite sollte von oben beginnend \textbf{SCHWARZ, ROT, GELB, GRÜN} sein, während sie an der TAIPO-Seite umgekehrt ist: \textbf{GRÜN, GELB, ROT, SCHWARZ}.
+\newline$\blacksquare$ \textbf{Wichtig}: An der The Centre-Seite schließen Sie das Kabel wie in der obigen Abbildung gezeigt an den MIDI-EX-Anschluss an. Der zweite Anschluss dient zur Weiterleitung des MIDI-Ausgangs von The Centre an TWINS.
 
 \newpage
 \part{MIDI}
@@ -51,29 +51,22 @@ Die Installation von TAIPO folgt den Schritten zur Installation eines beliebigen
 \section{MIDI-Kabeltypen}
 \subsection{TAIPO-Kabeltyp}
 \paragraph*{}
-TAIPO verwendet ein MIDI 3,5mm TRS (Tip-Ring-Shield) Kabel Typ B. Siehe: \underline{\nameref{section:cabletypeb}}
+Das \textbf{TAIPO} verwendet ein 3,5-mm-TRS-Kabel (Tip-Ring-Shield) Typ B. Siehe: \underline{\nameref{section:cabletypeb}}
 \subsection{Über das MIDI-Signal}
 \paragraph*{}
-Das MIDI-Signal wird über ein MIDI-Kabel unter Verwendung des Standard-RS232-Protokolls gesendet, jedoch mit einer
-nicht standardmäßigen Geschwindigkeit von 31250 Baud (Bits pro Sekunde). Die elektrische MIDI-Verbindung ist
-gerichtet, was bedeutet, dass die interne Pinbelegung im Kabel von Bedeutung ist, da der Strom
-in eine Richtung fließt. Während dies bei Standard-MIDI-DIN-Kabeln kein Problem darstellt,
-wurde es bei 3,5-mm-Klinkenkabeln (TRS) problematisch, da die Hersteller begannen, sie
-unterschiedlich zu verdrahten, da kein Standard definiert war. Basierend auf diesen Verdrahtungen haben sich einige
-Standards herausgebildet.
-\newline$\blacksquare$ Verschiedene TRS-Standards sind nicht austauschbar und nicht kompatibel.
-Um Geräte mit unterschiedlichen TRS-Standards zu verbinden, muss ein passendes Kabel verwendet werden.
+Das MIDI-Signal wird über ein MIDI-Kabel mit dem RS-232-Protokoll bei einer nicht standardmäßigen Geschwindigkeit von 31.250 Baud (Bits pro Sekunde) übertragen. MIDI-Verbindungen sind gerichtet, was bedeutet, dass die interne Pin-Konfiguration des Kabels entscheidend ist, da der Strom in eine Richtung fließt. Während standardmäßige MIDI-DIN-Kabel keine Probleme verursachen, können 3,5-mm-TRS-Kabel aufgrund des anfänglichen Fehlens eines einheitlichen Standards unterschiedlich verdrahtet sein, was zur Entstehung mehrerer Standards geführt hat.
+\newline$\blacksquare$ \textbf{Hinweis}: Unterschiedliche TRS-Standards sind nicht austauschbar oder kompatibel. Zum Verbinden von Geräten mit unterschiedlichen TRS-Standards muss ein passendes Kabel verwendet werden.
 \subsection{DIN-Anschluss}
-Standard-MIDI-Kabel mit 5-poligem DIN-Anschluss
+Das standardmäßige MIDI-Kabel verwendet einen 5-poligen DIN-Anschluss für eine zuverlässige Verbindung.
 \subsection{TRS-Anschlusstypen}
 \subsubsection{Typ-A-Anschluss}
-TRS Typ A definiert die \textbf{SPITZE} (TIP) des 3,5-mm-Klinkensteckers als \textit{\textbf{Quelle}} (source) und den \textbf{RING} als \textit{\textbf{Senke}} (sink).
+Der TRS-Typ A definiert den \textbf{TIP} des 3,5-mm-Steckers als \textit{\textbf{Quelle}} und den \textbf{RING} als \textit{\textbf{Senke}}.
 \newline
 \includegraphics[height=0.3\linewidth]{midi_trs_type_a.eps}
 \newline$\bigstar$ Marken, die Typ A verwenden: Korg, Akai
 \subsubsection{Typ-B-Anschluss}\label{section:cabletypeb}
-TRS Typ B definiert die \textbf{SPITZE} (TIP) des 3,5-mm-Klinkensteckers als \textit{\textbf{Senke}} (sink) und den \textbf{RING} als \textit{\textbf{Quelle}} (source).
-\newline$\blacksquare$ Typ B ist in der Eurorack-Modular-Szene weiter verbreitet.
+Der TRS-Typ B definiert den \textbf{TIP} des 3,5-mm-Steckers als \textit{\textbf{Senke}} und den \textbf{RING} als \textit{\textbf{Quelle}}.
+\newline$\blacksquare$ Typ B ist in der Eurorack-Modular-Community weit verbreitet.
 \newline
 \includegraphics[height=0.3\linewidth]{midi_trs_type_b.eps}
-\newline$\bigstar$ Marken, die Typ B verwenden: Arturia, Novation, 1010
+\newline$\bigstar$ Marken, die Typ B verwenden: Arturia, Novation, 1010 Music

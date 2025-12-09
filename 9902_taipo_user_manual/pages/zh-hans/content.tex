@@ -1,0 +1,72 @@
+\ifdefined\USERMANUAL
+  \newcommand{\doctype}{用户手册}
+\else
+  \newcommand{\doctype}{参考卡}
+\fi
+
+\maketitlepage{TAIPO}{MIDI扩展器}{TAIPO_SILVER_cutout_small_2}{\doctype}
+
+\newpage
+\tableofcontents
+\newpage
+\part{概述}
+\newpage
+\section{概述}\label{section:installation}
+\subsection{概述}
+\paragraph*{}
+\textbf{TAIPO} MIDI扩展器可通过标准MIDI TRS B型电缆将The Centre无缝连接到外部设备（包括计算机）。
+\subsection{包装内容}
+\paragraph*{}
+\textbf{TAIPO}包装包含以下配件：
+\begin{enumerate}
+  \item \textbf{TAIPO} Eurorack模块
+  \item 标准Eurorack电源线（10针至16针）
+  \item 用于连接\textbf{The Centre}的MIDI-EX链接电缆
+\end{enumerate}
+
+\newpage
+\part{安装}
+\newpage
+\section{安装}
+\subsection{安装步骤}
+\paragraph*{}
+安装\textbf{TAIPO}模块遵循在用户机箱中安装任何Eurorack模块的标准程序。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[height=0.5\linewidth]{taipo_the_centre_cable_install.jpg}
+  \includegraphics[height=0.5\linewidth]{taipo_cable_install.jpg}
+  \caption{两端电缆安装}
+  \label{fig:midsinglenote}
+\end{figure}
+
+\subsection{重要安装说明}
+\paragraph*{}
+安装时请确保电缆方向正确。The Centre端的颜色顺序从顶部起应为\textbf{黑色、红色、黄色、绿色}，而TAIPO端则相反：\textbf{绿色、黄色、红色、黑色}。
+\newline$\blacksquare$ \textbf{重要提示}：在The Centre端，请按照上图所示连接到MIDI-EX接口。第二个接口用于将The Centre的MIDI输出连接到TWINS。
+
+\newpage
+\part{MIDI}
+\newpage
+\section{MIDI电缆类型}
+\subsection{TAIPO电缆类型}
+\paragraph*{}
+\textbf{TAIPO}使用3.5毫米TRS（尖-环-屏蔽）B型电缆。参见：\underline{\nameref{section:cabletypeb}}
+\subsection{关于MIDI信号}
+\paragraph*{}
+MIDI信号通过MIDI电缆使用RS-232协议传输，速度为非标准的31,250波特（每秒位数）。MIDI连接具有方向性，这意味着电缆内部的引脚配置至关重要，因为电流是单向流动的。标准MIDI DIN电缆不存在问题，但由于最初缺乏统一标准，3.5毫米TRS电缆的接线方式各异，因此出现了几种标准。
+\newline$\blacksquare$ \textbf{注意}：不同的TRS标准不可互换或兼容。连接使用不同TRS标准的设备时，必须使用匹配的电缆。
+\subsection{DIN连接器}
+标准MIDI电缆使用5针DIN连接器以确保可靠连接。
+\subsection{TRS连接器类型}
+\subsubsection{A型连接器}
+A型TRS将3.5毫米插头的\textbf{尖端}定义为\textit{\textbf{信号源}}，\textbf{环}定义为\textit{\textbf{接收端}}。
+\newline
+\includegraphics[height=0.3\linewidth]{midi_trs_type_a.eps}
+\newline$\bigstar$ 使用A型的品牌：Korg、Akai
+\subsubsection{B型连接器}\label{section:cabletypeb}
+B型TRS将3.5毫米插头的\textbf{尖端}定义为\textit{\textbf{接收端}}，\textbf{环}定义为\textit{\textbf{信号源}}。
+\newline$\blacksquare$ B型在Eurorack模块化社区中更为流行。
+\newline
+\includegraphics[height=0.3\linewidth]{midi_trs_type_b.eps}
+\newline$\bigstar$ 使用B型的品牌：Arturia、Novation、1010 Music

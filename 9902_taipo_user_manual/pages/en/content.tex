@@ -1,7 +1,7 @@
 \ifdefined\USERMANUAL
   \newcommand{\doctype}{USER'S MANUAL}
 \else
-  \newcommand{\doctype}{REFERENCE  CARDS}
+  \newcommand{\doctype}{REFERENCE CARDS}
 \fi
 
 \maketitlepage{TAIPO}{MIDI Extender}{TAIPO_SILVER_cutout_small_2}{\doctype}
@@ -14,23 +14,23 @@
 \section{Overview}\label{section:installation}
 \subsection{Overview}
 \paragraph*{}
-\textbf{TAIPO} MIDI Extender for The Centre allows connecting The Centre
-to the external gear (including computer) via standard MIDI TRS Type B cable.
-\subsection{What's in the box}
-\paragraph*{}\textbf{TAIPO} comes with standard acessories. Inside box you will find:
+The \textbf{TAIPO} MIDI Extender enables seamless connection of The Centre to external equipment, including computers, using a standard MIDI TRS Type B cable.
+\subsection{What's in the Box}
+\paragraph*{}
+The \textbf{TAIPO} package includes the following accessories:
 \begin{enumerate}
   \item \textbf{TAIPO} Eurorack module
   \item Standard Eurorack power cable (10-pin to 16-pin)
-  \item MIDI-EX link cable for linking with \textbf{THE CENTRE}
+  \item MIDI-EX link cable for connecting to \textbf{The Centre}
 \end{enumerate}
 
 \newpage
 \part{Installation}
 \newpage
 \section{Installation}
-\subsection{Installation steps}
+\subsection{Installation Steps}
 \paragraph*{}
-Installing TAIPO follows steps of installing any Eurorack module in the owner's case.
+Installing the \textbf{TAIPO} follows the standard procedure for installing any Eurorack module in your case.
 
 \begin{figure}[h]
   \centering
@@ -40,13 +40,10 @@ Installing TAIPO follows steps of installing any Eurorack module in the owner's 
   \label{fig:midsinglenote}
 \end{figure}
 
-\subsection{Important installation notes}
+\subsection{Important Installation Notes}
 \paragraph*{}
- Please note order of colours on both sides. The Centre side colour order from top should be \textbf{BLACK, RED, YELLOW, GREEN} and on the TAIPO side opposite: \textbf{GREEN, YELLOW, RED, BLACK}
-\newline$\blacksquare$ IMPORTANT: On The Centre side connect to MIDI-EX connector as depicted on picture above. The second connector is for connecting The Centre's output MIDI to TWINS.
-
-% file format contains all definitions of a patch, connected modules, inputs, outputs and settings. This is the basic binary format of data in The Centre and his completely tied with definition of modules. 
-% See: \underline{\nameref{section:oppatch}}
+Ensure correct cable orientation during installation. The color order on The Centre side should be \textbf{BLACK, RED, YELLOW, GREEN} from the top, while on the TAIPO side, it should be \textbf{GREEN, YELLOW, RED, BLACK}.
+\newline$\blacksquare$ \textbf{Important}: On The Centre side, connect to the MIDI-EX connector as shown in the figure above. The second connector is designated for linking The Centre’s MIDI output to TWINS.
 
 \newpage
 \part{MIDI}
@@ -54,29 +51,22 @@ Installing TAIPO follows steps of installing any Eurorack module in the owner's 
 \section{MIDI Cable Types}
 \subsection{TAIPO Cable Type}
 \paragraph*{}
-TAIPO uses MIDI 3.5mm TRS (Tip-Ring-Shield) Cable Type B See: \underline{\nameref{section:cabletypeb}}
+The \textbf{TAIPO} utilizes a MIDI 3.5mm TRS (Tip-Ring-Sleeve) Cable Type B. See: \underline{\nameref{section:cabletypeb}}
 \subsection{About MIDI Signal}
 \paragraph*{}
-MIDI Signal is send over MIDI Cable using standard RS232 protocol however using 
-nonstandard speed of 31250 baud (bits per second). MIDI electrical connection is 
-directional meaning that internal connection of pins in cable does matter as the current
-flows in one direction. While this is not a problem for standard MIDI DIN type cables 
-it became problematic for 3.5mm jack (TRS) based cables as manufacturers started wiring
-them differently because no standard has been defined. Based on those wirings a few
-standards have emerged.
-\newline$\blacksquare$ Different TRS standards are not interchangeable and not compatible. 
-To connect defices with different TRS standard a matching cable must be used.
+The MIDI signal is transmitted over a MIDI cable using the RS-232 protocol at a non-standard speed of 31,250 baud (bits per second). MIDI connections are directional, meaning the internal pin configuration within the cable is critical as the current flows in one direction. While standard MIDI DIN cables pose no issues, 3.5mm TRS cables can vary due to the lack of an initial universal standard, resulting in different wiring configurations. Several standards have since emerged.
+\newline$\blacksquare$ \textbf{Note}: Different TRS standards are not interchangeable or compatible. To connect devices with differing TRS standards, a compatible cable must be used.
 \subsection{DIN Connector}
-Standard MIDI cable using 5-pin DIN connector
+The standard MIDI cable employs a 5-pin DIN connector for reliable connectivity.
 \subsection{TRS Connector Types}
 \subsubsection{Type A Connector}
-TRS Type A defines \textbf{TIP} of 3.5mm jack as \textit{\textbf{source}} and \textbf{RING} as \textit{\textbf{sink}}
+Type A TRS defines the \textbf{TIP} of the 3.5mm jack as the \textit{\textbf{source}} and the \textbf{RING} as the \textit{\textbf{sink}}.
 \newline
 \includegraphics[height=0.3\linewidth]{midi_trs_type_a.eps}
-\newline$\bigstar$ Brands that use Type A: Korg, Akai
+\newline$\bigstar$ Brands using Type A: Korg, Akai
 \subsubsection{Type B Connector}\label{section:cabletypeb}
-TRS Type B defines \textbf{TIP} of 3.5mm jack as \textit{\textbf{sink}} and \textbf{RING} as \textit{\textbf{source}}
-\newline$\blacksquare$ Type B is more popular among Eurorack Modular scene
+Type B TRS defines the \textbf{TIP} of the 3.5mm jack as the \textit{\textbf{sink}} and the \textbf{RING} as the \textit{\textbf{source}}.
+\newline$\blacksquare$ Type B is widely adopted in the Eurorack modular community.
 \newline
 \includegraphics[height=0.3\linewidth]{midi_trs_type_b.eps}
-\newline$\bigstar$ Brands that use Type B: Arturia, Novation, 1010
+\newline$\bigstar$ Brands using Type B: Arturia, Novation, 1010 Music
