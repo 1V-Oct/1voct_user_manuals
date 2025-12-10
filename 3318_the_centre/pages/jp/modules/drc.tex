@@ -1,0 +1,80 @@
+\def\drcset{
+  {{Audio Output}/{Drum Rackのオーディオ出力}/{DRCの音声出力先を選択します。 4 つのサンプルスロットはすべて、ダウンミックスされる同じオーディオ出力を共有しています。 \newline 参照: \underline{\nameref{section:audiooutputs}}}},
+}
+
+\def\drcinp{
+  {{Gate 1}/{スロット 1 のゲート CV 入力}/{サンプルの再生を開始するゲートまたはトリガー信号}},
+  {{Pitch 1}/{スロット 1 のピッチ調整}/{サンプル再生の相対ピッチ調整}},
+  {{Level 1}/{スロット 1 の振幅 (レベル)}/{サンプル再生用のレベル (Amplitude Modulation)}},
+  {{Steps 2}/{チャネル 2 のステップ数}/{チャネル内のステップ数}},
+  {{Beats 2}/{チャンネル 2 の拍数}/{チャンネル内のビート数。}},
+  {{Offset 2}/{チャネル 2 の最初のステップのオフセット}/{チャネルの最初のステップのオフセット}},
+  {{Steps 3}/{チャンネル 3 のステップ数}/{チャネル内のステップ数。}},
+  {{Beats 3}/{チャンネル 3 のビート数}/{チャンネル内のビート数。}},
+  {{Offset 3}/{チャンネル 3 の最初のステップのオフセット}/{チャネルの最初のステップのオフセット}},
+  {{Steps 4}/{チャネル 4 のステップ数}/{チャネル内のステップ数。}},
+  {{Beats 4}/{チャンネル 4 のビート数}/{チャンネル内のビート数。}},
+  {{Offset 4}/{チャンネル4 の最初のステップのオフショット}/{チャネルの最初のステップのオフセット}},
+}
+
+\def\drcout{
+  % {{Gate 1}/{Gate 1 Output}/{Output of Channel 1 setting gate to high upon beat}},
+  % {{Gate 2}/{Gate 2 Output}/{Output of Channel 2 setting gate to high upon beat}},
+  % {{Gate 3}/{Gate 3 Output}/{Output of Channel 3 setting gate to high upon beat}},
+  % {{Gate 4}/{Gate 4 Output}/{Output of Channel 4 setting gate to high upon beat}}%
+}
+
+\def\refcarddrc{
+  \makereferencecard{
+    \textcolor{black}{\textbf{回す]}} サンプルスロットを選択
+    \newline\textcolor{black}{\textbf{[クリック]}} ファイルブラウザに入り、SD カードからサンプルを選択します
+  }{
+    \textcolor{black}{\textbf{[On/Off]}} モジュールのオンとオフを制御します,
+    \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+    \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+    \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+  }{
+    \textcolor{black}{\textbf{[PITCH]}} スロット 1 のピッチ コントロール,
+    \textcolor{black}{\textbf{[PITCH]}} スロット ２ のピッチ コントロール,
+    \textcolor{black}{\textbf{[PITCH]}} スロット ３ のピッチ コントロール,
+    \textcolor{black}{\textbf{[PITCH]}} スロット ４ のピッチ コントロール,
+    \textcolor{black}{\textbf{[LEVEL]}} スロット 1 のレベル (振幅) コントロール,
+    \textcolor{black}{\textbf{[LEVEL]}} スロット ２ のレベル (振幅) コントロール,
+    \textcolor{black}{\textbf{[LEVEL]}} スロット ３ のレベル (振幅) コントロール,
+    \textcolor{black}{\textbf{[LEVEL]}} スロット ４ のレベル (振幅) コントロール,
+  }{%
+    \textcolor{black}{\textbf{[GATE]}} スロット 1 のゲート CV を選択します,
+    \textcolor{black}{\textbf{[GATE]}} スロット ２ のゲート CV を選択します,
+    \textcolor{black}{\textbf{[GATE]}} スロット ３ のゲート CV を選択します,
+    \textcolor{black}{\textbf{[GATE]}} スロット ４ のゲート CV を選択します,
+    \textcolor{black}{\textbf{[OUT]}} 音声出力先の選択,
+    NA,
+    NA,
+  }
+}
+
+
+
+\def\modnameshortdrc{DRC}
+\def\modnamelongdrc{Drum Rack}
+
+\newcommand{\moddrc}{
+  \newpage
+  \modmakesection{drc}
+
+  \paragraph*{}
+  Drum Rack (DRC) は、ピッチ調整とボリューム レベル コントロール (振幅変調) を備えた 4 スロットのシンプルなサンプル プレーヤーです。
+
+  \showrefcardsection{drc}
+
+  \subsection{操作}
+  \paragraph*{} ドラムラックは、サンプルをロードするための 4 つのスロットで構成されています。 \textbf{GATE} 入力でトリガーまたはゲート信号を受信すると、サンプルはシングル ショットとして開始されます。 現在調整するパラメータは 2 つだけで、両方とも静的な値を設定するか、CV を使用して変調することで制御できます。 これらのパラメーターは、ボリューム レベル (振幅) とピッチ補正です。 ピッチ補正は、サンプルのピッチを調整します
+  % \newline$\blacksquare$ クロックソースがない場合、BPM は 120 BPM に固定されます。
+  
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\drcset}{\optnameset}
+  \tableofoptionsnew{\drcinp}{\optnameinp}
+  \tableofoptionsnew{\drcout}{\optnameout}
+}
+

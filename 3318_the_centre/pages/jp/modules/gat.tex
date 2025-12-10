@@ -1,0 +1,81 @@
+\def\gatset{
+  {{NONE}/{}/{}}%
+}
+
+\def\gatinp{
+  {{Clock}/{クロック CV ソース}/{Pulse CV source to base divisions on}},
+  {{Reset}/{CV ソースをリセット}/{すべての位置を開始に設定することにより、すべてのディバイダの位置を同期するリセット信号}},
+  {{Intverval 1}/{パルスインターバル}/{高ゲート時のゲートインターバル}},
+  {{Gate Len 1}/{パルスの長さ}/{チャンネル内のビート数}},
+  {{Delay 1}/{パルスのトリガー前のディレイ}/{ディレイは、パルス信号がゲートをHighにするまでの期間}},
+  {{Intverval 2}/{パルスインターバル}/{高ゲート時のゲートインターバル}},
+  {{Gate Len 2}/{パルスの長さ}/{チャンネル内のビート数.}},
+  {{Delay 2}/{パルスのトリガー前のディレイ}/{ディレイは、パルス信号がゲートをHighにするまでの期間}},
+  {{Intverval 3}/{パルスインターバル}/{高ゲート時のゲートインターバル}},
+  {{Gate Len 3}/{パルスの長さ}/{チャンネル内のビート数}},
+  {{Delay 3}/{パルスのトリガー前のディレイ}/{ディレイは、パルス信号がゲートをHighにするまでの期間}},
+  {{Intverval 4}/{パルスインターバル}/{高ゲート時のゲートインターバル}},
+  {{Gate Len 4}/{パルスの長さ}/{チャンネル内のビート数}},
+  {{Delay 4}/{パルスのトリガー前のディレイ}/{ディレイは、パルス信号がゲートをHighにするまでの期間}}%
+}
+
+\def\gatout{
+  {{Gate 1}/{Gate 1出力}/{チャンネル 1 パルス信号の出力}},
+  {{Gate 2}/{Gate ２ 出力}/{チャンネル ２ パルス信号の出力}},
+  {{Gate 3}/{Gate ３ 出力}/{チャンネル ３ パルス信号の出力}},
+  {{Gate 4}/{Gate ４ 出力}/{チャンネル ４ パルス信号の出力}}%
+}
+
+\def\refcardgat{
+  \makereferencecard{
+    \textcolor{black}{\textbf{[回す]}}Gate Dividerチャンネル 1 ～ 4 を選択,
+    }{
+    \textcolor{black}{\textbf{[ON/OFF]}} モジュールのオン/オフ (バイパス),
+    \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+    \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+    \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+  }{
+    \textcolor{black}{\textbf{[INTV1]}} チャンネル 1 のインターバル,
+    \textcolor{black}{\textbf{[GLEN1]}} チャンネル 1 のゲートの長さ,
+    \textcolor{black}{\textbf{[INTV2]}} チャンネル ２ のインターバル,
+    \textcolor{black}{\textbf{[GLEN2]}} チャンネル ２　のゲートの長さ,
+    \textcolor{black}{\textbf{[INTV3]}} チャンネル ３ のインターバル,
+    \textcolor{black}{\textbf{[GLEN3]}} チャンネル ３ のゲートの長さ,
+    \textcolor{black}{\textbf{[INTV4]}} チャンネル４ のインターバル,
+    \textcolor{black}{\textbf{[GLEN4]}} チャンネル ４ のゲートの長さ,
+  }{%
+    \textcolor{black}{\textbf{[DLY1]}} Channel 1のDelay,
+    \textcolor{black}{\textbf{[DLY2]}} Channel ２のDelay,
+    \textcolor{black}{\textbf{[DLY3]}} Channel ３のDelay,
+    \textcolor{black}{\textbf{[DLY4]}} Channel ４のDelay,
+    \textcolor{black}{\textbf{[CLK]}}CLOCKソースCVを選択,
+    \textcolor{black}{\textbf{[RST]}} RESETソースCVを選択,
+    NA,
+    NA,
+  }
+}
+
+\def\modnameshortgat{GAT}
+\def\modnamelonggat{Gate Divider}
+
+\newcommand{\modgat}{
+  \newpage
+  \modmakesection{gat}
+
+  \paragraph*{}
+ Gate Divider (GAT) は、パルス クロック信号 (クロック) をより長い周期のパルスクロック信号に分割します。
+
+  \refcardgat%
+
+  \subsection{操作}
+  \paragraph*{} Gate Divider (GAT) は、入力されたパルス信号 (通常はクロック) を分割してパルス信号 (位相幅の異なるSquare波) を生成します。入力信号は 4 チャネルのカウンターをトリガーし、設定されたパラメーターに基づいて、位相の幅が変更された長いパルス信号 (負と正の両方) を作成します。
+  \newline$\blacksquare$ このような分割は、クロック信号を等間隔の休符を持つ等間隔の音符、または特定の音符の長さを持つ等間隔の音符トリガーに変換することと見なすことができます。
+  \newline$\bigstar$ 分割されたゲートは、繰り返しのタイム ジェネレーター (ドラム マシン) として使用される繰り返しパターンの優れたソースです。gate dividerからドラム サンプルをトリガーし、gate divider divisionsを異なるノートに設定すると、通常のビートパターンを作成できます。
+
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\gatset}{\optnameset}
+  \tableofoptionsnew{\gatinp}{\optnameinp}
+  \tableofoptionsnew{\gatout}{\optnameout}
+}
+

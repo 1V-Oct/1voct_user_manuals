@@ -1,0 +1,218 @@
+\newpage
+\section{Module Overview}
+\paragraph*{} The Centre is a multipurpose Eurorack module designed around it's primary function being Wavetable Synthesis and incorporating large number of of functional modules that can operate on it's own or can be connected to create internal patches or presets. The Centre inspired by fully fledged WaveTable Synthesisers in VST format brings that functionality into Eurorack module however with the scalability and flexibility of modular synth.
+\paragraph*{} The Centre can be considered as modular-in-modular as it allows creating instances of virtual modules and making connections between them either through audio or modulation paths. Every module can also be controlled via external CV inputs or physical knobs.
+\subsection{Patch} The Centre revolves around idea of patch (or preset) which is basically a set of different modules cascaded on top of each other connected via shared outputs and inputs and sharing the phyiscal knobs and CV inputs and audio outputs.
+\subsection{Physical Connectors}\label{section:connectors}%
+The Centre features:
+\begin{itemize}
+  \item \textbf{Rotary Encoder} - used for navigating menu system
+  \item \textbf{16 knobs} - 8 Level and 8 Attenuators
+  \item \textbf{4 V/OCT inputs} - calibrated inputs taking 1V per Octave to control pitch of multiple modules
+  \item \textbf{4 CVY inputs} - low latency gate inputs that result only in binary inputs (gate set and not set)
+  \item \textbf{8 CV inputs} - higher latency analog inputs with -10V to +10V range.
+  \item \textbf{4 VOUT inputs} (DC coupled inputs capable of outputting audio frequency and very low frequencies for modulating external modules)
+\end{itemize}
+\subsubsection{Rotary Encoder} Rotary Encoder allows navigating through all menu systems. Pressing rotary encoder down executes \textbf{[SELECT]} function and rotating encoder is refered to as \textbf{[ROTATE]}
+\subsubsection{Knobs}All knobs in The Centre have are fully configurable and the differentiation on panel for \textbf{LVL} - \textit{Level} and \textbf{ATT} - \textit{Attenuator} is just for aesthetic and visual purpose (easier to navigate through configured patch). Every knob is fully assignable to any parameter in patch that can be controlled via knob assignment.
+\subsubsection{V/OCT}V/OCT inputs are preconfigured and calibrated to take -3V to 8V Control Voltage and control it to music notes by applying standard formula of 1V per Octave.
+\newline$\blacksquare$ 1V per Octave (1V/Oct) is a term of controlling pitch of oscillators in modular synthesisers via control voltage that steps in linear way and every difference of 1 Volt causes difference in pitch of 1 octave.
+\newline$\blacksquare$ The Centre is calibrated that 0V (or no input) results in note C2 (MIDI note 36)
+\subsubsection{CVY} CVY are simple gate inputs with very low latency (with the worst case being the standard length of audio slice - 2.7ms). CVY inputs are good for external clock and gates. To sync module to external clock only CVY gates can be used. CV gates will result with unacceptable latency.
+\subsubsection{CV} CV inputs are standard inputs taking analog signal in range of -10V to +10V. Those inputs have much higher latency than CVY (Gates) inputs and that latency varies at around 10ms being an average.
+\subsubsection{VOUT} VOUT outputs are physical outputs of patch that are propagated by \textbf{OUT} module from VOUT1-4 audio buffers in patch.
+\newline$\blacksquare$ If multiple modules write to the same audio buffer the output is either mixed or overwritten based on module.
+\newpage
+\section{Patch}\label{section:patch}%
+Patch (also known as preset) is a set of modules that carry following characteristics:
+\begin{itemize}
+  \item Connected via audio inputs and outputs
+  \item Connected internally via CV inputs and outputs
+  \item Having set of knobs assigned to control performance
+  \item Having set of assigned external CV inputs (V/OCT, CVY, CV) to control performance from external gear
+\end{itemize}
+\subsection{Knobs}
+In \textbf{PATCH EDIT} screen the knobs perform actions as assigned in \underline{\nameref{section:moduleinputs}}. That means the knobs can be assigned to perform arbitrary functions like control Cutoff of VCF, Frequency of LFO or attenuation of external envelope that goes to VCA. 
+\newline$\blacksquare$ When navigating to different screens the knobs are no longer assigned to the inputs but they perform a function on the screen. In the modules section every screen has knobs explained.
+The mapping of the knobs and external CV inputs can be seen in the \textbf{PATCH} screen as seen below:
+\newpage
+
+\section{Audio Outputs}\label{section:audiooutputs}%
+\paragraph*{}%
+Audio Outputs is a fundamental mechanism of transferring audio between modules and out of The Centre. 
+\subsection{Physical Outputs}
+\paragraph*{}%
+There are 4 output channels via \textbf{VOUT1} to \textbf{VOUT4} 3.5mm jacks that output audio level signal. VOUTs are DC coupled thus capable of sending output of utility modules such as LFS (Low Frequency Shaper - free shape oscillator) or ENV (AHDSR Envelope) or even triggers and gates.
+Those outputs are filled as a copy VOUT1-4 buffers respectively at the end of processing patch.
+\newline$\blacksquare$ Modules in patch are processed in order for every time slice. If there are two modules writing to the same \textbf{VOUTx} they may either overwrite the content of mix it.  It is strongly suggested to use \textbf{VBuf - Virtual Buffers} whenever possible and only produce final result to \textbf{VOUTx} channel
+\subsection{Virtual Audio Buffers}%
+\paragraph*{} Virtual Buffer Output called in The Centre by shortened name \textbf{VBuf} is a concept of transferring audio inside The Centre between modules without occupying outside outputs. VBuf can be understand as a buffer that stores audio that can be then assigned to another module (or a few modules) and further processed indivdually.%
+\paragraph*{}%
+The most important part of VBuf is that every module within The Centre has own VBuf. Furhermore VBuf Output of a module can be used as VBuf input to other modules without being modified.
+\newline\paragraph*{}%
+$\bigstar$ WTO can output to VBuf and then VCF processes WTO input. At the end MIX module takes input from WTO VBuf (original oscillator signal) and VCF Vbuf (filtered oscillator signal) and MIX module can act as Dry/Wet Mixer for those two signals. In such scenario WTO VBuf (oscillator output signal) is being sent unmodified to two modules (VCF and MIX).
+\newline\paragraph*{}
+Audio Outputs are integral part of almost every module. Audio output of some modules can be configured to \textbf{Stereo} or \textbf{Mono} while some modules will output only single channel (Mono). Certain modules that take input of \textbf{VBuf} will detect if the input is Mono or Stereo and process it accordingly.
+\newline\paragraph*{}
+\subsection{Quick Configuration of Audio Inputs and Outputs for Modules}
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.7\linewidth]{vout.png}
+      \caption{In this example the audio flows from WTO to VCF then to VCA via Virtual Buffers and finally to VOUT1|2}
+      \label{fig:img1}
+  \end{wrapfigure}
+\paragraph*{}%
+While navigating patch menu press \textbf{[EDIT]} button and enter Input/Output configuration mode. In this mode you can directly configure inputs and outputs of selected module by using \textbf{ATT1} to configure primary input of module and use \textbf{ATT8} to congfigure output of module.\newline When the module is configured to output its Audio to Virtual Buffer it will automatically show in the list of Audio Inputs for other modules configuration. The module will have name in inputs as it's own name.%
+\paragraph*{}By pressing \textbf{[Inputs]} or \textbf{[Set]} buttons we can enter Inputs and Settings of selelected module.
+\newline\newline $\blacksquare$ When having two or more modules of same type they automatically get numbered. The numbers will get automatically assigned in ascending order in list.
+\\ \\ \\ \\ \\ \\ \\ \\
+\subsubsection{Visual Output Presentatu=ion in Patch View}
+\paragraph*{}
+\begin{itemize}
+  \item \textbf{1, 2, 3, 4} - monophonic VOUTx direct output (via OUT module)
+  \item \textbf{V} - monophonic virtual buffer \textbf{VBuf}
+  \item \textbf{V|V} - stereophonic virtual buffer \textbf{VBuf}
+  \item \textbf{1|2, 2|3, 3|4, 4|1} - stereophonic VOUTx direct output (via OUT module)
+\end{itemize}
+\newpage
+\section{CV Internal Outputs}\label{section:cvoutputs}
+\paragraph*{}
+Modules in Thw Centre nopt only output Audio Signal (that can be routed inside the module to other modules or outside of the module). Each module outputs Internal CV Signals that can be routed to other modules and used as CV (Control Voltage) Inputs. See:  \underline{\nameref{section:moduleinputs}}
+\newline$\bigstar$ VCO outputs two CV signals, VCO.OSC (output of oscillator) and VCO.RST (reset signal when phase of oscillator resets). The VCO.RST signal can be used as input of another VCO in Inputs: VCO Hard Sync that resets phase of oscillator. This way two VCOs can run in sync.
+
+\newpage\section{Module Inputs}\label{section:moduleinputs}
+\subsection{Overview}
+\paragraph*{}
+Each module in The Centre has configurable set of inputs. Each input is composed out up to 4 components. Those components are either \textbf{VALUE} or \textbf{CONTROLLER}. The most common input is a triplet Level-Attenuator-CV. Level and Attenuator components can be represented either by VALUE or by assigned CONTROLLER (knob). CV component can be assigned to either external CV input (3.5mm jacks labelled CVY (gates) and CV (Control Voltage)) or to the internal output of another modules.
+\newline$\bigstar$ A good example of internal CV connection: ENV (AHDSR Envelope) Module and VCA (Voltage Controlled Amplifier) module connected via Input:Modulation of VCA to the output of envelope module Output:ENV.ENV.
+
+\subsection{Input Configuration Mode}
+
+\subsubsection{Changing VALUE and CONTROLLER in Input Configuration mode}
+\paragraph*{}
+In the Input Screen of each module, we cam use encoder (SELECT) to navigate through list of inputs and then use knobs to change VALUE or CONTROLLER of component at the selected Input. Please see below diagram to understand mapping of knobs in the Input Screen.
+
+\subsubsection{Layout of controls in input menu (Input Configuration)}
+  \makereferencecard{\textcolor{black}{\textbf{[ROTATE]}} Select input\newline \textcolor{black}{\textbf{[CLICK]}} Enter/exit component configuration}{%
+    NA,
+    NA,
+    NA,
+    NA,}{%
+    Change VALUE of Input at position \#1,
+    Change VALUE of Input at position \#2,
+    Change VALUE of Input at position \#3,
+    Change VALUE of Input at position \#4,
+    Change CONTROLLER of Input at position \#1,
+    Change CONTROLLER of Input at position \#2,
+    Change CONTROLLER of Input at position \#3,
+    Change CONTROLLER of Input at position \#4%
+    }
+  {%
+    Change CONTROLLER of Input at position \#1,
+    Change CONTROLLER of Input at position \#2,
+    Change CONTROLLER of Input at position \#3,
+    Change CONTROLLER of Input at position \#4,
+    Change VALUE of Input at position \#1,
+    Change VALUE of Input at position \#2,
+    Change VALUE of Input at position \#3,
+    Change VALUE of Input at position \#4,
+    }
+  
+    \subsection{Individual Component Configuration Mode}
+    \paragraph*{}In Individual Component Configuration Mode each Componet of each Input can be configured individually by changing it's Value or assigned Controller.
+
+    \subsubsection{Layout of controls in input menu (Controller Configuration)}
+
+    \makereferencecard{\textcolor{black}{\textbf{[ROTATE]}} Select input\newline \textcolor{black}{\textbf{[CLICK]}} Exit component configuration
+    }{%
+    \textcolor{black}{\textbf{[Val]}} Switch to edit Value Mode (in this mode ANY knob changes value of component),
+    \textcolor{black}{\textbf{[Ctrl]}} Switch to edit Control Mode (in this mode ANY knob changes assigned controller of component),
+    \textcolor{black}{\textbf{[Assign]}} Switch to edit Assign Mode (in this mode touching kob will assign it as controller of component),
+    NA,
+    NA,
+    NA,
+    }{%
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    }{%
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    Change VALUE or CONTROLLER in Val and Ctrl mode or assign THIS knob as controller in Assign mode,
+    }
+  \subsubsection*{Assigning knobs}
+  \paragraph*{}
+  Another convenient way of changing knobs assignment is by pressign \textbf{Assign} button and switching to individual component setup in Assign Mode. In this mode Encoder (SELECT) navigates through all components of inputs individually and when placed upon Level or Attenuator component it is enough to rotate designated knob slightly to get it assigned to the component.
+  \subsubsection*{Configuring Components}
+  \paragraph*{}
+  In individual componet configuration pressing buttons Ctrl, Val and Assign switches between operation modes of changing CONTROLLER, VALUE or switching int Assign Mode described above. In those individual mode ANY knob will change either VALUE or CONTROLLER depending on selected mode.
+
+  \newpage\section{Pitch Control}\label{section:pitchcontrol}
+\subsection{Overview}
+The Centre pitch control affects following modules: WTO, VCO, SMP. Pitch control is generally change of frequency of sound based on configuration of input.
+
+\subsection{1V/Oct}
+\textbf{1V/Oct} is and abbreviation from \textit{''1 Volt per Octave''} and is a method of controlling pitch (frequency) of ociallator where increase of Control Voltage (CV) by 1 Volt doubles the frequency of oscillator effectively increasing pitch by one octave.
+
+There is no clear standard what voltage results in what note therefore between manufacturers of equipment there are clear differencies on what 0V (zero Volt) results in.
+
+Some suggest that 0V should give ''Middle C'' note but it is also unclear what Middle C is even in MIDI standard (note 48 or 60 are the most commonly suggested) or maybe the 0V should result in frequency 440Hz which is commonly used as tunning frequency for A note.
+
+The Centre follows Moog standard and defines 0V (zero Volt) for MIDI Note C4 and ultimately frequency of 261.63Hz (assuming concert pitch A4 is 440Hz).
+
+\subsection{Note Control in Inputs}%
+The Centre Note Control for Note controlled values is configured in Inputs:NOTE:
+\newline
+\begin{center}
+  \includegraphics[width = 7cm]{screenshots/inputs.png}
+\end{center}
+
+
+\makesupopt{{
+  {{VOCT}/{1V/Oct input for note control. This input can be either set as value (fixed), get input from external modules or synthesisers by V/OCT 1-4 3.5mm input jacks or get input from any other modules CV output. Mostly the output from internal modules should be named .NTE (like: RNG.NTE Random note generator, note output).
+  \newline$\blacksquare$ VOCT is the only dynamically controlled component that controls pitch}},
+  {{OCT}/{Tuning note by octaves +/- 8 octaves}},
+  {{NOTE}/{Tuning note by semitones +12 semitones (one octave)}},
+  {{FINE}/{Tuning note by cents +/- one semitone}}%
+}}%
+
+
+\newpage\section{System Settings}\label{section:systemsettings}
+\subsection{Changing System Settings}
+To enter System Settings go to System Menu by pressing \textbf{[EDIT]} and the \textbf{[System]} buttons and then select \textbf{Settings} from menu.
+
+\def\sysset{
+  {{Load Last Patch}/{Audio Output of WTO - Stereo}/{On system start (reset) it will load last patch that has been manually loaded by user}},
+  {{Reverse Encoder}/{Control behaviour of Encoder}/{Change encoder behaviour - select from 4 different settings}},
+  {{Clocks PQN}/{Configure number of clocks (pulses) peq quarter note}/{Number of clocks per quarter note (beat). Default to 24 CPQN as MIDI standard}},
+  {{V/OCT Quantise}/{V/OCT Quantisation}/{Turn on quantisatiation of V/OCT incloming pitch to the nearest semitone - nearest MIDI note
+    \makesupopt{{
+      {{On}/{V/OCT pitch will be quantised to the nearest semitone}},
+      {{Off}/{V/OCT pitch will be passed without quantisation}}%
+    }}%
+  }},
+  {{Fast SD Operation}/{Enables 4x speed for SD Card}/{Truns on 4x speed for SD Card access but might be incompatible with some cheap cards.}},
+  {{Multi Patch}/{Enable Multi Patch (Set)}/{Starts The Centre in Multi Patch mode aka Set}},
+  {{Overlay Timer}/{Timeout for overlays}/{Time in seconds for overlays in menus to stay on screen}},
+  {{Pots}/{Control behaviour of knobs}/{When operating knobs in between menu it is often happening that exiting one menu and entering other the physical knob position does not match the setting of the variable. The below are ways to configure pots behaviour
+    \makesupopt{{
+      {{Match}/{Set variable will instantly match (jump) to physical value pointed by the knob upon knob movement}},
+      {{Pickup}/{Variable will not change until knob is roatated to the value of the variable and will be picked up at that point}},
+      {{Scaled}/{Value of the affected input will be changed in scale according to pot movement and the value of the input variable until the knob will be picked up (matched) by physical value of variable}}%
+    }}
+  }},
+}%
+
+
+
+\tableofoptionsnew{\sysset}{{Settings}}

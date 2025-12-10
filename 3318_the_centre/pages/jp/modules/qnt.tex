@@ -1,0 +1,148 @@
+\def\qntset{
+  {{Mode}/{操作モード}/{
+    \makesupopt{{
+      {{Simple}/{入力ピッチが整列されるノートの選択に基づいてクオンタイズが行われる動作モード}},%
+      {{Advanced}/{クオンタイズが Scala (SCL) ファイルに基づく場合の動作モード}}%
+    }}%
+  }},
+  {{Scale}/{シンプルモードの音階}/{
+    \makesupopt{{
+      {{Custom}/{ユーザーが選択したノート}},
+      {{Chromatic}/{Chromaticスケール}},
+      {{Major}/{Majorスケール}}
+      {{Natural Minor}/{Natural Majorスケール}}
+      {{Harmonic Minor}/{Harmonic Majorスケール}}
+      {{Melodic Minor}/{Melodic Majorスケール}}
+    }}%
+  }},
+  {{Key}/{選択したスケールのキーを変更 (カスタム スケールを除く)}}%
+}
+
+\def\qntinp{
+  {{NOTE}/{クオンタイズのためのノート入力}/{入力ノートは、クオンタイズ前に調整およびチューニングできます。
+  \newline 参照: \underline{\nameref{section:pitchcontrol}}
+  \makesupopt{{
+    {{VOCT}/{ノートコントロール用の1V/Oct入力/}},
+    {{OCT}/{オクターブ単位のチューニングノート +/- 8 オクターブ}},
+    {{NOTE}/{半音単位のチューニングノート +12 半音 (1 オクターブ)}},
+    {{FINE}/{セント単位のチューニングノート　+/- 1 半音}}%
+  }}%
+  }}%
+}
+
+\def\qntout{
+  {{NOTE}/{Quantised Note}/{クオンタイズされたノート (クオンタイズ スケールの最も近いピッチに合わせられたノート)}}%
+}
+
+\def\refcardqnt{
+  \makereferencecard{\textcolor{black}{\textbf{回す}} ノートをオン/オフ、スケールセレクターではスケールセレクトモードに切り替え}{%
+  \newline\textcolor{black}{\textbf{[Mode]}} シンプルモードとアドバンスモードの切り替え,
+  \newline\textcolor{black}{\textbf{[SET]}} モジュールの設定,
+  \newline\textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+  \newline\textcolor{black}{\textbf{[Back]}} パッチメニューに戻る}{
+    NA,
+    有効化/無効化 Note C\#,
+    有効化/無効化 Note D\#,
+    NA,
+    有効化/無効化 Note F\#,
+    有効化/無効化 Note G\#,
+    有効化/無効化 Note A\#,
+    \textcolor{black}{\textbf{[KEY]}} スケールのキーを変更 / Base Frequencyの変更
+    }
+    {%
+      有効化/無効化 Note C,
+      有効化/無効化　Note D,
+      有効化/無効化 Note E,
+      有効化/無効化 Note F,
+      有効化/無効化 Note G,
+      有効化/無効化 Note A,
+      有効化/無効化 Note B,
+      \textcolor{black}{\textbf{[NOTE]}} NOTE CV入力を選択,
+  }
+}
+
+\def\refcardqntadv{
+  \makereferencecard{\textcolor{black}{\textbf{[回す]}} 現在のディレクトリ内の SCL ファイルを選択する　 \newline\textcolor{black}{\textbf{[クリック]}} ファイルブラウザに入る}{%
+  \newline\textcolor{black}{\textbf{[Mode]}} シンプルモードに切り替え,
+  \newline\textcolor{black}{\textbf{[SET]}} モジュールの設定,
+  \newline\textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+  \newline\textcolor{black}{\textbf{[Back]}} パッチメニューに戻る}{
+    \textcolor{black}{\textbf{[FREQ]}} ベース周波数の調整  (coarse),
+    \textcolor{black}{\textbf{[FREQ]}} ベース周波数を調整する (fine),
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA%
+  }
+  {%
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[NOTE]}} NOTE CV入力を選択%
+  }
+}
+
+
+\def\modnameshortqnt{QNT}
+\def\modnamelongqnt{Quantiser}
+
+\newcommand{\modqnt}{
+  \newpage
+  \modmakesection{qnt}
+  
+  \paragraph*{} Quantiser (QNT) は、入力ピッチを事前に定義された必要なピッチに揃えます。クオンタイザーは、入力ピッチを進行中の限定/設定済みのピッチのセットに制限します。
+  
+  \subsection{操作}%
+  \paragraph*{}Quantiser(QNT) を使用すると、入力ピッチを選択した一連の出力ピッチに修正できます。通常、特定の音階でのみ使用可能な音符の数を制限するために使用されます。 Quantizer は Input:NOTE からピッチを取得し、近似法によってスケール内の最も近い対応するピッチを見つけます。
+  
+  \subsection{Operating Modes}%
+  \paragraph*{}Quantizer は、\textbf{\textit{Simple}} モードまたは \textbf{\textit{Advanced}} モードで動作できます。
+  
+  \subsection{Simple Mode}%
+  \showrefcardsubsection{qnt}%
+  \subsubsection{Musical Scales}
+  \paragraph*{} 現在、クオンタイザーで事前構成されている音階はごくわずかです。事前設定された各スケールは、適切な \textbf{Key} に調整することもできます (LVL8 ノブまたは設定を使用)。.
+
+  \subsubsection{Custom Scales}
+  \paragraph*{} カスタム スケールは、ユーザーが設定したメモのセットです。ノートに対応するノブを回すと (上図のように)、ノートのオンとオフが切り替わります。ノートの構成は、エンコーダー [SELECT] を回転させ、選択したノートでエンコーダーをクリックすることによっても行うことができます。
+  \newline$\blacksquare$ ノブを回すかノートをクリックすると、モジュールが自動的にカスタムスケールに切り替わります。
+  \newline$\bigstar$ クオンタイザーで選択されたノートが 1 つだけの場合、たとえばノート C で入力ノートが E4 の場合、出力ノートは C4 になります。ただし、ノート G4 の場合、C5 は C4 よりも G4 に近いため (近似値)、出力ノートは C5 になります。
+
+  \subsection{Advanced Mode}%
+  \showrefcardsubsection{qntadv}%
+  \paragraph*{}Advanced modeでは、シンセサイザーのチューニングおよびマイクロチューニングの業界標準である Scala (SCL) ファイルを使用します。 Scala ファイルの最大のデータベースには、5000 以上のファイルが含まれています。
+  \newline$\blacksquare$ \textbf{注意:} Center はメモリが限られているため、フォルダーごとに大量のファイルがあるフォルダーを読み取ることができません。 The Centerリポジトリから Scala で準備されたファイルを使用してください。%
+  \newline$\bigstar$ こちらから: \underline{\url{https://github.com/1V-Oct/the_centre_waveforms/releases/tag/0.0.2}} 
+  
+  \begin{center}
+    \centering\textbf{\textit{以下の QR コードをスキャンして、ダウンロード先にアクセスしてください}}
+  \end{center}
+  \begin{center}
+    \qrcode{https://github.com/1V-Oct/the_centre_waveforms/releases/tag/0.0.2}
+  \end{center}
+  \paragraph*{}このモードでは、ユーザーが SD カードから SCL ファイルを選択すると、SCL ファイルで事前定義されたノートの比率が画面に表示されます。 
+  ノブ \textbf{LVL1 - Coarse} と \textbf{LVL2 - Fineı} を使用してベース周波数を調整します。
+%    \subsection*{LFS \- Low Frequency Shaper (Low Frequency Oscillator generating irregular shapes)}
+% This module creates low frequency oscillations of irregular shapes. The shapes can be either edited by user or imported from .shp (Serum) and .vitallfo (Vital) formats.
+
+% To load a shape press \textbf{[SELECT]} (Encoder down) and navigate in file browser to directory with shapes and press \textbf{[SELECT]} again to load the desired shape.
+
+% Rotating Encoder cycles through shapes in current directory.
+
+% \subsubsection*{Main Menu}
+
+% \tableofbuttons{\lfsbutmain}
+\newpage
+\section*{\modname}
+\tableofoptionsnew{\qntset}{\optnameset}
+\tableofoptionsnew{\qntinp}{\optnameinp}
+\tableofoptionsnew{\qntout}{\optnameout}
+% \setshowall{\lfsinfo}
+}
+

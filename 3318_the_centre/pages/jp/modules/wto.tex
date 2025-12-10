@@ -1,0 +1,148 @@
+% \def\lfsbutmain{
+%    {Edit}/{Invokes Shape Editor},
+%    {Set}/{Open Settings},
+%    {Inputs}/{Open Inputs},
+%    {Back}/{Return to Patch Menu}
+% }
+
+
+
+\def\wtoset{
+  {{Audio Output}/{オーディオ出力 - ステレオ}/{WTO の音声出力先を選択します。 ポリフォニーモードを含むすべてのオシレーターは、単一チャンネル (モノラルまたはステレオ) から出力されます。 \newline 参照 \underline{\nameref{section:audiooutputs}}}},
+  {{Polyphony}/{WTOオシレーターのパラフォニーモード}/{
+    \makesupopt{{
+      {{1}/{パラフォニー無効、1つのWTOピッチコントロール}},
+      {{2, 3, 4}/{ピッチの異なる 2 - 4 つのオシレーターのパラフォニー。 オシレーター1のピッチが V/OCT1 入力から来る場合、次のオシレーターのピッチは対応する V/OCT2 - V/OCT4 入力から来ます。}}%
+    }}
+  }},
+  {{Glide Scaled}/{ピッチの距離によるグライドタイムのスケーリング}/{
+    \makesupopt{{
+      {{Off}/{グライド タイムは、どのノート間のピッチポルタメントでも同じになります。}},
+      {{On}/{グライドタイムはピッチの距離によって変化します。 Input Glide Time (以下の「Inputs」を参照) によって設定された Glide Time は、1 オクターブのピッチ間の距離になります。 同じオクターブ内で演奏される音符の場合、次の音符のピッチを半音の分数で区切ります。}}%
+    }}
+  }},
+  {{Warp Mode}/{\label{wtoset:warpmode}オシレーション時の波形を加工する機能}/{ワープ モードは、入力 \textbf{\textit{Warp mode}} を通じたる変調に従って波形を処理するために使用される追加機能を有します。 現在、1 つの機能のみが有効になっています。
+  \newline
+  \makesupopt{{
+    {{Off}/{波形の処理なし}},
+    {{FM}/{ワープモード入力が波形の周波数 (FM) を変調します}}%
+  }}
+  }}%
+    % {{Running Mode}/{Select type of running mode of low frequency shape}/{
+    %    \makesupopt{{
+    %      {{Continuous}/{Oscillator keeps running and never stops. Gate High (Trigger) signal will reset oscillator phase to 0.}},
+    %      % \item [\tikz{\node[text=white, fill=black] {Continuous};}] Oscillator keeps running and never stops. Gate High (Trigger) signal will reset oscillator phase to 0.\
+    %      {{Trigger}/{Oscillator runs once upon the gate signal high and runs complete shape once and stops generation when phase of shape ends. Another trigger signal will reset phase to 0.}},
+    %      {{Gate length}/{Oscillator runs as long as gate signal is high. Stops immediatelly when signal goes to low.}}%
+    %   }}
+    % }},
+    % {{Timing Mode}/{Select timing mode for LFS}/{Timing for LFS can be either selected to be calculated in Hz for more time based experience or tied to BPM and measured in length of notes or bars.
+    % \makesupopt{{
+    %    {{BPM}/{Timing based on note duration}},
+    %    {{Hz}/{Timing based on frequency}}%
+    % }}
+    % }},
+    % {{Polarity}/{Polarity of output}/{
+    %    \makesupopt{{
+    %      {{Bipolar}/{Outputs shape in range -5V to +5V. Good for Ring Modulation or FM}},
+    %      {{Unipolar}/{Outputs shape in range 0V to +5V. Good for VCA}}%
+    %   }}
+    % }}%
+}
+% \def\inpclock{
+%    {{Clock}/{Clock for timing oscillator's phase duration in BPM mode (otherwise 120BPM is used)}/{}}
+% }
+
+\def\wtoinp{
+  {{NOTE}/{オシレーターのピッチコントロール}/{Note は、オシレーターのピッチまたは周波数を制御します。
+  \newline 参照 \underline{\nameref{section:pitchcontrol}}
+  \makesupopt{{
+    {{VOCT}/{ノートコントロール用の1V/Oct入力/}},
+    {{OCT}/{オクターブ単位のチューニングノート +/- 8 オクターブ}},
+    {{NOTE}/{半音単位のチューニング音 +12 半音 (1 オクターブ)}},
+    {{FINE}/{セント +/- 半音単位のチューニング ノート}}%
+  }}%
+  }},
+  {{Unison}/{ユニゾンモード（1～16ボイス）}/{ユニゾンモードを有効にし、並列で動作するオシレーターの数を制御します。}},
+  {{Detune}/{デチューンオシレーター}/{ユニゾン モードでオシレーターをデチューン範囲で均等にデチューンします。 デチューンを最大に設定すると、スプレッド範囲は 2 半音になります。 オシレーターの数が奇数の場合、中央のオシレーターは常にノート入力のピッチに従います。 偶数のオシレーターの場合、ノートの後に続くオシレーターはなく、各オシレーターはセンター ノートから +/- 離調されます。 \newline $\bigstar$ \textit{Unison で 2 つのオシレーターを実行し、デチューンを最大 (1.0) に設定し、ピッチをノート D に設定すると、ノート C\# を再生するオシレーターとノート D\# を再生するオシレーターが 1つあります (実際にノート C を再生するオシレーターはありません)。}}}%
+}
+\def\wtoinpi{
+  {{Wavetable}/{Wavetable position}/{ウェーブテーブルの波形の位置を調整します。 CV で制御すると、ウェーブテーブルに含まれる一連の波形をスキャンしてサウンドの質感を変更できます。}},
+  {{Reset Osc}/{オシレーターCV入力のリセット}/{CV 入力に接続して高レベルに設定すると、オシレーターの位相が 0 にリセットされます。同期でオシレーターを実行するのに便利です。}},
+  {{AM}/{Amplitude Modulation}/{振幅変調はサウンドレベルを変化させます。 Envelope の CV 信号と接続すると VCA として機能します。 LFO と接続すると、リング モジュレーターが作成されます。}},
+  {{Detune WT}/{ユニゾン モードでオシレーターのウェーブテーブル位置をデチューンする}/{ユニゾン モードでは、このパラメーターは個々のオシレーターのウェーブテーブルの波形の位置をデチューンします。 各オシレーターは異なる波形を再現するため、よりテクスチャーのあるサウンドが作成されます。\newline$\bigstar$ \textit{3 つの波形 (トライアングル、サイン、スクエア) と 3 つのオシレーターのユニゾンと 1.0 に設定された Detune WT パラメーターを備えたウェーブテーブルで、各オシレーターは固有の波形を再生します。}}},
+  {{Frequency Coarse}/{大きなステップでオシレータの周波数を調整}/{オシレータの周波数を 0Hz から 100Hz の範囲 (周波数モード) または 1/256 ノートから 8bar の間 (BPM/ノートデュレーションモード) で調整します。}},
+  {{Frequency Fine}/{オシレーターの周波数を微調整する}/{非常に小さな段階でオシレーターの周波数を調整します。}},
+  {{Glide Time}/{ポルタメント（ピッチグライド）タイム}/{ピッチの変更時に、あるピッチ(Note)から別のピッチに移る時間 。グライド時間は 0 秒から 1 秒の範囲です。 \newline $\blacksquare$ このパラメータは、*Glide Scaled* の設定の影響を受けます。 グライドスケールをオフに設定すると、2 つのノート間をグライドするのにかかる時間は一定であり、グライド タイムによって定義されます。グライドスケールをオンにすると、時間は演奏されるノートのピッチ距離によって決まります。}},
+  {{Warp Mode}/{ワープモードは、ワープモードパラメータ設定で選択されたワープモード機能で使用されるCVを介したモジュレーションパラメータです。 \underline{\hyperref[wtoset:warpmode]{Warp Mode}} 参照}}%
+ %  {{Trigger}/{Trigger CV input}/{Trigger or gate signal that initiates or resets oscillator}},
+  %  {\inpclock},
+  %  {{Frequency Coarse}/{Adjust Frequency of oscillator (coarse)}/{Adjusts frequency of oscillator in range of 0Hz to 100Hz (in frequency mode) or between 1/256 note and 8bar (in BPM/note duration mode)}},
+  %  {{Frequency Fine}/{Fine tune frequency of oscillator}/{Adjust frequency of oscillator in very small steps}}%
+}
+
+    
+    % {}/{}/{}%
+    % {}/{}/{}%
+    % {}/{}/{}%
+
+\def\wtoout{
+    {{OUT}/{WTO出力}/{ウェーブテーブルオシレーターの出力}},
+    {{RST}/{オシレーターリセット}/{発振器の位相がリセットされるとhighに設定されます。}}%
+}
+
+
+
+\def\refcardwto{
+  \makereferencecard{
+    \textcolor{black}{\textbf{[回す]}} 現在のディレクトリ内のウェーブテーブル間を移動\newline\textcolor{black}{\textbf{[クリック]}} File Browser に入り、選択したウェーブテーブルに変更し、ブラウジングディレクトリを変更\newline\textcolor{black}{\textbf{[長押し]}} Wavetable Editorに入る
+    }{
+      \textcolor{black}{\textbf{[2D/3D]}} ウェーブテーブルの表示切り替え,
+      \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+      \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+      \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+    }{
+      \textcolor{black}{\textbf{[WT]}} ウェーブテーブル内のウェーブの位置。 CV によって制御されている場合は、テーブルを移動します。
+      \textcolor{black}{\textbf{[UNI]}} ユニゾンモード。複数（最大16）のオシレーターを作成,
+      \textcolor{black}{\textbf{[DET]}} Detune. 最大範囲 +/- 半音のユニゾン モードでオシレーターをデチューン,
+      \textcolor{black}{\textbf{[AM]}} Amplitude Modulation Level (VCAとして使用可能),
+      \textcolor{black}{\textbf{[DTWT]}} Detune WT,
+      \textcolor{black}{\textbf{[FRQC]}} Frequency Coarse,
+      \textcolor{black}{\textbf{[FRQF]}} Frequency Fine,
+      \textcolor{black}{\textbf{[GLDT]}} Glide Time,
+    }{
+      Smooting \- ウェーブテーブルの再生方法を変更,
+      NA,
+      NA,
+      NA,
+      \textcolor{black}{\textbf{[NOTE-OCT]}} ノートをオクターブ単位でチューニング (+/- 8 オクターブ)),
+      \textcolor{black}{\textbf{[NOTE-NOTE]}} 音を半音単位でチューニング (+12 半音 1 オクターブ),
+      \textcolor{black}{\textbf{[NOTE-FINE]}} セント単位でノートを微調整 (+/- 半音),
+      音声出力先の選択,
+    }
+}
+
+\def\modnameshortwto{WTO}
+\def\modnamelongwto{Wavetable Oscillator}
+
+\newcommand{\modwto}{
+  \newpage
+  \modmakesection{wto}
+
+  \paragraph*{}
+Wavetable Oscillator (WTO) は、The Centreサウンドの主要な構成要素です。 WTO は、ユニゾン モードで動作する 1 ～ 16 のオシレーターで構成され、ピッチ及び、波形のデチューンが可能なウェーブテーブルを再現します。
+  
+  \showrefcardsection{wto}
+
+  \newpage
+  \section*{\modname}  
+  \tableofoptionsnew{\wtoset}{\optnameset}
+  \tableofoptionsnew{\wtoinp}{\optnameinp}
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\wtoinpi}{\optnameinp}
+  \tableofoptionsnew{\wtoout}{\optnameout}
+}
+
+
+

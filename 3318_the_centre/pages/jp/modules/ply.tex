@@ -1,0 +1,80 @@
+\def\plyset{
+  {{Pattern Length}/{barでのパターンの長さ}/{バーでのパターンの長さ。各パターンは Inputs:Pulses で設定されたステップ数に分割されます}},
+  {{Gate length}/{gateの長さ}/{
+    \makesupopt{{
+      {{Trigger}/{Triggerのみ}/{パルス発生時の非持続信号}}%
+    }}%
+  }}%
+}
+
+\def\plyinp{
+  {{Clock}/{Clock CV Source}/{Poly Rhythmを他のモジュールと同期させるためのクロックソース}},
+  {{Reset}/{Reset CV Source}/{トリガー時にパターン内のすべてのチャンネルの位置をリセット}},
+  {{Pulses 1}/{チャンネル 1 のパルス数}/{パターンが分割され、各ステップの開始時にビートを生成するステップの数}},
+  {{Pulses 2}/{チャンネル ２ のパルス数}/{パターンが分割され、各ステップの開始時にビートを生成するステップの数}},
+  {{Pulses 3}/{チャンネル ３ のパルス数}/{パターンが分割され、各ステップの開始時にビートを生成するステップの数}},
+  {{Pulses 4}/{チャンネル ４ のパルス数}/{パターンが分割され、各ステップの開始時にビートを生成するステップの数}}%
+}
+
+\def\plyout{
+  {{Gate 1}/{Gate 1　出力}/{ビートに対してPoly RhythmゲートをHighにする出力}},
+  {{Gate 2}/{Gate 2 出力}/{ビートに対してPoly RhythmゲートをHighにする出力}},
+  {{Gate 3}/{Gate 3 出力}/{ビートに対してPoly RhythmゲートをHighにする出力}},
+  {{Gate 4}/{Gate 4 出力}/{ビートに対してPoly RhythmゲートをHighにする出力}}%
+}
+
+\def\refcardply{
+  \makereferencecard{
+    NA%\textcolor{black}{\textbf{[ROTATE]}} Turn note on or off and in Scale Selector turn to Scale Select mode
+  }{
+    \newline\textcolor{black}{\textbf{[RESET]}} ボタンを放すと、パターン内のすべてのチャンネルがリセットされます,
+    \newline\textcolor{black}{\textbf{[SET]}} モジュールの設,
+    \newline\textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+    \newline\textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+  }{
+    チャネル 1 のステップ数を選択,
+    チャネル 2 のステップ数を選択,
+    チャネル 3 のステップ数を選択,
+    チャネル 4のステップ数を選択,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{%
+    \textcolor{black}{\textbf{[PLEN]}}パターンの長さを選択,
+    NA,
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[CLK]}} CLOCKソースCVを選択,
+    NA,
+    NA,
+    NA,
+  }
+}
+
+
+\def\modnameshortply{PLY}
+\def\modnamelongply{Polyrhythm}
+
+\newcommand{\modply}{
+  \newpage
+  \modmakesection{ply}  
+  \def\modname{PLY - Polyrhythm}% chktex 8
+  
+
+  \paragraph*{}
+  Polyrhythm (PLY) は、パターン内で対照なリズムを生成します。
+
+  \showrefcardsection{ply}
+
+  \subsection{操作}
+  \paragraph*{} Polyrhythmは、パターンの長さを入力パラメータ Inputs:Steps で決定される等しいステップ数に分割することにより、4 チャンネルのリズムを生成します。パターンは、指定された BPMでの小節数 (4 拍または 4 分音符) をカバーする期間として定義されます。チャンネルのステップ数は、Inputs:Beats X (X はチャンネル 1 ～ 4 の番号) で制御できます。
+  \newline$\blacksquare$ クロックソースがない場合、BPM は 120 BPM に固定されます。
+  
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\plyset}{\optnameset}
+  \tableofoptionsnew{\plyinp}{\optnameinp}
+  \tableofoptionsnew{\plyout}{\optnameout}
+}
+

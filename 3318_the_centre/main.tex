@@ -2,20 +2,21 @@
 \def\USERMANUAL{true}
 
 \makeatletter
-  \def\input@path{{pages/en/}{pages/}}
+  \def\input@path{{pages/\LANG/}{pages/}{shared/}{pages/en/}}
 \makeatother
 
 % Load the preamble, which in turn loads fonts.tex
 % This must be done early, especially before babel, to set up fontspec correctly.
 \input{../../shared/preamble.tex}
-
+\input{local_glossary.tex}
 \usepackage{wrapfig}
 \input{modules.tex}
 
 \begin{document}
 
+\maketitlepage{\LNGtitle}{\LNGsubtitle}{bg_image_the_centre_two_face}{\LNGdoctype}
 % Include the content file based on the language
-% This assumes your content files are located at pages/<lang>/content.tex
+% This assumes content files are located at pages/<lang>/content.tex
 \input{content.tex}
 
 \end{document}

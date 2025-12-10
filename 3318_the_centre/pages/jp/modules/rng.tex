@@ -1,0 +1,76 @@
+\def\rngset{
+  {{Pattern Length}/{パターンの長さ}/{各パターンは Inputs:Pulses で設定されたステップ数に分割されます。}},
+  {{Gate length}/{gateの長さ}/{
+    \makesupopt{{
+      {{Trigger}/{Triggerのみ}/{パルス発生時の非持続信号}}%
+    }}%
+  }}%
+}
+
+\def\rnginp{
+  {{Clock}/{Clock CV Source}/{音符を自動的に生成し、音符の長さを測定するためのクロック ソース}},
+  {{Trigger}/{Trigger CV Source}/{次の音符の生成をトリガー。接続されていない場合、音符と休符は、ピリオドの終了時に自動的に生成}}%
+}
+
+\def\rngout{
+  {{Pitch}/{生成されたノートのピッチ出力}/{選択した音階の設定によって制限されたランダムなピッチ出力}},
+  {{Gate}/{生成されたノートのゲート出力}/{ビートとともにPoly Rhythmゲート出力をHighに}},
+  {{Velocity}/{生成されたノートのVelocity出力}/{ビートとともにPoly Rhythmゲート出力をHighに}}%
+}
+
+
+\def\refcardrng{
+  \makereferencecard{
+    \textcolor{black}{\textbf{回す]}} Scale Selectorとノートの長さの間を移動する
+    \newline\textcolor{black}{\textbf{[クリック]}} Scale Selectorをオンにするか、音符/休符の長さを有効にする
+    }{
+    \textcolor{black}{\textbf{[ON/OFF]}} モジュールのオン/オフ (バイパス),
+    \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+    \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+    \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+  }{
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{%
+    \textcolor{black}{\textbf{[SCL]}} Scale選択,
+    \textcolor{black}{\textbf{[NOTES]}} Randomiserに含まれるノートの長さを選択,
+    \textcolor{black}{\textbf{[RESTS]}} Randomiserに含める休符の長さを選択,
+    NA,
+    \textcolor{black}{\textbf{[TRG]}} Trigger CVを選択 - CLOCKを無視,
+    \textcolor{black}{\textbf{[PLEN]}} パターンの長さを選択,
+    NA,
+    NA,
+  }
+}
+
+
+\def\modnameshortrng{RNG}
+\def\modnamelongrng{Rendom Note Generator}
+
+\newcommand{\modrng}{
+  \newpage
+  \modmakesection{rng}
+
+  \paragraph*{}
+  Rendom Note Generator (RNG) は、ランダムなノートを生成します。
+
+  \showrefcardsection{rng}
+
+  \subsection{操作}
+  \paragraph*{} ランダム ノート ジェネレーター (RNG) は、ピッチ、ゲート長、ベロシティの出力にランダムな値を生成します。ランダム化は、Input:Trigger でトリガー信号を受信するたびに発生します。ランダム化プロセスは、利用可能な音符と休符の範囲を選択することによって制御でき、生成されるピッチを制限するために音階を事前に定義することもできます。
+  \newline$\blacksquare$ クロックソースがない場合、BPM は 120 BPM に固定されます。
+  \newline$\bigstar$ QNT (クオンタイザー) を介して RNG の出力をルーティングし、そこで使用可能なピッチを制限することで、音階の選択は不要になり、柔軟性が大幅に向上します。
+
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\rngset}{\optnameset}
+  \tableofoptionsnew{\rnginp}{\optnameinp}
+  \tableofoptionsnew{\rngout}{\optnameout}
+}
+

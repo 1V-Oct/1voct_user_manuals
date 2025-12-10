@@ -1,0 +1,69 @@
+\def\vcaset{
+  {{Audio Output}/{VCA出力}/{VCA で処理された信号のオーディオ出力。信号は、LevelとSidechainの 2 つのモジュレーターの合計によって変調された振幅を持っています。  \newline 参照: \underline{\nameref{section:audiooutputs}}}},
+  {{Audio Input}/{モジュレーションされる音声信号}/{モジュレーターで変調された振幅 (レベル) を持つオーディオ信号 (任意の信号) 入力: Level}}%
+}
+
+\def\vcainp{
+  {{Level}/{サウンドレベルのモジュレーション}/{サウンドレベルの変調。Unipolar（正のみ）モジュレーター（通常はエンベロープ）による振幅変調}},
+  {{Sidechain}/{レベルの逆変調}/{サイドチェーンは、プライマリ信号変調のレベルを減衰させるリバース信号です。
+  \newline$\bigstar$
+  通常は、干渉する周波数を除去するためにキックドラムが入ってきたときにベースラインの振幅を下げるために使用されます。}}%
+}
+
+\def\vcaout{
+  {{NONE}/{}/{}}%
+}
+
+\def\refcardvca{
+  \makereferencecard{
+    NA,
+  }{
+    \textcolor{black}{\textbf{[ON/OFF]}} モジュールのオン/オフ (バイパス),
+    \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+    \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+    \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+  }{
+    Amplificationレベルの調整,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{
+    Level の CV 入力の減衰を調整,
+    NA,
+    NA,
+    NA,
+    Level Modulationのソースを選択,
+    NA,
+    VCAの入力を選択,
+   }
+}
+
+\def\modnameshortvca{VCA}
+\def\modnamelongvca{Voltage Controlled Amplifier}
+
+\newcommand{\modvca}{
+  \newpage
+  \modmakesection{vca}
+
+  \paragraph*{}Voltage Controlled Amplifierはモジュレーターレベルで信号レベルを変調します。. 
+  
+  \showrefcardsection{vca}
+
+  \subsection{操作}
+  VCA はこれらの信号の単純なAmplitude Modulationを実行し、オーディオ信号の音量 (レベル) を下げます。 Audio Input に入ってくる信号は、Input:Modulation から取得したモジュレーターで変調 (減衰) されます。 実際、VCA はAmplitude Modulationの原理を使用して動作しますが、オーディオ信号を変調するには正のunipolar CV 信号のみが必要です。
+  \newline$\bigstar$ 通常、モジュレーター信号は AD、ADSR、または AHDSR エンベロープのエンベロープ ジェネレーター (ENV) から来ており、オシレーターなどのオーディオ ソースからのオーディオ信号に適用されると、Pluck音や上昇音として現れます。
+  \subsection{Sidechain}
+  サイドチェーンは、別のオーディオ信号をより際立たせる必要がある場合に、オーディオ信号をダッキング (低減) する技術です。サイドチェーン モジュレーターは主信号のエンベロープであり、VCA に入力されるオーディオ信号のエンベロープから差し引かれ、セカンダリ シグナルのレベルを下げます。
+  \newline$\bigstar$ サイドチェインは、キックドラムが演奏されているときにベースラインのレベルを下げるために使用されます。多くの場合、キックドラム/バスドラムとベースラインの両方が同じ低周波数を共有しており、それらが混ざるとこもった音になります。キックドラムが鳴るポイントでベースラインの振幅を下げることにより、キックドラムのエンベロープが VCA のサイドチェーン入力に送られ、VCA はサイドチェーンの量だけベースラインのレベルを下げます。このようにして、キックドラムの低周波がベースライン上で聞こえます。
+  
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\vcaset}{\optnameset}
+  \tableofoptionsnew{\vcainp}{\optnameinp}
+  \tableofoptionsnew{\vcaout}{\optnameout}
+}
+

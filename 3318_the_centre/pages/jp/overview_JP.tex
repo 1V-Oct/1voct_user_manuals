@@ -1,0 +1,218 @@
+\newpage
+\section{モジュールの概要}
+\paragraph*{} The Centre は、Wavetable Synthesisという主な機能を中心に設計された多目的ユーロラックモジュールであり、単独で動作したり、接続して内部パッチやプリセットを作成したりできる多数の機能モジュールを組み込んでいます。 VST 形式の本格的な WaveTableシンセサイザーにインスパイアされたThe Centerは、モジュラー シンセのスケーラビリティと柔軟性を備えながら、その機能を Eurorack モジュールにもたらします。
+\paragraph*{} The Centre は、仮想モジュールのインスタンスを作成し、オーディオまたはモジュレーションパスを介してそれらの間を接続できるため、モジュラー イン モジュラーと見なすことができます。 すべてのモジュールは、外部 CV 入力または物理的なノブを介して制御することもできます。
+\subsection{パッチ} The Centreは、基本的に、共有出力と入力を介して接続され、物理ノブとCV入力とオーディオ出力を共有する、互いにカスケード接続された異なるモジュールのセットであるパッチ（またはプリセット）のアイデアを中心に展開します。
+\subsection{物理コネクタ}\label{section:connectors}%
+The Centre下記を搭載しています。
+\begin{itemize}
+  \item \textbf{Rotary Encoder} -  システムメニューを操作するのに使用されます。
+  \item \textbf{16 knobs} - 8 つのレベルと 8 つの減衰器
+  \item \textbf{4 V/OCT inputs} - 複数のモジュールのピッチを制御するためにオクターブごとに1Vを使用する校正済み入力
+  \item \textbf{4 CVY inputs} - バイナリ入力のみとなる低遅延ゲート入力 (ゲート セットおよび非セット)
+  \item \textbf{8 CV inputs} - -10V から +10V の範囲のより遅延の大きいアナログ入力。
+  \item \textbf{4 VOUT inputs} (外部モジュールを変調するためのオーディオ周波数と非常に低い周波数を出力できる DC 結合入力)
+\end{itemize}
+\subsubsection{Rotary Encoder} ロータリー エンコーダーにより、すべてのメニュー システムをナビゲートできます。 ロータリーエンコーダーを下に押すと、{[SELECT]} 機能が実行され、回転エンコーダーは {[ROTATE]} と呼ばれます。
+\subsubsection{Knobs}The Center のすべてのノブは完全に割り当て可能であり、{LVL} - {Level} および {ATT} -{Attenuator} のパネル上の区別は、美的および視覚的な目的のためだけです (構成されたパッチをナビゲートしやすくするため)。 すべてのノブは、ノブを介して制御できるパッチ内の任意のパラメーターに割り当て可能です。
+\subsubsection{V/OCT}V/OCT 入力は、-3V ～ 8V の制御電圧を使用し、オクターブあたり 1Vの標準式を適用することによって音符に合わせて制御するように事前に構成および調整されています。
+\newline$\blacksquare$ 1V per Octave (1V/Oct) はモジュラー シンセサイザーのオシレーターのピッチをリニアに変化するコントロール ボルテージで制御する用語で、1 ボルトの違いごとに 1 オクターブのピッチの違いが生じます。
+\newline$\blacksquare$ The Centreは、0V (または入力なし) でノート C2 (MIDI ノート 36) になるように調整されています。
+\subsubsection{CVY} CVY は、レイテンシーが非常に低い単純なゲート入力です (最悪の場合でも、オーディオ スライスの標準的な長さ - 2.7ms)。 CVY 入力は、外部クロックとゲートに適しています。 モジュールを外部クロックに同期するには、CVY ゲートのみを使用できます。 CV ゲートでは、許容できないレイテンシーが発生します。
+\subsubsection{CV} CV 入力は、-10V から +10V の範囲のアナログ信号を受け取る標準入力です。 これらの入力のレイテンシーは CVY (ゲート) 入力よりもはるかに高く、そのレイテンシーは平均で約 10ms で変動します。
+\subsubsection{VOUT} VOUT 出力は、パッチの VOUT1-4 オーディオ バッファから {OUT} モジュールによって伝播されるパッチの物理出力です。
+\newline$\blacksquare$ 複数のモジュールが同じオーディオ バッファに書き込む場合、出力はモジュールによって混合または上書きされます。
+\newpage
+\section{パッチ}\label{section:patch}%
+パッチ (プリセットとも呼ばれます) は、次の特徴を持つモジュールのセットです。
+\begin{itemize}
+  \item オーディオ入力と出力を介して接続
+  \item CV入力と出力を介して内部接続
+  \item パフォーマンスを制御するために割り当てられた一連のノブを持つ
+  \item 外部機器からパフォーマンスを制御するために割り当てられた外部 CV 入力 (V/OCT、CVY、CV) のセットを持つ
+\end{itemize}
+\subsection{ノブ}
+\textbf{PATCH EDIT} 画面では、ノブは \underline{\nameref{section:moduleinputs}} で割り当てられたアクションを実行します。 つまり、VCFのカットオフ制御、LFO の周波数、または VCA に送られる外部エンベロープの減衰など、任意の機能を実行するようにノブを割り当てることができます。
+\newline$\blacksquare$ 別の画面に移動すると、ノブは入力に割り当てられなくなりますが、画面上で機能を実行します。 モジュールセクションでは、すべての画面にノブの説明があります。
+ノブと外部 CV 入力のマッピングは、次のように \textbf{PATCH} 画面で確認できます。
+\newpage
+
+\section{オーディオ出力}\label{section:audiooutputs}%
+\paragraph*{}%
+オーディオ出力は、モジュール間および The Centre からオーディオを転送するための基本的なメカニズムです。
+\subsection{Physical Outputs}
+\paragraph*{}%
+\textbf{VOUT1} から \textbf{VOUT4} の 3.5mm ジャック経由で、オーディオ レベル信号を出力する 4 つの出力チャネルがあります。 VOUT は DC 結合されているため、LFS (Low Frequency Shaper - free shape oscillator) や ENV (AHDSR エンベロープ)、さらにはトリガーやゲートなどのユーティリティ モジュールの出力を送信できます。
+これらの出力は、パッチの処理の最後にそれぞれ VOUT1-4 バッファーのコピーとして組み込まれます。
+\newline$\blacksquare$ パッチ内のモジュールは、タイム スライスごとに順番に処理されます。 2 つのモジュールが同じ \textbf{VOUTx} に書き込みを行っている場合、それらは内容を上書きされるか、混合する可能性があります。 可能な限り \textbf{VBuf - Virtual Buffers} を使用し、\textbf{VOUTx} チャネルに最終結果のみを生成することを強くお勧めします。
+\subsection{Virtual Audio Buffers}%
+\paragraph*{} The Centreで省略名 \textbf{VBuf} で呼ばれる Virtual Buffer Output は、外部出力を占有することなくモジュール間で The Center 内のオーディオを転送する概念です。 VBuf は、別のモジュールに割り当てられ、個別処理されるオーディオを格納するバッファーとして捉えることもできます。%
+\paragraph*{}%
+VBuf の最も重要な部分は、The Centre 内のすべてのモジュールが独自の VBuf を持っていることです。 さらに、モジュールの VBuf 出力は、変更せずに他のモジュールへの VBuf 入力として使用できます。
+\newline\paragraph*{}%
+$\bigstar$ WTO は VBuf に出力でき、VCF は WTO 入力を処理します。 最後に、MIX モジュールは WTO VBuf (オリジナルのオシレーター信号) と VCF Vbuf (フィルター処理されたオシレーター信号) から入力を受け取り、MIX モジュールはこれら 2 つの信号のドライ/ウェット ミキサーとして機能します。 このような場合は、WTO VBuf (オシレーター出力信号) が変更されずに 2 つのモジュール (VCF と MIX) に送信されます。
+\newline\paragraph*{}
+オーディオ出力は、ほぼすべてのモジュールに不可欠な部分です。 一部のモジュールのオーディオ出力は \textbf{Stereo} または \textbf{Mono} に設定できますが、一部のモジュールは単一チャンネル (Mono) のみを出力します。 \textbf{VBuf} の入力を受け取る特定のモジュールは、入力がモノかステレオかを検出し、それに応じて処理します。
+\newline\paragraph*{}
+\subsection{モジュールのオーディオ入力と出力のクイック設定}
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.7\linewidth]{vout.png}
+      \caption{この例では、オーディオは WTO から VCF に流れ、次に仮想バッファーを介して VCA に流れ、最後に VOUT1|2 に流れます。}
+      \label{fig:img1}
+  \end{wrapfigure}
+\paragraph*{}%
+パッチメニュー上で \textbf{[EDIT]} ボタンを押して、入力/出力設定モードに入ります。 このモードでは、\textbf{ATT1} を使用してモジュールのプライマリ入力を構成し、\textbf{ATT8} を使用してモジュールの出力を構成することにより、選択したモジュールの入出力を直接構成できます。\newline モジュールがオーディオを出力するように構成されている場合、仮想バッファーに接続すると他のモジュール構成のオーディオ入力のリストに自動的に表示されます。 モジュールはインプット内でそれぞれの名前で表示されます。%
+\paragraph*{}\textbf{[Inputs]} または \textbf{[Set]} ボタンを押すと、選択したモジュールの入力と設定に入ることができます。
+\newline\newline $\blacksquare$ 同じタイプのモジュールが 2 つ以上ある場合、自動的に番号が付けられます。 番号は昇順で自動的に割り当てられます。
+\\ \\ \\ \\ \\ \\ \\ \\
+\subsubsection{パッチビューでのビジュアル出力表示}
+\paragraph*{}
+\begin{itemize}
+  \item \textbf{1, 2, 3, 4} - モノフォニックVOUTx 直接出力 (OUTモジュール経由)
+  \item \textbf{V} - モノフォニック仮想バッファ \textbf{VBuf}
+  \item \textbf{V|V} - ステレオ仮想バッファ \textbf{VBuf}
+  \item \textbf{1|2, 2|3, 3|4, 4|1} - ステレオVOUTx ダイレクト出力 (OUT モジュール経由)
+\end{itemize}
+\newpage
+\section{CV 内部出力}\label{section:cvoutputs}
+\paragraph*{}
+The Centreは、オーディオ信号のみを出力します (モジュール内で他のモジュールまたはモジュール外にルーティングできます)。 各モジュールは、他のモジュールにルーティングして CV (制御電圧) 入力として使用できる内部 CV 信号を出力します。こちらを御覧ください:  \underline{\nameref{section:moduleinputs}}
+\newline$\bigstar$ VCO は、VCO.OSC (オシレーターの出力) と VCO.RST (オシレーターの位相がリセットされたときのリセット信号) の 2 つの CV 信号を出力します。 VCO.RST 信号は、入力で別の VCO の入力として使用できます(発振器の位相をリセットする VCO ハード同期)。 このようにして、2つの VCO を同期して実行できます。
+
+\newpage\section{モジュール入力}\label{section:moduleinputs}
+\subsection{概要}
+\paragraph*{}
+The Centre の各モジュールには、構成可能な入力のセットがあります。 各入力は、最大 4 つのコンポーネントで構成されます。 これらのコンポーネントは \textbf{VALUE} または \textbf{CONTROLLER} のいずれかです。 最も一般的な入力は、トリプレットの Level-Attenuator-CV です。 Level and Attenuatorコンポーネントは、VALUE または割り当てられた CONTROLLER (ノブ) で表すことができます。 CV コンポーネントは、外部 CV 入力 (CVY (ゲート) および CV (コントロール ボルテージ) とラベル付けされた 3.5 mm ジャック) または別のモジュールの内部出力に割り当てることができます。
+\newline$\bigstar$ 内部 CV 接続の良い例: ENV (AHDSR Envelope) モジュールと VCA (Voltage Controlled Amplifier) モジュールを Input:Modulation 経由でエンベロープ モジュール Output:ENV の出力に接続
+
+\subsection{入力構成モード}
+
+\subsubsection{入力構成モードでVALUE と CONTROLLER を変更する}
+\paragraph*{}
+各モジュールの入力画面では、エンコーダー(SELECT) を使用して入力のリストを操作し、ノブを使用して、選択した入力コンポーネントのVALUEまたはCONTROLLERを変更します。 入力画面のノブのマッピングを理解するには、下の図を参照してください。
+
+\subsubsection{入力メニューのコントロールのレイアウト (入力構成)}
+  \makereferencecard{\textcolor{black}{\textbf{[回す]}} 入力を選択\newline \textcolor{black}{\textbf{[クリック]}} コンポーネント構成の開始/終了}{%
+    NA,
+    NA,
+    NA,
+    NA,}{%
+    入力のVALUEを変更 \#1,
+    入力のVALUEを変更 \#2,
+    入力のVALUEを変更 \#3,
+    入力のVALUEを変更 \#4,
+    入力のCONTROLLERを変更 \#1,
+    入力のCONTROLLERを変更 \#2,
+    入力のCONTROLLERを変更 \#3,
+    入力のCONTROLLERを変更 \#4%
+    }
+  {%
+    入力のCONTROLLERを変更 \#1,
+    入力のCONTROLLERを変更 \#2,
+    入力のCONTROLLERを変更 \#3,
+    入力のCONTROLLERを変更 \#4,
+    入力のVALUEを変更 \#1,
+    入力のVALUEを変更 \#2,
+    入力のVALUEを変更 \#3,
+    入力のVALUEを変更 \#4,
+    }
+  
+    \subsection{個別コンポーネント構成モード}
+    \paragraph*{}個別コンポーネント構成モードでは、各入力のコンポーネントは、そのVALUEまたは割り当てられたCONTROLLERを変更することで個別に構成できます。
+
+    \subsubsection{入力メニューのコントロールのレイアウト (コントローラー構成)}
+
+    \makereferencecard{\textcolor{black}{\textbf{[回す]}} 入力選択 \newline \textcolor{black}{\textbf{[クリック]}} 決定 / コンポーネント構成を終了する
+    }{%
+    \textcolor{black}{\textbf{[Val]}} エディットバリューモードに切り替えます(このモードでは、任意のノブでコンポーネントのVALUEが変更できます)。,
+    \textcolor{black}{\textbf{[Ctrl]}} エディットコントロールモードに切り替えます(このモードでは、任意のノブがコンポーネントのCONTROLLERを変更します)。,
+    \textcolor{black}{\textbf{[Assign]}} エディットアサインモードに切り替えます(このモードでは、ノブはコンポーネントのコントローラーとして割り当てられます)。,
+    NA,
+    NA,
+    NA,
+    }{%
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    }{%
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    Val および Ctrl モードで VALUE または CONTROLLER を変更するか、Assign モードでこのノブをコントローラーとして割り当てます。,
+    }
+  \subsubsection*{ノブの割り当て}
+  \paragraph*{}
+  ノブの割り当てを変更するもう 1 つの便利な方法は、\textbf{Assign} ボタンを押して、Assignモードで個々のコンポーネントの設定に切り替えることです。 このモードでは、エンコーダー (SELECT) は入力のすべてのコンポーネントを個別にナビゲートし、レベルまたはアッテネーター コンポーネントでは、対象のノブをわずかに回転させてコンポーネントに割り当てるだけで十分です。
+  \subsubsection*{コンポーネントの構成}
+  \paragraph*{}
+  個々のコンポーネント構成では、前述の通りボタン Ctrl、Val、およびAssignを押すと、CONTROLLER、VALUE の変更、またAssign Mode へ操作モードが切り替わります。 それぞれモードでは、どのノブも選択したモードに応じてVALUE または CONTROLLER のいずれかを変更します。
+
+  \newpage\section{ピッチコントロール}\label{section:pitchcontrol}
+\subsection{概要}
+The Centreのピッチ コントロールは、次のモジュールに影響します: WTO、VCO、SMP。 ピッチコントロールとは、一般的に入力の構成に基づいて音の周波数を変化させることです。
+
+\subsection{1V/Oct}
+\textbf{1V/Oct} は、\textit{''1 Volt per Octave''} の略語であり、オシレーターのピッチ (周波数) を制御する方法であり、コントロール ボルテージ (CV) を 1 ボルト増加させると、オシレーターの周波数が効果的に 2 倍になり、 ピッチが1オクターブ上がります。
+
+どの電圧がどの音になるかという明確な基準はありません。したがって、0V (ゼロボルト) が何になるかについては、機器のメーカー間で明確な違いがあります。
+
+0V は ''ミドル C'' ノートを与えるべきであると示唆する人もいますが、MIDI 標準でもミドル C が何であるかは不明です (ノート 48 または 60 が最も一般的に提案されています)。あるいは、0V は A 音のチューニング周波数として一般的に使用される周波数 440 Hz になるはずです。
+
+センターは Moog 規格に従い、MIDI ノート C4 の 0V (ゼロボルト) を定義し、最終的に 261.63Hz の周波数を定義します (コンサートピッチ A4 が 440Hz であると仮定)。
+
+\subsection{入力でのノートコントロール}%
+The Centreのノート コントロールは、入力の NOTE: で設定されます。
+\newline
+\begin{center}
+  \includegraphics[width = 7cm]{screenshots/inputs.png}
+\end{center}
+
+
+\makesupopt{{
+  {{VOCT}/{ノートコントロール用の1V/Oct入力。 この入力は、固定値として設定するか、V/OCT 1-4 3.5mm 入力ジャックによって外部モジュールまたはシンセサイザーから入力を取得するか、または他のモジュール CV 出力から入力を取得することができます。 ほとんどの場合、内部モジュールからの出力は .NTE という名前にする必要があります (例: RNG.NTE ランダム ノート ジェネレーター、ノート出力)。
+  \newline$\blacksquare$ VOCT はピッチを制御する唯一の動的制御コンポーネントです。}},
+  {{OCT}/{オクターブ単位のチューニングノート +/- 8 オクターブ}},
+  {{NOTE}/{半音単位のチューニング音 +12 半音 (1 オクターブ)}},
+  {{FINE}/{セント +/- 半音単位のチューニング ノート}}%
+}}%
+
+
+\newpage\section{System Settings}\label{section:systemsettings}
+\subsection{System Settingsの変更}
+システム設定に入るには、\textbf{[EDIT]} と \textbf{[System]} ボタンを押してシステム メニューに移動し、メニューから \textbf{Settings} を選択します。
+
+\def\sysset{
+  {{Load Last Patch}/{WTO のオーディオ出力 - ステレオ}/{システムの起動 (リセット) 時に、ユーザーが手動でロードした最後のパッチをロードします。}},
+  {{Reverse Encoder}/{エンコーダーの制御動作}/{エンコーダーの動作を変更 - 4 つの異なる設定から選択}},
+  {{Clocks PQN}/{四分音符あたりのクロック (パルス) の数を設定}/{4 分音符 (ビート) あたりのクロック数。 デフォルトは MIDI 規格として 24 CPQN です}},
+  {{V/OCT Quantise}/{V/OCTクオンタイズ}/{V/OCT 受信ピッチの最も近い半音 - 最も近い MIDI ノートへのクオンタイズをオンにします
+    \makesupopt{{
+      {{On}/{V/OCT ピッチは最も近い半音にクオンタイズされます}},
+      {{Off}/{V/OCT ピッチはクオンタイズなしでパスされます}}%
+    }}%
+  }},
+  {{Fast SD Operation}/{SD カードの 4 倍速を有効にします}/{SD カード アクセスの 4 倍速をオンにしますが、一部の安価なカードとは互換性がない場合があります。}},
+  {{Multi Patch}/{マルチパッチを有効化}/{The Center をマルチ パッチ モード (Set) で起動します。}},
+  {{Overlay Timer}/{オーバーレイの表示時間}/{メニューのオーバーレイが画面に表示される秒数}},
+  {{Pots}/{ノブの動作制御}/{異なるメニュー間で、物理的なノブの位置が変数の設定と一致しないことがよくあります。 以下は、ポットの動作を設定する方法です。
+    \makesupopt{{
+      {{Match}/{設定された変数は、ノブの移動時にノブが指す物理値に即座に一致 (ジャンプ) します。}},
+      {{Pickup}/{ノブが変数の値に到達するまで変数は変更されません}},
+      {{Scaled}/{影響を受ける入力の値は、ノブが変数の物理的な値と一致する まで、ポットの動きと入力変数の値に従って変更されます。}}%
+    }}
+  }},
+}%
+
+
+
+\tableofoptionsnew{\sysset}{{Settings}}

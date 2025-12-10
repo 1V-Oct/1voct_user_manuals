@@ -1,0 +1,877 @@
+\documentclass[table]{article}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{tabto}
+\usepackage{subfiles}
+\usepackage[hidelinks]{hyperref}
+
+% \usepackage{pdfTeX}
+% \usepackage[demo]{graphicx}
+\usetikzlibrary{positioning, fit, matrix, calc}
+\usetikzlibrary{arrows.meta}
+\usepackage{datatool}
+\usepackage[l3]{csvsimple}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{tikzpagenodes}
+\usetikzlibrary{calc}
+\usetikzlibrary{backgrounds}
+\usepackage{anyfontsize}
+\usepackage{atbegshi}
+\usepackage[hashEnumerators,smartEllipses]{markdown}
+% \usepackage{ifmtarg}% http://ctan.org/pkg/ifmtarg
+\usepackage{substr}
+
+\usepackage{xstring}
+% \usepackage{xcolor}
+\usepackage{graphicx}
+% \usepackage[x11names]{xcolor}
+% \usepackage[explicit]{titlesec}
+\usepackage[newparttoc]{titlesec}
+\usepackage{xcolor}
+% \usepackage{titletoc}
+
+\usepackage{multirow}
+\usepackage{xparse}
+
+\usepackage{wrapfig}
+
+\usepackage{qrcode}
+% for settings
+    % \usepackage[utf8]{inputenc}
+    % \usepackage{xcolor}
+
+% \usepackage{fourier}
+% \usepackage{cabin}
+% \usepackage{linegoal}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{scrextend}
+
+\usepackage{textcomp}
+\usepackage{afterpage}
+\usepackage{placeins}
+
+
+\newcommand{\dl}[2]{{#2}}
+
+\newcommand{\qrdlink}[3][]{
+  \begin{minipage}{\textwidth}
+    \begin{center}
+      \centering\Large #3\normalsize
+      \paragraph*{}#1\paragraph*{}
+      \centering\textbf{\textit{Scan below QR Code or click link}}
+    \end{center}
+    \begin{center}
+      \centering\qrcode{#2}
+      \paragraph*{}
+      \underline{\url{#2}}
+    \end{center}   
+  \end{minipage}
+  \paragraph*{}
+}
+
+
+% \setmainfont{TeX Gyre Termes}
+% \setsansfont{TeX Gyre Heros}
+% \setmonofont{TeX Gyre Cursor}
+% \setCJKmainfont{Arial Unicode MS}
+\newfontfamily\japfont[
+  Path = fonts/,
+  Scale=1.0
+] {Eras-Bold-ITC.ttf}
+
+\setCJKmainfont[ Path = fonts/, BoldFont = SourceHanSans-Bold.otf, ItalicFont = SourceHanSerif-Light.otf ]{SourceHanSans-Normal.otf}
+% \setCJKsansfont{Source Han Sans}
+% \setCJKsansfont{Source Han Serif}
+
+
+\providecommand{\tcversion}{v0.0.0}
+%% There is two way to compare categore
+% The \jobname primitive is a TeX string, so all characters have category code 12 (other) not 11 (letter) (with the exception of any spaces, which are category code 10 (space)). Slightly confusingly, xstring is carrying out a token-based comparison here not a string one! Assuming e-TeX is available you can fix your code easily
+
+% \ifx\workspace\undefined
+%   \def\workspace{working}
+% \else
+% \fi
+
+
+
+% \IfStrEq{\jobname}{reference-cards}{\newcommand*{\USERMANUAL}{}}{}
+\IfStrEq{\jobname}{\detokenize{users-manual}}{\newcommand*{\USERMANUAL}{}}{}
+\IfStrEq{\jobname}{\detokenize{manual}}{\newcommand*{\USERMANUAL}{}}{}
+% \IfStrEq*{\jobname}{reference-cards}{\newcommand*{\USERMANUAL}{}}{}
+% \newcommand*{\USERMANUAL}{}
+% \def\USERMANUAL
+% \begin{document}
+  
+% \jobname
+% \end{document}
+
+
+\newcommand\underlinedlink[1]{\underline{\nameref{section:mod#1}}}
+
+
+\geometry{a4paper, lmargin=6mm, rmargin=6mm, tmargin=2.5cm, bmargin=1.5cm}
+
+\definecolor{sec}{HTML}{DD5C14}
+\definecolor{band}{HTML}{EE9C52}
+
+% \newfontfamily{\erasfont}{fonts/Eras-Bold-ITC.ttf}[]
+\newfontfamily\amatica[
+  Path = fonts/,
+  Scale=1.0
+] {Eras-Bold-ITC.ttf}
+\newfontfamily\arial[Scale=1.0]{Arial}
+\setmainfont[]{PT Sans}
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+
+\usepackage{fancyhdr}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyfoot[R]{\amatica\fontsize{19pt}{19pt}\selectfont\thepage} % except the center
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+
+\input{pages/modules.tex}
+
+
+\usepackage{xcolor}
+% \hypersetup{
+%     colorlinks,
+%     % linkcolor={red!50!black},
+%     % citecolor={blue!50!black},
+%     % urlcolor={blue!80!black}
+%     % colorlinks=false,
+%     linkcolor={red},
+%     citecolor={black},
+%     urlcolor={blue!80!black}
+% }
+
+
+
+
+\newcommand\boxedsection[1]{{%
+    % \usekomafont{sectioning}\usekomafont{section}%
+    \begin{tikzpicture}[inner sep=0pt, inner ysep=0.3ex]
+
+        \node[inner sep=2mm, outer sep = 1cm, color=white, anchor=base west] at (current page.west) (counter) {\thesection  \hskip0.75ex #1};
+        % \hskip1em
+        % \node[inner sep=2mm,color=white] {\thesection \hskip0.75ex #1};
+        % \path let \p1 = (counter.base east) in node[outer sep=2mm, anchor=base west, text width={\textwidth-\x1-0.33em},text=white] (content) at ($(counter.base east)+(0.33em,0)$) {#1};
+        \begin{pgfonlayer}{background}
+            % \draw[left color=red!20!yellow,right color=black!40!white] let \p1=(counter.north), \p2=(content.north) in (0,{max(\y1,\y2)}) rectangle (content.south east);
+            % \draw[fill=black] let \p1=(counter.north), \p2=(content.north) in (current bounding box.north west) rectangle (current bounding box.south east);
+            \draw[fill=black] (current bounding box.north -| current page.west) rectangle (current page.east |- current bounding box.south);
+        \end{pgfonlayer}
+    \end{tikzpicture}%
+}}
+
+\newcommand\tocboxedpart[1]{{%
+  \begin{tikzpicture}[inner sep=0pt, inner ysep=0.3ex]
+      \node[
+        inner sep=2mm, 
+        outer sep=3mm, 
+        color=white, 
+        anchor=base west,
+        font=\amatica\fontsize{14}{14}\selectfont
+      ] at (current page.west) (counter) {\thecontentslabel \hskip0.75ex #1};
+        \begin{pgfonlayer}{background}
+            \draw[fill=black] (current bounding box.north -| current page.west) rectangle (current page.east |- current bounding box.south);
+        \end{pgfonlayer}
+    \end{tikzpicture}%
+}}
+
+
+\newcommand\boxedsectionx[1]{{%
+  \begin{tikzpicture}[overlay,remember picture,line width=5pt, inner sep=0pt, inner ysep=0ex, outer sep=0pt]
+  \fill[black] (current page.north west) rectangle ($(current page.north east)-(0,3cm)$);
+  \fill [black] (current page.north west) rectangle ($(current page.north east)-(0,3cm)$);
+  \node[
+    rectangle,
+    fill=none, 
+    draw = none, 
+    text = white, 
+    minimum width=19cm, 
+    minimum height=30mm, 
+    font=\amatica\fontsize{17}{17}\selectfont,
+    anchor = north
+  ] at (current page.north) {#1};
+  \end{tikzpicture}%
+}}
+
+
+  \newcommand\custompart[1]{{%
+  \begin{tikzpicture}[
+    myrect/.style={
+      rectangle,
+      draw,
+      inner sep=0pt,
+      fit=#1},
+    overlay,
+    textbox/.style = {
+      inner xsep = 2cm,
+      inner ysep = 0.2cm,
+    },
+    remember picture,
+    line width=5pt,
+    inner sep=0pt,
+    inner ysep=0ex
+  ]
+    % \fill[black] (current page.north west) rectangle ($(current page.north east)!50!(current page.east)$);
+    % \fill [black] (box) at (current page.north west) rectangle ($(current page.north east)!0.30!(current page.south east)$); %-(0,10cm)$);
+    % \coordinate (partboxa) at (2,3);
+    % \coordinate (partboxb) at (-3,4);
+    % \coordinate (C) at (0,2);
+    % \coordinate (D) at (-5,6);
+    % \coordinate (E) at (5,-2);
+    % \node[myrect={(partboxa) (partboxb)}] {}; 
+    % \node[myrect={(C) (D)},draw=cyan,rounded corners] {}; 
+      \node [rectangle, fill=black, fit=(current page.south west) ($(current page.north east)!0.30!(current page.south east)$)] (partbox) {};% at (current page.north west) -- ($(current page.north east)!0.30!(current page.south east)$); %-(0,10cm)$);
+    % \node[myrect={(A) (E)},draw=cyan,fill=orange,line width=2pt] {}; 
+
+    \node[
+      textbox,
+    rectangle,
+    fill=none, 
+    draw = none, 
+    text = white, 
+    font=\amatica\fontsize{25}{25}\selectfont,
+    anchor = north west,
+  ] at (partbox.north west) {#1};
+
+
+  \node[
+    textbox,
+    rectangle,
+    fill=none, 
+    draw = none, 
+    text = black, 
+    font=\amatica\fontsize{25}{25}\selectfont,
+    anchor = south west,
+  ] at (partbox.north west) {Part \thepart};
+  \end{tikzpicture}%
+}}
+
+
+% \titleformat{\part}[display]
+% {\Large\bfseries}
+% % {\partname\nobreakspace\thepart}
+% {\thepart}
+% {0mm}
+% {\huge\bfseries}
+
+\titleformat{\section}%
+  {\Large}%
+  {}%
+  {0.5ex}%
+  {\boxedsectionx}%
+
+\titleformat{\part}[display]
+  {\Large\bfseries}
+  {}
+  {0mm}
+  {\custompart}
+
+
+\usepackage{titletoc}
+
+\setcounter{tocdepth}{3}
+\contentsmargin{2.55em}
+
+\titlecontents{part}[0pc]
+{}
+{\tocboxedpart}%
+{}
+{}
+  
+\titlecontents{section}[1.0pc]
+{\normalsize}
+% {\contentslabel[\hfill\thecontentslabel.]{1.33em}\quad}
+{\begin{tikzpicture}[baseline={([yshift=-.8ex]current bounding box.center)},]
+  \node [
+    thick, draw=none, fill=none, rectangle, rounded corners
+    ] {\thecontentslabel};\end{tikzpicture}\quad}
+{---}
+{$\:$\titlerule[0.5pt]$\:$\thecontentspage}
+
+\titlecontents{subsection}[1.8pc]
+{\small}
+{\begin{tikzpicture}[baseline={([yshift=-.8ex]current bounding box.center)},]
+\node [
+  thick, draw=none, fill=none, rectangle, rounded corners
+  ] {\thecontentslabel};\end{tikzpicture}\quad}
+{---}
+{$\:$\titlerule[0.5pt]$\:$\thecontentspage}
+
+\titlecontents{subsubsection}[2.8pc]
+{\footnotesize}
+{\begin{tikzpicture}[baseline={([yshift=-.8ex]current bounding box.center)},]
+\node [
+  thick, draw=none, fill=none, rectangle, rounded corners
+  ] {\thecontentslabel};\end{tikzpicture}\quad}
+{---}
+{$\:$\titlerule[0.5pt]$\:$\thecontentspage}
+
+% \dottedcontents{subsection}[3.6em]{}{2.5em}{1pc}
+
+% \titlecontents*{subsubsection}[0pc]
+% {\small}{\thecontentslabel dsadasd}
+% {}{\,---\,\thecontentspage}[\quad][]
+
+
+
+% \newcommand{\link}[2]{{\color{blue}\href{#1}{#2}}}
+
+
+
+% \newfontfamily\amatica[Scale=1.0]{Amatica SC}
+
+% \setmainfont[Renderer=ICU,Mapping=tex-text, Size=7]{PT Sans}
+
+% \documentclass[border=0.2cm]{standalne}
+ 
+% \usepackage{tikz}
+ 
+% \tikzset{near start abs/.style={xshift=1cm}}
+
+\definecolor{m_orange}{RGB}{255,171,64}
+\definecolor{m_green}{RGB}{69, 129, 142}
+\definecolor{m_purple}{RGB}{142, 124, 195}
+\definecolor{m_lightgray}{RGB}{235, 235, 235}
+\definecolor{m_red}{RGB}{224, 102, 102}
+\definecolor{mred}{RGB}{224, 102, 102}
+\definecolor{mlightgray}{RGB}{235, 235, 235}
+
+
+\makeatletter
+\newcommand{\isempty}[1]{%
+  \@ifmtarg{#1}{YES}{NO}}
+\newcommand{\isnotempty}[1]{%
+  \@ifnotmtarg{#1}{YES}}
+\makeatother
+
+% \newcommand{\instring}[4]{
+%   % \instring{<pattern>}{<string>}{<true>}{<false>}
+%   %   pattern = sought after string
+%   %   string  = string to search
+%   \ifnum\pdfmatch{#1}{#2}=1
+%     #3
+%   \else
+%     #4
+%   \fi
+% }
+
+\newcommand{\showgrid}{%
+  \AtBeginShipoutNext{\AtBeginShipoutAddToBoxForeground{%
+      \begin{tikzpicture}
+        [
+          overlay,
+          remember picture,
+          inner sep=0pt,
+          outer sep=0pt,
+          minor line/.style={help lines, draw=black!50, on background layer},
+          major line/.style={help lines, draw=black},
+          major number/.style={font=\fontsize{3}{5}\selectfont\bfseries},
+          minor number/.style={font=\fontsize{1}{2}\selectfont},
+        ]
+        \pgfmathtruncatemacro\xmaxstep{\paperwidth/1mm}% calculate needed steps in x direction
+        \pgfmathtruncatemacro\ymaxstep{\paperheight/1mm}% calculate needed steps in y direction
+        \foreach \step in {0,1,...,\xmaxstep} {
+          \pgfmathsetmacro\gridlineconfig{ifthenelse(equal(int(mod(\step,10)),0),"major line","minor line")}%
+          \draw [\gridlineconfig] ($(current page.north west) + (\step mm,0)$) -- ($(current page.south west) + (\step mm,0)$);
+        }
+        \foreach \step in {0,1,...,\ymaxstep} {
+          \pgfmathsetmacro\gridlineconfig{ifthenelse(equal(int(mod(\step,10)),0),"major line","minor line")}%
+          \pgfmathsetmacro\numberconfig{ifthenelse(equal(int(mod(\step,10)),0),"major number","minor number")}%
+          \draw [\gridlineconfig] ($(current page.north west) - (0,\step mm)$) -- ($(current page.north east) - (0,\step mm)$);
+          \node [anchor=north,\numberconfig] at ($ (current page.north west) + (\step mm,0) $) {\step};
+          \node [anchor=west,\numberconfig] at ($ (current page.north west) - (0,\step mm) $) {\step};
+        }
+      \end{tikzpicture}
+    }%
+  }%
+}
+\tikzset{% 
+    myseg/.style={%
+        red,very thick
+    }
+}
+
+
+\graphicspath{{images/}}
+
+
+\newcommand{\selannotationcol}[2]{\IfSubStringInString{NA}{#1}{\color{mlightgray}}{\color{#2}}}
+\newcommand{\selannotationcolxx}[2]{\IfSubStringInString{NA}{#1}{"mlightgray"}{#2}}
+\newcommand{\testcolx}[2]{#2}
+\newcommand{\setitemcol}[1]{\IfSubStringInString{NA}{#1}{\color{mlightgray}#1}{#1}}
+% \newcommand{\testcolx}[2]{\IfSubStringInString{NA}{NA}{#2}{#2}}
+
+
+% \setcounter{secnumdepth}{0} % sections are level 1
+
+\begin{document}
+ 
+% \show\section
+% \newpage
+
+% \DTLloaddb{list}{test.csv}
+
+\def\pb_h{1.2cm}
+
+\title{\huge The Centre by 1V/Oct\\
+\large 
+\ifdefined\USERMANUAL%
+  User's Manual
+\else
+  Cheat Sheet
+\fi
+\\
+\small 1.99.05 - Pre-2.0 *ALPHA RELEASE*}
+\date{\today}
+% \maketitle
+
+\begin{titlepage}
+  \begin{tikzpicture}[overlay,remember picture,line width=5pt]
+      % set a new origin [1]
+      % \coordinate (O) at (current page.south west);
+      % gray triangle
+      % \fill [gray] (current page.south) -| (current page.north);
+      % \draw[path picture={\fill[red] (current page.south) rectangle (current page.east);}] (0,0) rectangle  ++ (5,4);
+      % \fill[red]    (current page.north east) rectangle  ++ (current page.south);
+      \fill[black] (current page.south west) rectangle (current page.north);
+      % \includegraphics[width=19cm]{the_centre_silhouete.jpg};
+      % \node (title_img) at (current page.center) {\includegraphics[width=19cm]{the-centre-monotone.png}};
+      \node (title_img) at ($(current page.south)!0.33!(current page.north)$) {\includegraphics[width=19cm]{the-centre-monotone.png}};
+      \node (logo_img) at ($(current page.north east) -(2.5cm,2.5cm)$) {\includegraphics[width=3cm]{logo.png}};
+
+      % \coordinate (O) at (current page.north );
+
+  % \draw         (0,0) rectangle  ++ (5,4);
+  %     % \draw[path picture={\fill[red] (path picture bounding box.south west)
+  %     % red line
+  %     \draw [red] (current page.south west) -- (current page.north east);
+  %     % white framed box
+      % \node at (current page.north west) [%
+      %     draw=red,
+      %     inner sep=15pt,
+      %     fill=white,
+      %     above=5cm
+      % ] {{The book title}};
+  %     % red box at 0.8\pageheight
+  %     \node (Author) at ($(O)+(0,0.8\paperheight)$) [% [2] [4]
+  %         fill=red,
+  %         anchor=south west,
+  %         minimum width=\paperwidth,
+  %         align=center,
+  %         outer sep=0pt,
+  %         font=\sffamily\bfseries] {Jon Doe};
+  %     % red box at 0.75\paperheight
+      % \node at ($(current page.south)!0.75!(current page.north)$) [% [3]
+      %     fill=red,
+      %     anchor=south,
+      %     minimum width=\paperwidth,
+      %     align=center,
+      %     outer sep=0pt]
+      %      {\amatica \today};
+          %  \node at [fill=white,draw=blue,rectangle] at (1.5,0) {\amatica REFERENCE CARDS};% this works
+          \node [
+            rectangle, 
+            draw = none,
+            minimum width=20cm,
+            minimum height = 2.5cm,
+            text width = 20cm,
+           ] (box) at ($(current page.center)!0.50!(current page.north)$) {XX};
+
+           \node [
+             rectangle, 
+             fill=black, 
+             text=white, 
+             draw=none,
+             minimum width=12cm,
+             minimum height = 2.5cm,
+             text width = 10cm,
+             inner sep = 0cm,
+             outer sep = 0cm,
+             align=right,
+            %  font=\amatica\fontsize{25pt}{25pt}\selectfont,
+             anchor=east
+            ] at ($(box.center) +(1cm,0cm)$) {
+              \amatica\fontsize{25pt}{25pt}\selectfont{
+              \ifdefined\USERMANUAL
+                USER'S MANUAL
+              \else
+                REFERENCE CARDS%
+              \fi
+              }\\
+            \arial\small \tcversion{} (\today)};% this works
+          \node [
+            font=\amatica\fontsize{1.2cm}{1.2cm}\selectfont,
+            anchor = north west,
+            align = left,
+          ] at ($(box.north) + (1.5cm,0cm)$) {THE};
+          \node [
+            font=\amatica\fontsize{1.2cm}{1.2cm}\selectfont,
+            anchor = south west,
+            align = left,
+          ] at ($(box.south) + (1.5cm,0cm)$) {CENTRE};
+          \node [
+            font=\amatica\fontsize{1.2cm}{1.2cm}\selectfont,
+            anchor = south west,
+            align = left,
+          ] at ($(box.south) + (1.5cm,0cm)$) {CENTRE};
+          \node [
+            % font=\amatica\fontsize{1.2cm}{1.2cm}\selectfont,
+            anchor = south east,
+            align = left,
+          ] at (current page.south east) {\copyright 2022 1V/Oct. All rights reserved.
+          };
+
+          %     % red box above the author
+  %     \node [%
+  %         fill=red,
+  %         above=1mm of Author,% [5]
+  %         minimum width=\paperwidth,
+  %         align=center,
+  %         outer sep=0pt,
+  %         font=\sffamily] {\TeX.SX example press};
+  \end{tikzpicture}
+  \end{titlepage}
+\thispagestyle{empty}
+% \includegraphics[width=20cm]{the_centre_stylised_edges.png};
+% \includegraphics[width=19cm]{the_centre_silhouete.jpg};
+
+% \vspace*{\fill}
+% \centering
+% \copyright 2022 1V/Oct. All rights reserved.
+
+\newpage
+\tableofcontents
+% \newpage
+
+% \setcounter{page}{1}
+
+\ifdefined\USERMANUAL%
+  \newpage
+  \part{始めに}
+  % \newpage\input{pages/testing.tex}
+  \newpage\input{pages/software_update_JP.tex}
+  \newpage\input{pages/calibrate_JP.tex}
+  \newpage\input{pages/whats_in_the_box_JP.tex}
+  \newpage\input{pages/getting_started.tex}  
+  \newpage\input{pages/clocks_JP.tex}
+  \newpage
+  \part{システム概要}
+  \newpage\input{pages/overview_JP.tex}
+  \newpage
+  \part{操作}
+  \newpage\input{pages/multi_patch_JP.tex}
+  \clearpage
+  \newpage
+  \part{モジュール}
+\else
+  % Cheat Sheet
+\fi
+
+% \showgrid
+
+\ifdefined\SOMEBOLLOCKS%
+
+\csvreader[
+]{_wip_um.csv} {1=\top,2=\encoder,3=\gbi,4=\gbii,5=\gbiii,6=\gbiv, 7=\pbi,8=\pbii,9=\pbiii, 10=\pbiv, 11=\pbv, 12=\pbvi, 13=\pbvii, 14=\pbviii, 15=\rbi,16=\rbii,17=\rbiii, 18=\rbiv, 19=\rbv, 20=\rbvi, 21=\rbvii, 22=\rbviii, 23=\datafile, 24=\modinfo}{%
+\newpage
+
+% \addcontentsline{toc}{section}{\protect\numberline{\top}}
+\section{\top}
+
+\begin{tikzpicture}[node distance=1mm and 1mm, inner sep=0, 
+    every node/.style={font=\fontsize{8}{8}\selectfont, inner sep=0, outer sep=0, distance=1mm and 1mm},
+    bignode/.style     = {font=\fontsize{7}{7}\selectfont},
+    mymatrix/.style={matrix of nodes, nodes=typetag, outer ysep=2mm, row sep=1mm, anchor=south west},
+    mycontainer/.style={inner sep=1ex},
+    typetag/.style={bignode, draw=m_lightgray, text=m_green, inner sep=1mm,  minimum height=1cm}
+    ]
+
+    % , [every node/.style={inner sep=0,outer sep=0}]
+    % \node[draw, white, minimum width=19cm, minimum height=10mm, fill=black, font=\fontsize{17}{7}\selectfont] at (0 ,7) {\top};
+    \node (main_img) at (0,0) {\includegraphics[width=5.5cm]{bg_image_the_centre.png}};
+    \matrix[
+        matrix of nodes,
+        % nodes=typetag,
+        column 1/.style={anchor=base west},
+        nodes={draw=m_lightgray, text=m_purple, minimum width=6cm, minimum height = 1.2cm, text width=5.6cm, align=right, outer sep=0mm},
+        outer sep=2mm,
+        inner sep=1mm,
+        row sep=1mm,
+        anchor=east,
+        ] (pb_mxl) at (main_img.west){
+        \setitemcol{\pbi} \\
+        \setitemcol{\pbii} \\
+        \setitemcol{\pbiii} \\
+        \setitemcol{\pbiv} \\%
+    };
+    \matrix[
+        matrix of nodes,
+        % nodes=typetag,
+        column 1/.style={anchor=base west},
+        nodes={draw=m_lightgray, text=m_purple, minimum width=6cm, minimum height = 1.2cm, text width=5.6cm, align=left},
+        outer sep=2mm,
+        inner sep=1mm,
+        row sep=1mm,
+        anchor=west,
+        ] (pb_mxr) at (main_img.east){
+        \setitemcol{\pbv} \\
+        \setitemcol{\pbvi} \\
+        \setitemcol{\pbvii} \\
+        \setitemcol{\pbviii} \\%
+    };
+
+
+    % \node (o1) [
+    %     draw, orange, minimum width=5.75cm, text width=5.6cm, align=left, minimum height=2cm, anchor=south east
+    %     outer sep=2mm,
+    %     inner sep=1mm,
+    %     ] (org_b) at (pb_mxr.north east) {\scriptsize \encoder};
+        
+    \matrix[
+        % mymatrix, 
+        matrix of nodes,
+        column 1/.style={anchor=south west},
+        nodes={draw=m_lightgray, text=m_green, minimum height = 1.0cm, align=right, inner sep=1mm},
+        row 1/.style={minimum width=9.5cm, text width=9.2cm}, 
+        row 2/.style={minimum width=9cm, text width=8.7cm}, 
+        row 3/.style={minimum width=8.5cm, text width=8.2cm},
+        outer ysep=2mm,
+        outer xsep=1mm,
+        inner sep=1mm,
+        row sep=1mm,
+        anchor=south west,
+        ] (gb_mxl) at (pb_mxl.north west){
+          \setitemcol{\gbiii} \\%
+          \setitemcol{\gbii} \\%
+          \setitemcol{\gbi} \\%
+    };
+    \matrix[
+        matrix of nodes, 
+        column 1/.style={anchor=south west},
+        nodes={draw=m_lightgray, text=m_green, minimum height = 1.0cm, align=left, inner sep=1mm},
+        row 1/.style={minimum width=8.5cm, text width=8.2cm}, 
+        outer ysep=2mm,
+        outer xsep=1mm,
+        inner sep=1mm,
+        row sep=1mm,
+        anchor=north east
+        ] (gb_mxr) at (gb_mxl.north-|pb_mxr.east){
+          \setitemcol{\gbiv} \\%
+    };
+
+    \matrix[
+        matrix of nodes,
+        % nodes=typetag,
+        column 1/.style={anchor=base west},
+        nodes={draw=m_lightgray, text=m_orange, minimum width=5.75cm, minimum height = 2.0cm, text width=7.6cm, align=left, inner sep=1mm},
+        outer sep=2mm,
+        inner sep=1mm,
+        anchor=east,
+        ] (ob_mx) at ($(gb_mxr.south east)!0.5!(pb_mxr.north east)$){
+        % ] (ob_mx) at (pb_mxr.north east){
+          \encoder \\%
+    };
+
+    \matrix[
+      matrix of nodes,
+      % nodes=typetag,
+      column 1/.style={anchor=base west},
+        nodes={draw=m_lightgray, text=m_red, minimum height = 1.0cm, align=right, inner sep=1mm},
+        row 1/.style={minimum width=7.6cm, text width=7.4cm}, 
+        row 2/.style={minimum width=8.1cm, text width=7.9cm}, 
+        row 3/.style={minimum width=8.6cm, text width=8.4cm},
+        row 4/.style={minimum width=9.1cm, text width=8.9cm},
+            outer ysep=2mm,
+        outer xsep=1mm,
+        inner sep=1mm,
+        row sep=1mm,
+        anchor=north west,
+      ] (rb_mxl) at (pb_mxl.south west){
+        \setitemcol{\rbi}\\%
+        \setitemcol{\rbii}\\%
+        \setitemcol{\rbiii}\\%
+        \setitemcol{\rbiv}\\%
+  };
+
+  \matrix[
+    matrix of nodes,
+    column 1/.style={anchor=base east},
+    nodes={draw=m_lightgray, text=m_red, minimum height = 1.0cm, align=left, inner sep=1mm},
+    row 1/.style={minimum width=7.6cm, text width=7.4cm}, 
+    row 2/.style={minimum width=8.1cm, text width=7.9cm}, 
+    row 3/.style={minimum width=8.6cm, text width=8.4cm},
+    row 4/.style={minimum width=9.1cm, text width=8.9cm},
+    outer ysep=2mm,
+    outer xsep=1mm,
+    inner sep=1mm,
+    row sep=1mm,
+    anchor=north east,
+    ] (rb_mxr) at (pb_mxr.south east){
+      \setitemcol{\rbviii}\\%
+      \setitemcol{\rbvii}\\%
+      \setitemcol{\rbvi}\\%
+      \setitemcol{\rbv}\\%
+  };
+
+
+  \selannotationcol{\pbi}{m_purple}
+  \draw[-{Circle},thick] (pb_mxl-1-1.center -|pb_mxl-1-1.east) +(0,-1.0em) -- (-1.85, 0.70); % node[sloped] {};
+  \selannotationcol{\pbii}{m_purple}
+  \draw[-{Circle} ,thick] (pb_mxl-2-1.center -|pb_mxl-2-1.east) +(0,0.0em)-- (-1.55, -0.10); % node[sloped] {};
+  \selannotationcol{\pbiii}{m_purple}
+  \draw[-{Circle} ,thick] (pb_mxl-3-1.center -|pb_mxl-3-1.east) +(0,-0.5em)-- (-0.95, -0.20); % node[sloped] {};
+  \selannotationcol{\pbiv}{m_purple}
+  \draw[-{Circle} ,thick] (pb_mxl-4-1.center -|pb_mxl-4-1.east) +(0,1.0em)-- (-0.35, -0.25); % node[sloped] {};
+  \selannotationcol{\pbv}{m_purple}
+  \draw[-{Circle} ,thick] (pb_mxr-1-1.center -|pb_mxr-1-1.west) +(0,-1.0em) -- (1.78, 0.70); % node[sloped] {};
+  \selannotationcol{\pbvi}{m_purple}
+  \draw[-{Circle} ,thick] (pb_mxr-2-1.center -|pb_mxr-2-1.west) +(0,0.0em)  -- (1.55, -0.10); % node[sloped] {};
+  \selannotationcol{\pbvii}{m_purple}
+  \draw[-{Circle} ,thick] (pb_mxr-3-1.center -|pb_mxr-3-1.west) +(0,-0.5em) -- (0.95, -0.20); % node[sloped] {};
+  \selannotationcol{\pbviii}{m_purple}
+  \draw[-{Circle} ,thick] (pb_mxr-4-1.center -|pb_mxr-4-1.west) +(0,1.0em)  -- (0.35, -0.25); % node[sloped] {};
+
+    \draw[{Circle}-, m_orange, thick] (1.61,1.34) coordinate (b1) -- (b1 |- ob_mx-1-1.south);
+
+
+    \selannotationcol{\gbiv}{m_green}
+    \draw[{Circle}-, thick] (0.7,0.1) coordinate (b1) -- (b1 |- gb_mxr-1-1.south);
+    \selannotationcol{\gbiii}{m_green}
+    \draw[{Circle}-, thick] (0.2,0.1) coordinate (b1) -- (b1 |- gb_mxl-1-1.south);
+    \selannotationcol{\gbii}{m_green}
+    \draw[{Circle}-, thick] (-0.25,0.1) coordinate (b1) -- (b1 |- gb_mxl-2-1.south);
+    \selannotationcol{\gbi}{m_green}
+    \draw[{Circle}-, thick] (-0.73,0.1) coordinate (b1) -- (b1 |- gb_mxl-3-1.south);
+
+    \selannotationcol{\rbv}{mred}
+    \draw[{Circle}-, thick] (0.22,-1.1) coordinate (b1) -- (b1 |- rb_mxr-4-1.north);
+    \selannotationcol{\rbvi}{mred}
+    \draw[{Circle}-, thick] (0.72,-1.1) coordinate (b1) -- (b1 |- rb_mxr-3-1.north);
+    \selannotationcol{\rbvii}{mred}
+    \draw[{Circle}-, thick] (1.2,-1.1) coordinate (b1) -- (b1 |- rb_mxr-2-1.north);
+    \selannotationcol{\rbviii}{mred}
+    \draw[{Circle}-, thick] (1.7,-1.1) coordinate (b1) -- (b1 |- rb_mxr-1-1.north);
+    \selannotationcol{\rbiv}{mred}
+    \draw[{Circle}-, thick] (-0.22,-1.1) coordinate (b1) -- (b1 |- rb_mxl-4-1.north);
+    \selannotationcol{\rbiii}{mred}
+    \draw[{Circle}-, thick] (-0.72,-1.1) coordinate (b1) -- (b1 |- rb_mxl-3-1.north);
+    \selannotationcol{\rbii}{mred}
+    \draw[{Circle}-, thick] (-1.2,-1.1) coordinate (b1) -- (b1 |- rb_mxl-2-1.north);
+    \selannotationcol{\rbi}{mred}
+    \draw[{Circle}-, thick] (-1.7,-1.1) coordinate (b1) -- (b1 |- rb_mxl-1-1.north);
+    % \draw[{Circle}-, m_red, thick] (0.22,-1.1) coordinate (b1) -- (b1 |- rb_mxr-4-1.north);
+    % \draw[{Circle}-, m_red, thick] (0.72,-1.1) coordinate (b1) -- (b1 |- rb_mxr-3-1.north);
+    % \draw[{Circle}-, m_red, thick] (1.2,-1.1) coordinate (b1) -- (b1 |- rb_mxr-2-1.north);
+    % \draw[{Circle}-, m_red, thick] (1.7,-1.1) coordinate (b1) -- (b1 |- rb_mxr-1-1.north);
+    % \draw[{Circle}-, m_red, thick] (-0.22,-1.1) coordinate (b1) -- (b1 |- rb_mxl-4-1.north);
+    % \draw[{Circle}-, m_red, thick] (-0.72,-1.1) coordinate (b1) -- (b1 |- rb_mxl-3-1.north);
+    % \draw[{Circle}-, m_red, thick] (-1.2,-1.1) coordinate (b1) -- (b1 |- rb_mxl-2-1.north);
+    % \draw[{Circle}-, m_red, thick] (-1.7,-1.1) coordinate (b1) -- (b1 |- rb_mxl-1-1.north);
+  \end{tikzpicture}
+    % \newpage
+
+  \ifdefined\USERMANUAL%
+
+    % \IfSubStringInString{.tex}{\datafile}{
+    %   AAAA
+    %   \input{pages/modules/\datafile}
+    % }{
+    % }
+    \IfSubStringInString{.md}{\datafile}{
+    %   \markdownInput{\datafile}
+    }{
+      \csname mod\datafile\endcsname
+    }
+
+    % \expandx\setshowall{\modinfo}
+  \else
+    % Cheat Sheet
+  \fi
+        
+    % \fullexpandarg
+    % \meaning\rbii \\
+
+    % \IfSubStringInString{NA}{\rbii}{ZZZ}{XXX}
+
+}
+\else
+\fi
+
+
+\ifdefined\USERMANUAL%
+  \modwto%
+  \modvco%
+  \modlfs%
+  \modlfo%
+  \modenv%
+  \modvca%
+  \modbrm%  
+  \modsmp%
+  \modnoi%
+  \moddly%
+  \moddst%
+  \modvcf%
+  \moddrc%
+  \modclk%
+  \modgat%
+  \modeuc%
+  \modply%
+  \modrng%
+  \modqnt%
+  \modarp%
+  \modout%
+\else
+  \modrefcard{wto}%
+  \modrefcard{vco}%
+  \modrefcard{lfs}%
+  \modrefcard{lfo}%
+  \modrefcard{env}%
+  \modrefcard{vca}%
+  \modrefcard{brm}%  
+  \modrefcard{smp}%
+  \modrefcard{noi}%
+  \modrefcard{dly}%
+  \modrefcard{dst}%
+  \modrefcard{vcf}%
+  \modrefcard{drc}%
+  \modrefcard{clk}%
+  \modrefcard{gat}%
+  \modrefcard{euc}%
+  \modrefcard{ply}%
+  \modrefcard{rng}%
+  \modrefcard{qnt}%
+  \modrefcard{arp}%
+  \modrefcard{out}%
+\fi
+
+\ifdefined\USERMANUAL%
+  \newpage
+  \part{補足}
+  \newpage
+  \section{ファイル形式}\label{section:fileformats}
+  \subsection{VXP - Patch File Format}
+  \paragraph*{}%
+  \textbf{VXP} ファイル形式には、パッチ、接続されたモジュール、入力、出力、および設定のすべての定義が含まれています。これは The Center のデータの基本的なバイナリ形式であり、モジュールの定義と完全に結びついています。 参照: \underline{\nameref{section:oppatch}}
+  \subsection{VXS - Multi-Patch format}
+  \paragraph*{}%
+  \textbf{VXS} 形式には、複数のパッチ (4) とエフェクト パッチが含まれています。 VXS フォーマットは、Multi-Patch (Set) モードからのみ開いて保存できます。 参照: \underline{\nameref{section:multipatch}}
+
+\else
+\fi
+
+
+\end{document}

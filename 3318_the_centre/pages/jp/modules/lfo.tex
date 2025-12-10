@@ -1,0 +1,145 @@
+\def\lfoset{
+   {{Audio Output}/{Audio Output of LFO}/{LFOのオーディオ出力}/{LFO の音声出力先を選択します。
+  \newline 参照: \underline{\nameref{section:audiooutputs}}}},
+  {{Waveform}/{波形の選択}/{
+    \makesupopt{{
+      {{Triangle}/{標準Triangle波形。波形は Input: Skew の影響を受け、Ramp から Triangle を経て Saw に変化します。}},
+      {{Square}/{標準Square波形。  波形は、PWM (Pulse Width Modulation) を変更するInput (Skew) の影響を受けます。}},
+      {{Sine}/{標準Sine波形。波形は、2 つの非対称sine phasesに変更する Input(Skew) の影響を受けます。
+      \newline$\blacksquare$ Skew パラメータを変更して負と正のハーフ サインの特定の比率を調整すると、Diode Ladderフィルターと相性の良い非常に興味深いハーモニクスが追加されます。
+      }}%
+    }}
+  }},
+}
+% \def\lfoset{
+%   {{Audio Output}/{Audio Output of LFO}/{Selects audio output destination for LFO.
+%   \newline See: \underline{\nameref{section:audiooutputs}}}},
+%   {{Waveform}/{Selection of Waveform}/{
+%     \makesupopt{{
+%       {{Triangle}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+%       {{Square}/{Standard square waveform.  The waveform is affected by Input: Skew that modifies PWM (Pulse Width Modulation) of the waveform}},
+%       {{Sine}/{Standard sine waveform.  The waveform is affected by Input: Skew that modifies it to two assymetric sine phases.
+%       \newline$\blacksquare$ Adjusting certain ratios of negative and positive half sines by modifying Skew parameter will add very interestic harmonics that go well with Diode Ladder filter.
+%       }}%
+%     }}
+%   }},
+% }
+
+% \def\inpclock{
+%    {{Clock}/{Clock for timing oscillator's phase duration in BPM mode (otherwise 120BPM is used)}/{}}
+% }
+
+% \def\lfoinp{
+%   {{Unison}/{Unison mode (1-16 voices)}/{Enables unison mode and controls number of oscillators running in parallel.}},
+%   {{Detune}/{Detune oscillators}/{Detunes oscillators in Unison mode by spreading them equally in Detune range. With detune set at maximum the spread range is 2 semi-tones. With odd number of oscillators the centre oscillator will always be following pitch from Note Input. For even number of oscillators there is no oscillator followin Note and each oscillator is detuned +/- from the center note. \newline $\bigstar$ \textit{With Unison running two oscillators, detune set to maximum (1.0) and pitch set at note D there is one oscillator playing note C\# and one playing note D\# (no oscillator is actually playing note C)}}},
+%   {{Wavetable}/{Wavetable position}/{Adjusts position of waveform in wavetable. When controlled by CV allows changing texture of sound by scanning through set of waveforms contained in wavetable}},
+%   {{Reset Osc}/{Reset Oscillator CV input}/{When connected with CV input and set to high level it resets phase of oscillator to 0. Useful to run oscillators in Sync}}%
+% }
+
+\def\lfoinp{
+    {{NOTE}/{オシレーターのピッチコントロール}/{Note は、オシレーターのピッチまたは周波数を制御します。
+  \newline 参照 \underline{\nameref{section:pitchcontrol}}
+  \makesupopt{{
+    {{VOCT}/{ノートコントロール用の1V/Oct入力/}},
+    {{OCT}/{オクターブ単位のチューニングノート +/- 8 オクターブ}},
+    {{NOTE}/{半音単位のチューニング音 +12 半音 (1 オクターブ)}},
+    {{FINE}/{セント +/- 半音単位のチューニング ノート}}%
+  }}%
+  }},
+   {{AM}/{Amplitude Modulation}/{振幅変調はサウンドレベルを変化させます。 Envelope の CV 信号と接続すると VCA として機能します。 LFO と接続すると、リング モジュレーターが作成されます。}},
+  {{FM}/{Frequency Modulation}/{Frequency modulationは、変調による周波数の変化です。
+  \newline$\blacksquare$  FM の CV 入力にモジュレーターを追加し、実際のLFOに対して特定の周波数比で動作させると、興味深いサウンド テクスチャが作成されます。}},
+  {{Skew}/{波形の非対称性を変形}/{Skew は、Triangle を Saw または Ram に変えたり、Square Wave の PWM を変更したりすることで、波形の非対称性に影響を与えます。上記の設定: Waveformを参照してください。}},
+  {{Hard Sync}/{オシレータの位相をリセット}/{オシレータの位相をリセットし、波形の先頭からオシレーションを開始します。
+  \newline$\bigstar$ LFO1 Output: Reset から LFO2 Input: Hard Sync にわずかにデチューンした 2 つのLFOを接続することで、シンプルなオシレーションの非常に豊かなテクスチャーを作成できます。}},
+  {{PM}/{Phase Modulation}/{Phase modulation により、モジュラーはオシレーターの位相を変更できます。 FM (Frequency Modulation) とは異なり、Phase Modulation は方向を変えることでオシレーターをリバースモードで動作させることができます。}}%
+} 
+
+\def\lfoout{
+    {{OSC}/{LFO出力}/{オシレーター信号の出力}},
+    {{RST}/{オシレーターリセット}/{発振器の位相がリセットされるとhighに設定されます。}}%
+} 
+
+% \def\refcardlfo{
+%   \makereferencecard{
+%     \textcolor{black}{\textbf{[回す]}} 波形の切り替え(Triangle Square Sine),
+%   }{
+%     \textcolor{black}{\textbf{[ON/OFF]}} モジュールのオン/オフ (Bypass),
+%     \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+%     \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+%     \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+%   }{
+%     \textcolor{black}{\textbf{[SKEW]}} 波形の PWM または PWM styleの効果レベルを調整する,
+%     \textcolor{black}{\textbf{[FRQC]}} LFO 0 ～ 28Hz のFrequency Coarse ,
+%     \textcolor{black}{\textbf{[FRQF]}} Frequency fine tune (+ 10\% of coarse frequency),
+%     \textcolor{black}{\textbf{[AM]}} Amplitude Modulation Level (VCAとして使用可能),
+%     \textcolor{black}{\textbf{[FM]}} Frequency Modulation Level,
+%     \textcolor{black}{\textbf{[PM]}} Phase Modulation Level,
+%     NA,
+%     NA,
+%   }{
+%     NA,
+%     NA,
+%     NA,
+%     NA,
+%     NA,
+%     NA,
+%     NA,
+%     Select Audio Output Destiantion,
+%     }
+% }
+
+\def\refcardlfo{
+  \makereferencecard{
+    \textcolor{black}{\textbf{[回す]}} 波形の切り替え(Triangle Square Sine),
+  }{
+    \textcolor{black}{\textbf{[ON/OFF]}} モジュールのオン/オフ (Bypass),
+    \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+    \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+    \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+}{
+    \textcolor{black}{\textbf{[SKEW]}} 波形の PWM または PWM styleの効果レベルを調整する,
+    \textcolor{black}{\textbf{[FRQC]}} LFO 0 - 28Hz のFrequency Coarse ,
+    \textcolor{black}{\textbf{[FRQF]}} Frequency fine tune (+ 10\% of coarse frequency),
+    \textcolor{black}{\textbf{[AM]}} Amplitude Modulation Level (VCAとして使用可能),
+    \textcolor{black}{\textbf{[FM]}} Frequency Modulation Level,
+    \textcolor{black}{\textbf{[PM]}} Phase Modulation Level,
+    NA,
+    NA,
+  }{
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    Select Audio Output Destiantion,
+    }
+}
+
+\def\modnameshortlfo{LFO}
+\def\modnamelonglfo{Low Frequency Oscillator}
+
+\newcommand{\modlfo}{
+  \newpage
+  \modmakesection{lfo}
+
+  \paragraph*{}
+  \modnamelonglfo は、非常に低い周波数 (通常は可聴レベル以下) で基本的な波形をオシレーションするモジュラーソースです。
+  
+  \showrefcardsection{lfo}
+
+   \subsection{波形}
+  \paragraph*{}LFOは基本的な形状 (Sine, Triangle, Square) を取り、特定の周波数でこれらの波形の単相をオシレーションします。各 \textbf{波形} は、Skew CV入力でそのピボットパラメータで変更できます。 Skew パラメータをTriangleに適用すると、\textit{Ramp} または \textit{Saw} のいずれかに変わります。 Square の場合、Skew パラメータは、Square パルスの長さを変更する PWM (Pulse Width Modulation) を調整します。 Sine の場合、Skewパラメータは、Sine波の正と負の部分の位相の比率を変更します。
+
+
+  \newpage
+  \section*{\modname}  
+  \tableofoptionsnew{\lfoset}{\optnameset}%
+  \tableofoptionsnew{\lfoinp}{\optnameinp}%
+  \tableofoptionsnew{\lfoout}{\optnameout}%
+}
+
+
+

@@ -1,0 +1,97 @@
+\def\smpset{
+  {{Audio Output}/{SMP のオーディオ出力 - ステレオ}/{MP の音声出力先を選択します。ポリフォニーモードを含むすべてのオシレーターは、単一チャンネル (モノラルまたはステレオ) から出力されます。 \newline 参照: \underline{\nameref{section:audiooutputs}}}},
+  {{Running Mode}/{low frequency shape低周波形状の走行モードの種類を選択}/{
+    \makesupopt{{
+      {{Continuous}/{サンプルの再生がループし続けます。 Gate High (Trigger) 信号は、サンプルの再生を開始位置にリセットします。}},
+      {{Trigger}/{サンプルは、ゲート信号が高くなると 1 回再生され、終了位置で停止します。再生中その他のトリガーは、開始位置にリセットされます。}},
+      {{Gate length}/{ゲート信号が高い限り、サンプルが再生されます。信号が低くなるとすぐに停止します。}}%
+   }}
+ }},
+}
+
+\def\smpinp{
+   {{NOTE}/{オシレーターのピッチコントロール}/{Note は、オシレーターのピッチまたは周波数を制御します。
+  \newline 参照 \underline{\nameref{section:pitchcontrol}}
+  \makesupopt{{
+    {{VOCT}/{ノートコントロール用の1V/Oct入力/}},
+    {{OCT}/{オクターブ単位のチューニングノート +/- 8 オクターブ}},
+    {{NOTE}/{半音単位のチューニング音 +12 半音 (1 オクターブ)}},
+    {{FINE}/{セント +/- 半音単位のチューニング ノート}}%
+  }}%
+  }},
+    {{Gate}/{Gate CV入力}/{サンプルの再生を開始またはリセットするゲートまたはトリガー信号}},
+    {{AM}/{Amplitude Modulation}/{Amplitude Modulationはサウンドレベルを変化させます。 Envelope の CV 信号と接続すると VCA として機能します。 LFO と接続すると、リング モジュレーターが作成されます。}},
+    {{Sample Start}/{sampleのスタート位置}/{ゲートまたはトリガー信号を受信したときにサンプル プレーヤーが再生を開始するサンプルの開始位置}},
+    {{Loop Start}/{loopの開始}/{1 フェーズの再生が完了したときのループの再開位置}},
+    {{Loop End}/{loopの終了}/{Loop Start からの再生の再開をトリガーするサンプルの最終位置}},
+}
+
+\def\smpout{
+    {{OUT}/{SMP出力}/{wavetable oscillatorの出力}},
+    {{RST}/{オシレーターリセット}/{オシレーターの位相がリセットされたときにHighに設定}}%
+}
+
+
+\def\refcardsmp{
+   \makereferencecard{
+    \textcolor{black}{\textbf{[回す]}} 現在のディレクトリ内のウェーブテーブル間を移動\newline\textcolor{black}{\textbf{[クリック]}} File Browser に入り、選択したウェーブテーブルに変更し、ブラウジングディレクトリを変更\newline\textcolor{black}{\textbf{[長押し]}} Wavetable Editorに入る
+    }{
+      \textcolor{black}{\textbf{[2D/3D]}} ウェーブテーブルの表示切り替え,
+      \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+      \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+      \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+      }{
+      \textcolor{black}{\textbf{[AM]}} Amplitude Modulation Level (VCAとして使用可能),
+      NA,
+      NA,
+      ZOOM モードでウィンドウを制御する,
+      \textcolor{black}{\textbf{[START]}} サンプルのスタートポインターを調整する,
+      \textcolor{black}{\textbf{[LOOP-START]}} サンプルのループスタートポインターを調整する,
+      \textcolor{black}{\textbf{[LOOP-END]}} サンプルのループエンドを調整する,
+      微調整のためポインタをズーム,
+    }{
+      \textcolor{black}{\textbf{[RUN]}} runningモードを選択 (Trigger Continuous Gate Length),
+      \textcolor{black}{\textbf{[GATE]}} Gate CVを選択,
+      NA,
+      \textcolor{black}{\textbf{[NOTE-VOCT]}} VOCT入力を選択,
+     \textcolor{black}{\textbf{[NOTE-OCT]}} ノートをオクターブ単位でチューニング (+/- 8 オクターブ),
+      \textcolor{black}{\textbf{[NOTE-NOTE]}} 音を半音単位でチューニング (+12 半音 1 オクターブ),
+      \textcolor{black}{\textbf{[NOTE-FINE]}} セント単位でノートを微調整 (+/- 半音),
+      音声出力先の選択,
+    }
+}
+
+
+\def\modnameshortsmp{SMP}
+\def\modnamelongsmp{Sample Player}
+
+\newcommand{\modsmp}{
+  \newpage
+  \modmakesection{smp}
+
+  \paragraph*{}
+  \modnamelongsmp{ }(SMP)は、サンプルを要求されたピッチで再生して音を生成する音源です
+  
+  \showrefcardsection{smp}
+
+  \subsection{操作}
+  
+  \modnamelongsmp{ }サンプルプレーヤーは、Inputs:Note によって提供され、Inputs:Gate によってトリガーされた特定のピッチでサンプルを再生します。 エンコーダー (SELECT) を押すと、SD カードからサンプルをロードできます。 ディレクトリからサンプルをロードした後、エンコーダを回転させると、同じディレクトリから次のサンプルと前のサンプルをロードできます。
+  \subsection{サンプルとグレインのループ}%
+  \paragraph*{}サンプルプレーヤーを使用すると、CV によって制御されるサンプルのループを作成できるため、グラニュラーサンプルプレーヤーに変換できます。サンプル プレーヤーは、効果的にグラニュラー シンセサイザーに変換する CV 入力を介してループ スタートとループ エンドのパラメーターを変更することでループできます。これらのコントロールには下記のノブを使用します。:
+  \begin{itemize}
+    \item \textbf{[LVL5 - Start]} サンプルの開始位置。ゲート信号がサンプルをトリガーすると、ここから再生が開始されます。 Start が Loop Start よりも大きい場合、Loop Start がサンプルの開始位置になります。
+    \item \textbf{[LVL6 - Loop Start]} Loop 開始位置、Loop終了後、この時点からサンプルの再生が開始されます
+    \item \textbf{[LVL7 - Loop End]} ループ終了が 0 より大きい値に設定されている場合、サンプル ループが有効になります。
+  \end{itemize}
+  \paragraph*{}上記のパラメーターのいずれかに CV コントロールを追加することで、演奏中に LFO や LFS などの CV 入力でグレインのサイズを変更できます。
+
+  \newpage
+  \section*{\modname}  
+  \tableofoptionsnew{\smpset}{\optnameset}
+  \tableofoptionsnew{\smpinp}{\optnameinp}
+  \tableofoptionsnew{\smpout}{\optnameout}
+}
+
+
+

@@ -1,0 +1,140 @@
+% \def\lfsbutmain{
+%    {Edit}/{Invokes Shape Editor},
+%    {Set}/{Open Settings},
+%    {Inputs}/{Open Inputs},
+%    {Back}/{Return to Patch Menu}
+% }
+
+
+
+\def\vcfset{
+  {{Audio Output}/{VCFのオーディオ出力}/{VCF でフィルタリングされた音声の音声出力先を選択します。
+  \newline 参照: \underline{\nameref{section:audiooutputs}}}},
+  {{Audio Input}/{VCF を介してフィルタリングされるオーディオ信号}/{まざまな種類のフィルターでフィルター処理されるオーディオ信号 (任意の信号)}},
+  {{Filter Type}/{Filterの選択}/{
+    \makesupopt{{
+      {{OP Lowpass, OP Highpass}/{One Pole filters.}/{単極の最も単純なフィルターですが、高周波を低減するのに優れた結果をもたらします}},
+      % {{OP Highpass}/{One Pole High Pass filter.}/{The simpliest filter with single pole but giving nice results in reducing low frequency}},
+      {{BQ Lowpass, Highpass, Bandpass, Low Shelf, High Shelf, Peaking, Notch, Allpass}/{Biquad filters}},
+      % {{BQ Highpass}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{BQ Bandpass}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{BQ Low Shelf}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{BQ High Shelf}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{BQ Peaking}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{BQ Notch}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{BQ Allpass}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      {{DL Ladder}/{Diode Ladder filter}},
+      {{MG Ladder}/{MG Type Ladder filter}},
+      {{LD Lowpass 12, Highpass 12, Bandpass 12, Lowpass 24, Highpass 24, Bandpass 24}/{Ladder filters 12dB and 24dB versions}},
+      % {{LD Lowpass 24}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{LD Highpass 12}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{LD Highpass 24}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{LD Bandpass 12}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}},
+      % {{LD Bandpass 24}/{Standard triangle waveform.  The waveform is affected by Input: Skew and changes from Ramp through Triangle to Saw}}%
+    }}%
+  }}%
+}
+% \def\inpclock{
+%    {{Clock}/{Clock for timing oscillator's phase duration in BPM mode (otherwise 120BPM is used)}/{}}
+% }
+
+% \def\vcfinp{
+%   {{Unison}/{Unison mode (1-16 voices)}/{Enables unison mode and controls number of oscillators running in parallel.}},
+%   {{Detune}/{Detune oscillators}/{Detunes oscillators in Unison mode by spreading them equally in Detune range. With detune set at maximum the spread range is 2 semi-tones. With odd number of oscillators the centre oscillator will always be following pitch from Note Input. For even number of oscillators there is no oscillator followin Note and each oscillator is detuned +/- from the center note. \newline $\bigstar$ \textit{With Unison running two oscillators, detune set to maximum (1.0) and pitch set at note D there is one oscillator playing note C\# and one playing note D\# (no oscillator is actually playing note C)}}},
+%   {{Wavetable}/{Wavetable position}/{Adjusts position of waveform in wavetable. When controlled by CV allows changing texture of sound by scanning through set of waveforms contained in wavetable}},
+%   {{Reset Osc}/{Reset Oscillator CV input}/{When connected with CV input and set to high level it resets phase of oscillator to 0. Useful to run oscillators in Sync}}%
+% }
+
+
+
+\def\vcfinp{
+  {{NOTE}/{オシレーターのピッチコントロール}/{Note は、オシレーターのピッチまたは周波数を制御します。
+  \newline 参照 \underline{\nameref{section:pitchcontrol}}
+  \makesupopt{{
+    {{VOCT}/{ノートコントロール用の1V/Oct入力/}},
+    {{OCT}/{オクターブ単位のチューニングノート +/- 8 オクターブ}},
+    {{NOTE}/{半音単位のチューニング音 +12 半音 (1 オクターブ)}},
+    {{FINE}/{セント +/- 半音単位のチューニング ノート}}%
+  }}%
+  }},
+  {{Cutoff}/{Cutoff Frequency}/{フィルターが信号のフィルター処理を開始する周波数境界}},
+  {{Resonance}/{Resonance}/{信号の抑制または増強のレベル}},
+  {{Gain}/{Pre-Gain of Signal}/{フィルタリング前の信号の増幅}},
+} 
+
+\def\vcfout{
+  {{NONE}/{}}%
+}
+  
+\def\refcardvcf{
+  \makereferencecard{
+    \textcolor{black}{\textbf{回す]}} フィルターの種類を切り替える
+  }
+  {
+    \textcolor{black}{\textbf{[ON/OFF]}} モジュールのオン/オフ (バイパス),
+    \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+    \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+    \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る
+  }
+  {
+    \textcolor{black}{\textbf{[CTO]}} カットオフレベルの調整,
+    \textcolor{black}{\textbf{[RES]}} Resonanceの調整,
+    \textcolor{black}{\textbf{[GAI]}} フィルターのゲインを調整する,
+    NA,
+    \textcolor{black}{\textbf{[VOCT]}} キー トラッキング CV の減衰,
+    \textcolor{black}{\textbf{[VOCT]}} キートラッキング CV を選択,
+    NA,
+    NA,
+  }
+  {
+    \textcolor{black}{\textbf{[CTO]}} Cutoff CVを減衰,
+    \textcolor{black}{\textbf{[RES]}} Resonance CVを減衰,
+    \textcolor{black}{\textbf{[GAI]}} Filter CVのゲインを減衰,
+    \textcolor{black}{\textbf{[CTO]}} Cutoff CV,
+    \textcolor{black}{\textbf{[RES]}} Resonance CV,
+    \textcolor{black}{\textbf{[GAI]}} Filter CVのゲイン,
+    オーディオ入力を選択,
+    オーディオ出力を選択,
+  }
+}
+    
+
+
+\def\modnameshortvcf{VCF}
+\def\modnamelongvcf{Voltage Controlled Filter}
+
+\newcommand{\modvcf}{
+  \newpage
+  \modmakesection{vcf}
+
+  \paragraph*{}
+Voltage Controlleed Filter (VCF) はCutoff, Resonance, Gain を制御するデジタル フィルターのセットです。 
+
+\showrefcardsection{vcf}
+% \subsubsection*{LFS Settings}
+\subsection{操作}電圧制御フィルター (VCF) は、デジタル領域に実装されたさまざまなフィルターのセットで、音の周波数を制限する制御を可能にします。
+
+\subsection{トラッキング} VCF は、複数の方法で制御できるカットオフ周波数追跡メカニズムを実装していますが、Cufoff 周波数を制御するための 3 つの標準パラメーターがあります。
+
+Cutoff CV \- これは Input:Cutoff パラメータの一部であり、ベース カットオフ周波数を変調するために、外部または内部の制御電圧を割り当てることができます。
+
+Tracking V/OCT と Tracking CV は、同じ入力コントロール Input:Tracking の一部である 2 つの電圧制御パラメーターです。トラッキング V/OCT は、外部 (V/OCT ジャック) または内部 (内部モジュールの NOTE 出力) からのピッチに割り当てられ、そのアッテネーターで調整できます。逆にトラッキング CV は、エンベロープや LFO などの CV モジュレーターに割り当てられます。
+\newline$\bigstar$ VCF の Input:Tracking と VCO または WTO の Input:NOTE ピッチコントロールに同じ V/OCT を割り当てることで、ローパスフィルターを使用したときに、弾いた音のキーに追従してピッチの変化にパンチのあるサウンドを作成できます。
+
+
+
+  
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\vcfset}{\optnameset}%
+  \tableofoptionsnew{\vcfinp}{\optnameinp}%
+  \tableofoptionsnew{\vcfout}{\optnameout}%
+% \section*{\top}
+
+% \subsubsection*{LFS Settings}
+
+% \tableofoptionsnew{\vcoinpi}{\optnameinp}
+}
+
+
+

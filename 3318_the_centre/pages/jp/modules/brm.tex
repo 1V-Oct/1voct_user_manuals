@@ -1,0 +1,65 @@
+\def\brmset{
+  {{Audio Output}/{BRM出力}/{BRMで処理された信号の音声出力。信号は、 LevelとSidechainの 2 つのモジュレーターの合計によって変調された振幅を持っています。 \newline 参照: \underline{\nameref{section:audiooutputs}}}},
+  {{Audio Input 1}/{Audio Signal入力1}/{2 番目の信号と結合される音声信号 (任意の信号)}},
+  {{Audio Input 2}/{Audio Signal 入力2}/{最初の信号と結合される音声信号 (任意の信号)}}%
+}
+
+\def\brminp{
+  {{Balance}/{信号間のバランス}/{2 つの信号を結合するときの比率。信号の音量レベルは、結合する前にそれぞれ調整されます。)}}%
+}
+
+\def\brmout{
+  {{NONE}/{}/{}}%
+}
+
+\def\refcardbrm{
+  \makereferencecard{
+    NA,
+  }{
+    \textcolor{black}{\textbf{[ON/OFF]}} モジュールのオン/オフ (バイパス),
+    \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+    \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+    \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+  }{
+    クロスモジュレーションのレベルを調整
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{
+    Modulation の CV 入力の減衰を調整,
+    NA,
+    NA,
+    NA,
+    レベルモジュレーションのソースを選択,
+    最初のオーディオ入力を選択,
+    最初のオーディオ入力を選択,
+    Ring Modulator で結合された信号のオーディオ出力を選択,
+   }
+}
+
+
+\def\modnameshortbrm{BRM}
+\def\modnamelongbrm{Balanced Ring Modulator}
+
+\newcommand{\modbrm}{
+  \newpage
+  \modmakesection{brm}
+
+  \paragraph*{}Balanced Ring Modulator は 2 つのオーディオ信号を受け取り、それらを組み合わせて出力信号を生成します。
+  
+  \showrefcardsection{brm}
+
+  \subsection{操作}
+  BRM は、Aduio Input 1 と Audio Input 2 を組み合わせることで、2 つの信号のクロスモジュレーションを実行します。Input:Balance 設定は、これら 2 つの信号間の比率です。
+  
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\brmset}{\optnameset}
+  \tableofoptionsnew{\brminp}{\optnameinp}
+  \tableofoptionsnew{\brmout}{\optnameout}
+}
+

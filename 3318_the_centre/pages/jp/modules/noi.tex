@@ -1,0 +1,77 @@
+\def\noiset{
+  {{Audio Output}/{Noise Generatorのオーディオ出力}/{ノイズのオーディオ出力先を選択します。
+  \newline 参照: \underline{\nameref{section:audiooutputs}}}},
+}
+% \def\inpclock{
+%    {{Clock}/{Clock for timing oscillator's phase duration in BPM mode (otherwise 120BPM is used)}/{}}
+% }
+
+% \def\noiinp{
+%   {{Unison}/{Unison mode (1-16 voices)}/{Enables unison mode and controls number of oscillators running in parallel.}},
+%   {{Detune}/{Detune oscillators}/{Detunes oscillators in Unison mode by spreading them equally in Detune range. With detune set at maximum the spread range is 2 semi-tones. With odd number of oscillators the centre oscillator will always be following pitch from Note Input. For even number of oscillators there is no oscillator followin Note and each oscillator is detuned +/- from the center note. \newline $\bigstar$ \textit{With Unison running two oscillators, detune set to maximum (1.0) and pitch set at note D there is one oscillator playing note C\# and one playing note D\# (no oscillator is actually playing note C)}}},
+%   {{Wavetable}/{Wavetable position}/{Adjusts position of waveform in wavetable. When controlled by CV allows changing texture of sound by scanning through set of waveforms contained in wavetable}},
+%   {{Reset Osc}/{Reset Oscillator CV input}/{When connected with CV input and set to high level it resets phase of oscillator to 0. Useful to run oscillators in Sync}}%
+% }
+
+\def\noiinp{
+  {{LPF}/{Low Pass Filter}/{CVコントロールのLow Pass Filter}},
+  {{HPF}/{High Pass Filter}/{CVコントロールのHigh Pass Filter}}%
+} 
+
+\def\noiout{
+    {{OSC}/{NOI出力}/{ノイズ信号の出力}},
+}
+
+\def\refcardnoi{
+ \makereferencecard{
+    \textcolor{black}{\textbf{[回す]}} 波形の切り替え(Triangle Square Sine),
+  }{
+    \textcolor{black}{\textbf{[ON/OFF]}} モジュールのオン/オフ (Bypass),
+    \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+    \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+    \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+  }{
+    \textcolor{black}{\textbf{[LPF]}} ローパスフィルターのカットオフ周波数 - ノイズのカラーを調整します,
+    \textcolor{black}{\textbf{[HPF]}} ハイパスフィルターのカットオフ周波数 - ノイズのカラーを調整します,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{
+    \textcolor{black}{\textbf{[LPF]}} ローパスフィルターのCV入力を減衰,
+    \textcolor{black}{\textbf{[HPF]}} ハイパスフィルターのCV入力を減衰,
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[LPF]}} ローパスフィルターのCV入力を選択,
+    \textcolor{black}{\textbf{[HPF]}} ハイパスフィルターのCV入力を選択,
+    NA,
+    ノイズのオーディオ出力先を選択,
+    }
+}
+
+\def\modnameshortnoi{NOI}
+\def\modnamelongnoi{Noise Generator}
+
+\newcommand{\modnoi}{
+  \newpage
+  \modmakesection{noi}
+
+Noise Generator は、さまざまな音色のノイズを生成する音源です。
+  
+  \showrefcardsection{noi}
+
+  \subsection{波形}
+  \paragraph*{} ノイズ ジェネレーターは、さらにフィルタリングするためのベースとしてホワイト ノイズを生成します。 2 つの組み込みフィルター (ローパス フィルターとハイパス フィルター) を使用すると、ノイズの音色を CV 入力の助けを借りて調整できます。
+
+
+  \newpage
+  \section*{\modname}  
+  \tableofoptionsnew{\noiset}{\optnameset}%
+  \tableofoptionsnew{\noiinp}{\optnameinp}%
+  \tableofoptionsnew{\noiout}{\optnameout}%
+}
+
+
+

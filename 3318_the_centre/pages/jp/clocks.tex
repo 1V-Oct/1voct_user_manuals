@@ -1,0 +1,28 @@
+\section{Clocks}
+
+多くのモジュールは、指定された時間間隔の要件に確実に同期するためにクロックを必要とします。 これが単純なランダムノート ジェネレーター (RNG) であれ、低周波シェイパー (LFS) であれ、供給されたクロックにより、1 つのモジュールの 4 分音符の長さが別のモジュールの 4 分音符の長さと等しくなります。 ビートごとに異なる数のクロック パルスを定義する複数の標準またはアドホックな設計があります。 最もポピュラーなのは、4 分音符あたり 24 クロック (24 PQN) を確立した MIDI 規格です。
+
+センターはデフォルトで 4 分音符 (拍) あたり 24 クロックを使用しますが、この値はすべてのモジュールに対してグローバルに変更できます。 この設定はグローバル設定で調整でき、1 拍あたり 24、12、6、4、3、2、1 クロックの間で変更できます。
+
+\begin{enumerate}
+  \item[$\blacksquare$] \textit{MIDI を使用して The Center を制御する場合、MIDI 規格に準拠するために 24 CPQN (四分音符あたりのクロック数) を維持することをお勧めします。}
+\end{enumerate}
+
+\section{BPM}
+
+Beats Per Minute (BPM) は、電子音楽で音楽の時間間隔を定義するために使用される尺度です。 電子音楽のビートは 4 分音符に相当し、小節には 4 つの 4 分音符 (4/4 テンポ) があります。 The Center はデフォルトで、すべてのモジュールを 120BPM で動作するように設定してあります。 1 分あたり 120 ビート、つまり 60 秒あたり 120 ビートであり、最終的に 1 つの 4 分音符の長さは 0.5 秒または 500 ミリ秒 (ms) です。 デフォルトのテンポを変更するには、モジュール入力のクロック CV (CLK) を介してモジュールにクロック入力を提供する必要があります。 クロックは、CVY 入力、MIDI 入力を介して送信するか、クロック モジュール (CLK) を介して内部的に生成することができます。 CLK モジュールを追加することで、ユーザー定義のテンポから派生した他のモジュールのクロックを生成できます。
+
+
+
+% \begin{enumerate}
+%   \item Download latest firmware release from Github 
+% \url{https://github.com/1V-Oct/3318_the_centre_releases/releases}
+% %  - filename\: the_centre_v4.fwx
+%   \item  Copy downloaded firmware file into SD Card (make sure that the filename is: 'the\_centre\_v4.fwx' and it is in root directory of your card)
+%   \item Insert SD Card into The Centre
+%   \item Power on The Centre or perform Reset
+% %[[Reset|System Menu#Reset]]
+%   \item Go to [[System Menu]] and check firmware version. 
+%   \item[$\blacksquare$] \textit{NOTE: Sometimes Safari, Explorer and other browsers add some extra bits to the filename like  '(1)' or '\_1' to indicate that it is different file than already downloaded. Please rename the file to the correct name.}
+  
+% \end{enumerate}

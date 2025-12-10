@@ -1,0 +1,139 @@
+\def\lfsbutmain{
+   {Edit}/{Shape Editorを呼び出す },
+   {Set}/{Settingsを開く},
+   {Inputs}/{Inputsを開く},
+   {Back}/{Patch Menuに戻る}
+}
+
+\def\lfsset{
+    {{Running Mode}/{low frequency shapeのRunning Modeの種類を選択}/{
+       \makesupopt{{
+         {{Continuous}/{オシレーターは動き続け、止まることはありません。ゲート ハイ (トリガー) 信号は、オシレーターの位相を 0 にリセットします。}},
+         {{Trigger}/{オシレータは、ゲート信号がハイになると 1 回実行され、完全なシェイプが 1 回実行され、シェイプのフェーズが終了すると生成が停止します。別のトリガー信号は位相を 0 にリセットします。}},
+         {{Gate length}/{オシレータは、ゲート信号がハイになると 1 回実行され、完全なシェイプが 1 回実行され、シェイプのフェーズが終了すると生成が停止します。別のトリガー信号は位相を 0 にリセットします。}}%
+      }}
+    }},
+    {{Timing Mode}/{LFSのタイミングモードを選択}/{LFS のタイミングは、時間ベースでHz で計算するか、BPM に関連付けて音符または小節の長さで測定するように選択できます。
+    \makesupopt{{
+       {{BPM}/{ノートの長さに基づくタイミング}},
+       {{Hz}/{フリクエンシーに基づくタイミング}}%
+    }}
+    }},
+    {{Polarity}/{出力のPolarity}/{
+       \makesupopt{{
+         {{Bipolar}/{出力は -5V から +5V の範囲で整形します。リングモジュレーションやFMに最適。}},
+         {{Unipolar}/{出力は 0V から +5V の範囲で整形します。 VCAに最適。}}%
+      }}
+    }}%
+}
+
+\def\lfsinp{
+   {{Trigger}/{Trigger CV入力}/{オシレーターを開始またはリセットするトリガーまたはゲート信号}},
+   {{Clock}/{BPM モードでのタイミングオシレータの位相持続時間のクロック (未設定では120BPM が使用されます)}/{}},
+   {{Frequency Coarse}/{オシレータの周波数を大まかに調整する}/{オシレータの周波数を 0Hz から 100Hz の範囲 (周波数モード) または 1/256 ノートから 8bar の間 (BPM/ノートデュレーションモード) で調整します。}},
+   {{Frequency Fine}/{オシレーターの周波数を微調整する}/{オシレーターの周波数を細かく調整します。}}%
+}
+
+\def\lfsout{
+    {{SHP}/{シェイプオシレーター出力 }/{他の信号を変調するために使用できるシェイプオシレーターの出力}}%
+}
+
+\def\refcardlfs{
+   \makereferencecard{\textcolor{black}{\textbf{[回す]}} 現在のディレクトリ内の図形間を移動する%
+   \newline\textcolor{black}{\textbf{[クリック]}} ファイルブラウザに入り、シェイプまたはブラウジングディレクトリを変更
+}{
+   \textcolor{black}{\textbf{[Edit]}} Shape Editorに入る,
+   \textcolor{black}{\textbf{[SET]}} モジュールのセッティング,
+   \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+   \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+}{
+   \textcolor{black}{\textbf{[FRQC]}} LFO の周波数コース (HZ: 0 ～ 100Hz または BPM: 1/256 ～ 8bar),
+   \textcolor{black}{\textbf{[FRQF]}} 周波数の微調整,
+   NA,
+   NA,
+   NA,
+   NA,
+   NA,
+   NA,
+   }{
+      \textcolor{black}{\textbf{[RUN]}} Running mode を選択 (Trigger Continuous Gate Length),
+      Timing Modeを選択: BPM or Hz,
+      NA,
+      NA,
+      \textcolor{black}{\textbf{[CLK]}} CLOCKソースCVを選択,
+      \textcolor{black}{\textbf{[TRIG]}} Trigger CVを選択,
+      NA,
+      シェイプの出力先を選択,
+   }
+}
+
+\def\refcardlfsedit{
+  \makereferencecard{\textcolor{black}{\textbf{[回す]}} シェイプのポイントを移動%
+      \newline\textcolor{black}{\textbf{[クリック]}} シェイプの 2 点を水平方向に整列 - 前の点まで
+   }{
+      \textcolor{black}{\textbf{[Add]}}ポイントを追加してシェイプのセグメントを作成,
+      \textcolor{black}{\textbf{[Del]}} 現在のポイントを,
+      \textcolor{black}{\textbf{[Free/Quant]}} フリー編集とクオンタイズ編集の切り替え,
+      \textcolor{black}{\textbf{[Back]}} シェイプメニューに戻る,
+   }{
+      NA,
+      NA,
+      \textcolor{black}{\textbf{[Y]}} ポイントの垂直位置を調整する,
+      \textcolor{black}{\textbf{[X]}} ポイントの水平位置を調整する,
+      \textcolor{black}{\textbf{[BEND-]}} 選択した点より前の形状の曲率を変更する,
+      \textcolor{black}{\textbf{[BEND+]}} 選択した点の後の形状の曲率を変更する,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+   }{
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+   }
+}
+
+\def\modnameshortlfs{LFS}
+\def\modnamelonglfs{Low Frequency Shaper}
+
+\newcommand{\modlfs}{
+   \newpage
+   \modmakesection{lfs}
+   \def\modname{\modnameshortlfs - \modnamelonglfs}% chktex 8
+   % \section{\modname}\label{section:modlfs}
+
+   \subsection*{LFS \- Low Frequency Shaper (不規則なシェイプを生成するLow Frequency Oscillator)}
+   \paragraph*{} 
+このモジュールは、不規則なシェイプの low frequency oscillationsを作成します。シェイプは、ユーザーが編集するか、.shp (Serum) および .vitallfo (Vital) 形式からインポートできます。
+
+   \showrefcardsection{lfs}
+
+   \subsection{シェイプのロード}
+シェイプをロードするには、\textbf{[SELECT]} (エンコーダーを下に) を押し、ファイル ブラウザでシェイプのあるディレクトリに移動し、\textbf{[SELECT]} をもう一度押して目的のシェイプをロードします。 エンコーダーを回転させると、現在のディレクトリ内のシェイプが変化します。
+
+
+   \newpage
+   \section*{\modname}
+   \tableofoptionsnew{\lfsset}{\optnameset}
+   \tableofoptionsnew{\lfsinp}{\optnameinp}
+   \tableofoptionsnew{\lfsout}{\optnameout}
+
+   \newpage
+   \section{LFS - Shape Editor}\label{section:shapeedit}
+   \showrefcardsection{lfsedit}
+   \subsection{シェイプのエディット}
+   シェイプを編集するには、LFS 画面で \textbf{Edit} を押します。ボタン \textbf{Add} と \textbf{Del} を使用して、シェイプに点を追加できます (点は現在の点の間、つまり中央に追加されます)。 \textbf{LVL3} と \textbf{LVL5} を使用して、ポイントの垂直位置と水平位置を適切に調整します (注意: 最初と最後のポイントの水平位置は調整できません)。 \textbf{LVL5} は選択した点より前のシェイプセグメントの曲率を調整し、\textbf{LVL6} は選択した点の後のセグメントの曲率を調整します。
+   \subsection{Position Quantisation}
+   ボタン \textbf{Free} を押すと、モードをフリー編集に変更できます。次に、ボタン \textbf{Quant} (同じボタン) を押すと、モードを Quantized編集に切り替えます。このモードでは、垂直位置が 12 の分割に量子化 (整列) されます (半音をシミュレートします)、水平位置は 32 分割に整列され、ノートの長さをシミュレートする整列を提供します。 
+   \newline $\blacksquare$ Aligmentまたはquantisationで、音符または半音は実際には整列しませんが、シェイプが BPM の速度で再生されたときに配置が改善されます。 
+   \newline $\bigstar$ 整列されたシェイプは、アルペジエーター効果を作成するために VCO または WTO の周波数に適用可能です。
+
+}
+

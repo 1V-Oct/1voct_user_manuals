@@ -1,0 +1,133 @@
+\def\arpset{
+  {{Timing Mode}/{Arpeggiator patternの長さ}/{
+    \makesupopt{{
+      {{BPM}/{ステップで制御されるBPMから計算された音符の長さに基づくタイミング}},
+      {{Hz}/{パターンが繰り返される頻度}}%
+   }}
+  }},
+  {{Note Length}/{固定のノートまたはパターンの長さ}/{
+    固定ノートまたはパターンデュレーションを切り替える
+    \makesupopt{{
+      {{Off}/{固定の \textbf{Pattern} の長さが選択されています。ノートの長さはパターンの長さをステップ数で割ったものです。}},
+      {{On}/{固定の \textbf{Note} の長さが選択され、パターンの長さは音の長さ x ステップ数に等しくなります。}}%
+   }}%
+  }}%
+} 
+
+\def\arpinp{
+  {{NOTE}/{Base note}/{アルペジエーターがシーケンスを作成するためのベースとなるノートを入力します。
+  \newline 参照: \underline{\nameref{section:pitchcontrol}}
+  \makesupopt{{
+    {{VOCT}/{ノートコントロール用の1V/Oct入力/}},
+    {{OCT}/{オクターブ単位のチューニングノート +/- 8 オクターブ}},
+    {{NOTE}/{半音単位のチューニングノート +12 半音 (1 オクターブ)}},
+    {{FINE}/{セント単位のチューニング ノート　+/- 1半音}}%
+  }}%
+  }},
+  {{Clock}/{Clock CV Source}/{他のモジュールと同期するためのクロック ソース。}},
+  {{Reset}/{Reset CV Source}/{位置をステップ 0 にリセット}},
+  {{Duration}/{パターンの長さ}/{周波数 (Hz) または音の長さ (BPM) で測定されたパターンの長さ}},
+  {{Position}/{Pattern stepのPosition CV Source}/{パターンの位置を制御するための外部 CV}}%
+}
+
+\def\arpout{
+  {{NTE}/{ノートのPitch出力}/{再生されていないステップの半音を加算して計算された現在のステップのピッチの出力}},
+  {{GTE}/{ノートのGate出力}/{ビート時にポリリズム設定ゲートの出力をHighに}},
+  {{VEL}/{ノートのVelocity出力}/{現在のステップに関連付けられたベロシティ/モジュレーション パラメータの出力}}%
+}
+
+\def\refcardarp{
+  \makereferencecard{\textcolor{black}{\textbf{[回す]}}パターンの半音/ベロシティ値の編集を切り替える\newline\textcolor{black}{\textbf{[クリック]}} Exit
+    }{
+    \textcolor{black}{\textbf{[ON/OFF]}} モジュールのオン/オフ (バイパス),
+    \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+    \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+    \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+  }{
+    \textcolor{black}{\textbf{\mbox{[STEP 1]}}} ステップを半音 (-24 ～ +24) またはモジュレーション (ベロシティ) で調整,
+    \textcolor{black}{\textbf{\mbox{[STEP 2]}}} ステップを半音 (-24 ～ +24) またはモジュレーション (ベロシティ) で調整,
+    \textcolor{black}{\textbf{\mbox{[STEP 3]}}} ステップを半音 (-24 ～ +24) またはモジュレーション (ベロシティ) で調整,
+    \textcolor{black}{\textbf{\mbox{[STEP 4]}}} ステップを半音 (-24 ～ +24) またはモジュレーション (ベロシティ) で調整,
+    \textcolor{black}{\textbf{\mbox{[STEP 5]}}}　ステップを半音 (-24 ～ +24) またはモジュレーション (ベロシティ) で調整,
+    \textcolor{black}{\textbf{\mbox{[STEP 6]}}} ステップを半音 (-24 ～ +24) またはモジュレーション (ベロシティ) で調整,
+    \textcolor{black}{\textbf{\mbox{[STEP 7]}}} ステップを半音 (-24 ～ +24) またはモジュレーション (ベロシティ) で調整,
+    \textcolor{black}{\textbf{\mbox{[STEP 8]}}} ステップを半音 (-24 ～ +24) またはモジュレーション (ベロシティ) で調整,
+    }{%
+    \textcolor{black}{\textbf{[STEPS]}} ステップ数を調整 (1 ～ 8),
+    \textcolor{black}{\textbf{[DURATION]}} アルペジエーター シーケンスの長さを調整,
+    \textcolor{black}{\textbf{[TIMING]}} 時間ベース (Hz) と音符の長さベース (BPM) の間でパターンのタイミングを変更,
+    \textcolor{black}{\textbf{[CLK]}} CLOCKソースCVを選択、Trigger CVを選択,
+    \textcolor{black}{\textbf{[NOTE-OCT]}} オクターブ単位で音符をチューニング (+/- 8 オクターブ),
+    \textcolor{black}{\textbf{[NOTE-NOTE]}} 音を半音単位でチューニング (+12 半音 1 オクターブ),
+    \textcolor{black}{\textbf{[NOTE-FINE]}} セント単位でノートを微調整 (+/- 半音),
+    \textcolor{black}{\textbf{[NOTE-VOCT]}} ノートの V/OCT の CV 入力を選択,
+  }
+}
+
+\def\modnameshortarp{ARP}
+\def\modnamelongarp{Arpeggiator}
+
+\newcommand{\modarp}{
+  \newpage
+  \modmakesection{arp}
+  
+  \paragraph*{}
+  Arpeggiatorは、定義された長さの短いパターンで定義されたノートのセットを循環します。
+  \showrefcardsection{arp}
+
+  \subsection{操作}
+  \paragraph*{} アルペジエーター (ARP) は、演奏されたノートとの半音の差として定義される最大 8 つのノートから構成される反復的な音楽パターンを作成するピッチ操作ユーティリティです。ステップはノブで調整でき、ステップ数は 1 ～ 8 ステップの間で変更できます。パターンのデュレーションは、パターンのオシレーション周波数 (Hz) でパターン全体の長さを指定するか、クロック ソース (BPM) からのタイミングに基づいて音符または小節の長さで測定されたパターンの長さを指定することによって設定できます。 エンコーダー (SELECT) を使用して、編集パターンの半音とベロシティ値を変更します。
+  \newline$\blacksquare$ 各ステップのアルペジエーターは、ステップ全体にわたって続くゲート信号を生成します。
+  \newline$\blacksquare$ ベロシティ値は、各ステップに割り当てられた任意の値であり、The Centre 内の任意のパラメーターを変調するために使用できます。
+  \newpage
+  \subsection{Arpeggiator Screen}
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{arp1.png}
+    \caption{STEP 1で休符をセットしたArpeggiator}
+    \label{fig:arprests}
+  \end{figure}
+  % \FloatBarrier
+  % \newpage
+  % \begin{wrapfigure}{r}{0.5\textwidth}
+  %   \centering
+  %   \includegraphics[width=0.7\linewidth]{arp1.png}
+  %   \caption{Arpeggiator with rest set on STEP 1}
+  %   \label{fig:arprests}
+  % \end{wrapigure}
+
+  Arpeggiatorメニュー表記:
+  \begin{itemize}
+    \item \textbf{GRAY} - 非アクティブなステップ
+    \item \textbf{YELLOW} - アクティブなステップ
+    \item \textbf{ORANGE} - 現在再生中のノート
+    \item \textbf{RED} -　ベロシティが \textbf{OFF} に設定されている場合、ゲート信号は設定されません
+  \end{itemize}
+  スクリーンの要素:
+  \begin{itemize}
+    \item \textbf{緑のバー} 設定に応じたノートまたはパターンの長さ \textbf{SET:Note Length}
+    \item ノート パートには、特定のステップの出力ノートが入力ノートと異なる半音の数が含まれています
+    \item 半音部分の下には、ステップの実際の出力ノートが表示されます
+    \item ベロシティは、任意のパラメーターを変調するために使用できるノートに割り当てられた値です。この値がOFFに設定されている場合、指定されたステップはこのステップのGATE出力をしません。
+  \end{itemize}
+\FloatBarrier
+
+  \subsection{外部ソースからアルペジエーターの位置を制御}
+  \paragraph*{}デフォルト設定のアルペジエーターの位置は、ステップごとに位置が増加します。 Position CV を使用して、外部 CV ソースに従ってアルペジエーターの位置を設定します。
+  \newline$\blacksquare$ 外部 CV ソースを設定することにより、アルペジエーターは TRIGGER のみを出力し、GATE 出力には GATE 信号を出力しません。さらに、CLOCK は無視され、外部で制御された位置がアルペジエーターの位置を決定します。
+  \newline$\blacksquare$ CV 入力の正の値のみが位置に影響します。負の値は位置 0 にクリップされます。正の CV ソースを使用するか、Attenution と Level でソースを変更します。
+  \newline$\bigstar$ ATTENUATOR を 0.5 に設定し、LEVEL を 0.5 に設定した LFO TRIANGLE 入力を使用して、PING-PONG モードで動作するアルペジエーターの TRAINGULAR 入力を作成します。
+  \newline$\bigstar$ LFO を RAMP または SAW (LFO Skew) に変更すると、アルペジエーターはそれぞれ上昇モードまたは下降モードで動作します。
+
+  \subsection{休符の追加}%
+  \paragraph*{} ベロシティ (モジュレーション) 値は 0 から 99 までの範囲を持つことができますが、ノブが完全に左に回されている場合、ベロシティ値は \textbf{OFF} としてマークされます。 Velocity が \textbf{OFF} に設定されている場合、ゲートはこのステップでは設定されません。
+  \subsection{Duration}%
+  \paragraph*{}%
+ アルペジエーターは、連なるノートまたは固定のノート、どちらに対しても固定の長さで動作します。 \textbf{Setting:Note Length} でアルペジエーターの動作モードを選択可能
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\arpset}{\optnameset}
+  \tableofoptionsnew{\arpinp}{\optnameinp}
+  \tableofoptionsnew{\arpout}{\optnameout}
+}
+

@@ -1,37 +1,20 @@
+% v3.4
 \section{Calibration}
-
-
-TL;DR: I came here to calibrate and not read poems... Here is YouTube video that shows Calibration of The Centre:
-
-% \href{https://www.youtube.com/watch?v=uEFr7RkuP7k}{https://www.youtube.com/watch?v=uEFr7RkuP7k}
-\underline{\url{https://www.youtube.com/watch?v=uEFr7RkuP7k}}
-
+Quick Start: For a visual demonstration of the calibration process for The Centre, refer to the following video:
 \qrdlink
-  [This video shows how to calibrate The Centre]
-  {https://www.youtube.com/watch?v=uEFr7RkuP7k}
-  {Calibration of The Centre}
-
+[This video demonstrates the calibration procedure for The Centre]
+{https://www.youtube.com/watch?v=uEFr7RkuP7k}
+{Calibration of The Centre}
 \subsection{Why Calibrate?}
-In the ideal world things are well... ideal. Although in real world things are not perfect and this is where term tolerance kicks in. Every electronic component has tolerance. Usually measured in percentage and usually this tolerance is like \%1 for resistors and \%5 for capacitors. Each circuit contains multiple electronic components and tolerances of those components add together making quite a huge percentage tolerance of the circuit. When circuit is operating the tolerances of this circuit do not change. Tolerance just change component properties at manufacturing stage. Therefore the circuit is always stable but might be slightly off. 
-
-Of course there are different ways to deal with the non-ideal circuits. Some of them are expensive (on hardware level) and some of them are quite cheap. One of those methods is calibration.
-
-Calibration allows to establish default values returned by circuit under controlled environment and use them as reference points.
-
-\subsection{Calibration of music instruments}
-
-Many music instruments need calibration. Even tuning the piano or guitar. For digital or hybrid modules like The Centre the calibration process is to connect a well calibrated source of pitch that will provide stable value of voltages at two or more reference points. Usually two points are enough. The software will recalculate all the values and will apply proper algorithms to always generate correct pitch for voltages.
-
+In an ideal scenario, electronic circuits perform perfectly. However, real-world components introduce imperfections, quantified by manufacturing tolerances. These tolerances, typically expressed as percentages (e.g., 1\% for precision resistors and 5\% for standard capacitors), accumulate across multiple components within a circuit, resulting in an overall deviation from the intended performance.
+Once manufactured, these tolerances remain fixed, ensuring circuit stability during operation but potentially causing slight offsets from nominal values.
+Various techniques address these non-idealities, ranging from costly hardware solutions (e.g., precision component selection) to more economical software-based methods, such as calibration.
+Calibration establishes reference values from the circuit's output under controlled conditions, enabling compensation for tolerances and accurate operation.
+\subsection{Calibration of Musical Instruments}
+Calibration is essential for many musical instruments, including the tuning of acoustic ones like pianos and guitars. For digital or hybrid modules such as The Centre, calibration involves connecting a stable, reference pitch source to provide precise voltages at two or more defined points. Typically, two reference points suffice. The module's firmware then computes scaling factors and applies corrective algorithms to ensure accurate pitch tracking across the voltage range.
 \subsection{Calibrating The Centre}
-
-The Centre needs two voltages separated by 2V. In other words, the centre needs a Control Voltage (CV) for two C notes separated by 2 octaves. Ideally that would be C1 and C3 but many current MIDI keyboards supply only voltages between 0V and 5V which translates to C2 and C8. Yep, there is no standard for V/Oct assignemnt of voltage to notes so at 1V/OCT we assume that C2 is 0V. It does not matter anyway, because every V/Oct input has Octave and Note correction anyway.
-
-To calibrate V/OCT inputs press two middle buttons (button 2 + 3) and it will bring System Menu. From there select "Calibrate" and press encoder down (select).
-
-Now every channel can be calibrated individually or 4 inputs at the same time. Use encoder to select channel or all channels (when calibrating all channels use signal splitter to send CV voltage for calibration (pitch) to all inputs).
-
-Now follow instructions on screen. First send any note from your keyboard except note C (we calibrate by C notes) and press Start (button 1). Now press any low octave C note (lets say C3) wait 10 seconds for next instructions, move two octaves up and send note C5. Wait 10 seconds and your unit is fully calibrated.
-
-Now you can Save your calibration settings and enjoy your fully calibrated unit.
-
-
+The Centre requires two reference voltages separated by at least 2V (two octaves), corresponding to control voltages (CV) for two C notes spanning two octaves in a 1 V/octave system. Ideally, these would be C1 (e.g., -2 V) and C3 (0 V), but many MIDI keyboards output CV in the 0--5 V range, mapping to C0 through C5. Note that no universal standard exists for voltage-to-note assignment in V/oct systems; here, we assume C0 at 0V. Regardless, each V/oct input includes independent octave and note offset adjustments.
+To initiate V/OCT input calibration, press the two central buttons (buttons 2 and 3) to access the System menu. Navigate to "Calibrate" and confirm by pressing the encoder knob.
+Channels can be calibrated individually or simultaneously (up to four inputs). Use the encoder to select the desired channel(s); for multi-channel calibration, employ a signal splitter to distribute the reference CV to all inputs.
+Follow the on-screen prompts. First, send a non-C note from your MIDI keyboard and press Start (button 1) to establish a baseline. Next, trigger a low-octave C note (e.g., C1) and hold for 10 seconds. The display will then prompt for the upper reference: advance two octaves (e.g., to C3) and hold for another 10 seconds. Calibration is now complete.
+Save the calibration data via the menu to apply it persistently, ensuring precise pitch tracking for your module.

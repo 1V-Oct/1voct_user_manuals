@@ -1,0 +1,110 @@
+\section{Patch}\label{section:oppatch}%
+\subsection{概要}
+パッチ別名プリセットは、サウンドを構築できる The Centreの基本操作モードです。 The Centre を起動すると、\textbf{Patch Edit} メニューが表示され、個々のモジュールを追加、削除、および制御できます。
+\subsection{基本操作}
+Patch Edit のメイン画面には、モジュールのリストが含まれています。
+\newline$\blacksquare$ The Centre のモジュールは、\textbf{Patch Edit} メニューにある順序で実行されます。
+\newline$\blacksquare$ PatchはModule OUTを含みます。 \nameref{section:modout}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.35\linewidth]{pch1.png}
+      \caption{パッチエディットのメインメニュー}
+      \label{fig:oppatcheditmain}
+  \end{figure}
+
+\paragraph*{}\textbf{[Manage]} ボタンを押すことで、操作モードをパッチ管理に変更します。
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{pch3.png}
+    \caption{パッチ管理メニュー}
+    \label{fig:oppatcheditmanage}
+  \end{figure}
+
+\subsubsection{パッチの初期化}
+\paragraph*{}\textbf{[Init]}\textbf{[Init]} ボタンをクリックすると、システム初期化ダイアログが開き、センターを初期状態に設定し、作業モードを選択できます。 The Center の 2 つの作業モードは、\textbf{Patch} とマルチパッチ (別名 Set) で利用できます\underline{\nameref{section:multipatch}} 
+  
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{set2.png}
+    \caption{パッチまたはマルチパッチの初期化}
+    \label{fig:oppatcheditmanage}
+  \end{figure}
+  
+  \FloatBarrier
+  
+
+
+  \subsubsection{モジュールの追加と削除}
+\paragraph*{}\textbf{[Add]} ボタンを押すことでモジュールを追加できます。 モジュールは、選択したモジュールの前に挿入されます。 \textbf{[Del]} を押すと、選択したモジュールが削除されます。
+
+モジュールを追加するには、\textbf{[Add]} ボタンを押してモジュール選択画面を開き、\textbf{[SELECT]} エンコーダーでモジュールを選択すると、モジュールがパッチ エディターの選択された位置に挿入されます。
+
+\begin{figure}[hbt!]
+  \centering
+  \begin{tabular}{ll}
+    \includegraphics[width=0.35\linewidth]{pch4.png}
+    &
+    \includegraphics[width=0.35\linewidth]{pch5.png}
+  \end{tabular}
+  \caption{Addを押してモジュールを追加すると、選択した位置にモジュールが挿入されます}
+  \label{fig:oppatcheditaddmod}
+\end{figure}
+\FloatBarrier
+
+
+\subsubsection{}
+
+
+\newpage
+\clearpage
+\section{Multi-Patch 別名 Set}\label{section:multipatch}%
+\paragraph*{}%
+\subsection{概要}%
+\textbf{Set} とも呼ばれるマルチパッチは、The Centre のマルチティンバー機能に簡単にアクセスできるようにするための特別なモードです。 The Centreは（コンピュータリソースから）複数の音声を実行する可能性があるため、マルチティンバー音声生成を提供できるように、4 つのゲート、4 つの V/OCT、および 4 つのオーディオ出力で設計されています。
+\subsection{操作}%
+マルチパッチ モードに切り替えるには、パッチ メニューに移動し、\textbf{Manage -> Init} を選択し、選択ダイアログから \textbf{Set} を選択します。
+\begin{figure}[h]
+  \centering
+  \begin{tabular}{ll}
+  \includegraphics[width=0.35\linewidth]{set1.png}
+  &
+  \includegraphics[width=0.35\linewidth]{set2.png}
+  \end{tabular}
+  \caption{左: Manageサブメニューから Initを選択します。 右: ダイアログボックスからSetを選択}
+  \label{Fig:initset}
+\end{figure}
+\subsubsection{Setメニューの操作}
+マルチパッチ (Set) モードでモジュールを起動した後、ユーザーには以下の画面が表示されます。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.35\linewidth]{set3.png}
+      \caption{Setオプションとマルチパッチメニュー}
+      \label{fig:setmain}
+  \end{figure}
+\paragraph*{}%
+一番上の行にはセットの名前が含まれており、カーソルが一番上の行に置かれると、ボタンの割り当てが変更され、Save Set、Init、および Auto のオプションが表示されます。
+
+ユーザーは \textbf{[Save]} および \textbf{[Save As]} を選択してセットを保存できます。
+\newline$\blacksquare$ Set は VXS ファイル形式で保存され、Patch は VXP ファイル形式で保存されます。こちらを参照 \underline{\nameref{section:fileformats}}
+
+\FloatBarrier
+
+\subsubsection*{}
+
+マルチパッチメニューにはパッチ用の4つのスロットがあり、VXP 形式の標準パッチ \underline{\nameref{section:patch}} を SD カードからロードしたり、Patch Edit メニューで編集したりできます。
+エンコードを回転させ、4 つのスロットのいずれかで \textbf{[SELECT]} を押すと、パッチ\underline{\nameref{section:patch}} メニューに入り、選択したスロットのパッチを編集できます。
+
+\begin{figure}[htb!]
+  \centering
+  \includegraphics[width=0.35\linewidth]{set4.png}
+  \caption{各スロットで使用可能なマルチパッチ メニュー オプション}
+  \label{fig:setpatch}
+\end{figure}
+
+\FloatBarrier
+
+\paragraph*{}%
+一番上の行にはセットの名前が含まれており、カーソルが一番上の行に置かれると、ボタンの割り当てが変更され、Save Set、Init、および Auto のオプションが表示されます。
+
+\FloatBarrier

@@ -1,0 +1,281 @@
+% \begin{filecontents*}{\jobname.dat}
+%   {(1,1)}/{(3,3)},
+%   {(-1,1)}/{(-3,3)},
+%   {(1,-1)}/{(3,-3)}%
+%   \end{filecontents*}
+  
+%   \documentclass[border=5mm]{standalone}
+%   \usepackage{tikz}
+%   \usepackage{catchfile}
+  
+%   \newcommand\loaddata[1]{\CatchFileDef\loadeddata{#1}{\endlinechar=-1}}
+  
+%   \begin{document}
+  
+%   \begin{tikzpicture}
+%   \loaddata{\jobname.dat}
+%   \foreach \from/\to in \loadeddata{\draw [->] \from -- \to;}
+%   \end{tikzpicture}
+  
+%   \end{document}
+% \newcommand{\showsettings}[1] {
+% {\renewcommand\arraystretch{1.25}
+% \begin{tabularx}{\textwidth}{|c||X|}
+% \textcolor{blue}{qrcap.Serie}& \textit{Class} \\ \hline \hline
+% \multirow{5}{*}{Parameters:} & \textbf{Audio Output} : \textit{Select Audio Output of Module} \\
+%                              & \multicolumn{1}{@{\quad\quad}X}{Description 1.} \\
+%                              & \textbf{Audio Input} : \textit{pandas.DataFrame} \\ 
+%                              & \multicolumn{1}{@{\quad\quad}X}{Description2 Description2 Description2 Description2  Description2}   \\ \hline
+% \end{tabularx}}
+% }
+
+%  shit below probably better as new command
+
+% \begin{filecontents*}[overwrite]{set.dat}
+%     {Audio Output}/{Selects Audio Output for the module}/{Audio Output can be directed into VOUT outputs or into internal VBuf Virtual Buffer},
+%     {(-1,1)}/{(-3,3)},
+%     {(1,-1)}/{(3,-3)}%
+% \end{filecontents*}
+
+% \newcommand\loaddata[1]{\CatchFileDef\loadeddata{#1}{\endlinechar=-1}}
+
+\makeatletter
+    \newread\dataread
+    \def\loaddata#1{%
+        \gdef\loadeddata{}%
+        \openin\dataread=#1
+        \begingroup\endlinechar=-1
+        \@whilesw\unless\ifeof\dataread\fi{%
+            \read\dataread to \dataline
+            \edef\rslt{\noexpand\g@addto@macro\noexpand\loadeddata{\dataline}}%
+            \rslt%expanded argument
+        }%
+        \endgroup
+        \closein\dataread
+    }%
+\makeatother
+% \documentclass[pt,12pt]{article}
+    \makeatletter
+    \newcommand*{\compress}{\@minipagetrue}
+    \makeatother
+%     \begin{document}
+
+\def\ifempty#1{\def\temp{#1} \ifx\temp\empty }
+
+\renewcommand{\tabularxcolumn}[1]{>{\compress\arraybackslash}m{#1}}
+
+\newcommand{\tableofoptions}[1]{
+\begin{center}
+    \sffamily
+    % \begin{tabularx}{\linewidth}{@{}lX@{}}%
+    %     \textcolor{blue}{qrcap.Serie} & \textit{Class} \\ \hline \hline
+    % \end{description}
+
+    \foreach \settype/\dataset in {{Settings}/{#1/set.dat}, {Inputs}/{#1/inp.dat}, {Outputs}/{#1/out.dat}} {
+        % \\[2mm]
+    \begin{tabularx}{\linewidth}{@{}>{\hsize=0.2\hsize \columncolor{gray!10}[0pt]}XX@{}}%
+    % \hline \hline
+    % \\[12mm]
+        % \begin{tabularx}{\linewidth}{|X|X|X|}
+    % \begin{tabularx}{\linewidth}{}%
+     \settype & \smallskip 
+    \begin{description}[font =\sffamily, after=\vspace*{-\topsep}]
+        \IfFileExists{\dataset}{
+        \loaddata{\dataset}
+        \foreach \param/\descshort/\desclong in \loadeddata{\item[\param :] \textit{\descshort} \newline\desclong}
+        }{\item[] N/A \newline}
+    % {\hline \hline
+    %     % \begin{tabularx}{\linewidth}{|X|X|X|}
+    % % \begin{tabularx}{\linewidth}{}%
+    %  \settype & \smallskip 
+    % \begin{description}[font =\sffamily, after=\vspace*{-\topsep}]
+    %     \loaddata{\dataset}
+    %     \foreach \param/\descshort/\desclong in \loadeddata{\item[\param :] \textit{\descshort} \newline\desclong}
+    % }
+        % draw [->] \from -- \to;}
+    % \item[parameter1 :] \textit{string} \newline
+    % Description 1.
+    % \item[parameter2 :]\textit{pandas.DataFrame} \newline
+    % Description2.
+    \end{description}
+\end{tabularx}
+}
+\end{center}
+}
+
+\ExplSyntaxOn
+  \cs_set_eq:NN \expandx \exp_args:Nx
+\ExplSyntaxOff
+
+
+
+\def\pagesdir{pages}
+
+% \newcommand{\setrecord}[3]{#1\slash#2\slash#3}
+
+    % \immediate\write18{mkdir \pagesdir/\modulename}
+\def\setaudiooutput{{Audio Output}/{Selects Audio Output for the module}/{Audio Output can be directed into VOUT outputs or into internal VBuf Virtual Buffer}}
+\def\inpfreqcoarse{{Frequency Coarse}/{Adjust Frequency of oscillator (coarse)}/{Adjusts frequency of oscillator in big steps +/- one octave}}
+\def\inpnote{{Note}/{Change note input}/{Note defines MIDI note that will be converted to pitch of oscillator. VOCT is the CV input of a note, OCT modifies Octave of note in range +/- 8 octaves, Note tunes note in semitone steps (up to +12 semitones - one octave), Fine tunes note in cents in range of +/- semitone}}
+\def\xxxset{
+    {NA}/{}/{}%
+}
+
+
+
+\def\wtoset{
+    \setaudiooutput,
+    {Polyphony}/{Enables number of polyphony voices from WTO}/{Polyphony turns on WTO into polyphonic mode and up to 4 channels of polyphony are achievable. By turning Polyphony on, the VOCT channels used to control notes will be taken from the next one.},
+    {Glide Scaled}/{}/{},
+    {Warp Mode}/{}/{},
+    {Smoothing}/{}/{}%
+}
+
+\def\wtoinp{
+    {Unison}/{Number of unison voices oscillators}/{Turns on unison of voices and their pitch can be detuned by Detune parameter},
+    {Detune}/{Detune oscillators in Unison mode}/{Every oscillator in Unison mode will be detuned by fraction of Detune parameter. Detune can detune a note by 1 semitone. At full detune, when there are two oscillators one will be at previous semitone of tuning frequency and anothe at the next semitone of tuning frequency},
+    {WT}/{Wavetable pointer}/{Adjust pointer of current waveform in the wavetable}/
+    {Reset}/{Reset input to reset oscillator phase}/{Upon trigger or gate high the oscillator phase will get reset},
+    {AM}/{Amplitude Modulation or output Level}/{AM input modulates amplitude of oscillator and can be used as output level or by connecting modulation signal it turns WTO into ring modulator.},
+    {Detune WT}/{Detune Wavetable Pointer}/{Detunes Wavetable pointer in Unison mode so two or more oscillators can run different waveforms from same wavetable.},
+    {Frequency Coarse}/{Adjust Frequency of oscillator (coarse)}/{Adjusts frequency of oscillator in big steps +/- one octave},
+    {Frequency Fine}/{Adjusts pitch of oscillator in small steps +/- semitone},
+    {Glide Time}/{Time to glide between notes}/{},
+    {Warp Mode}/{Special mode depending on selected function}/{}%
+}
+\def\envinp{
+    {Attack}/{Value of Attack in range 0s-32s (Level-Attenuator-CV)}/{Value of Attack of AHDSR Envelope, set to small time for punch envelopes},
+    {Hold}/{Value of Hold in range 0s-32s (Level-Attenuator-CV)}/{Value of Hold of AHDSR Envelope, Keeps sound at highest level for period of time after raising attack, set to 0s for ADSR envelopes},
+    {Decay}/{Value of Decay in range 0s-32s (Level-Attenuator-CV)}/{Decays is a time that elapses from soundreaching maximum volume level (after A and H stages) till it decresases in volume to Sustain level},
+    {Sustain}/{Value of Sustain as volume level when AHD stages passed but sound still has Gate ON (Level-Attenuator-CV)}/{Value of Sustain of AHDSR Envelope, Keeps sound at highest level for period of time after raising attack, set to 0s for ADSR envelopes},
+    {Release}/{Value of Hold in range 0s-32s (Level-Attenuator-CV)}/{Value of Hold of AHDSR Envelope, Slowly fades sound out. Short Release time make sound end rapidly}%
+}
+
+%     \begin{filecontents*}[overwrite]{\pagesdir/\modulename/out.dat}
+%         {ENV}/{Envelope}/{CV Output of current envelope value}%
+%     \end{filecontents*}
+
+\def\wtoout{
+    {OSC}/{Output of oscillator}/{Ouputs current level of oscillator}/{Level of oscillator can be used as envelope for side chaining},
+    {RST}/{Phase Reset}/{Outputs trigger every time phase pases through zero}%
+}
+
+\newcommand{\wtoinfo}{{\wtoset}/{\wtoinp}/{\wtoout}}
+
+
+% \newcommand{\vcoinfo}{{\vcoset}/{\vcoinp}/{\vcoout}}
+% \newcommand{\lfoinfo}{{\vcoset}/{\vcoinp}/{\vcoout}}
+
+
+
+% \newcommand{\emptyinfo}{{\xxxset}/{\xxxset}/{\xxxset}}
+% \newcommand{\vcoinfo}{{\vcoset}/{\xxxset}/{\xxxset}}
+% \newcommand{\lfoinfo}{{\xxxset}/{\xxxset}/{\xxxset}}
+
+\NewDocumentCommand{\infotype}{m}
+ {
+  \use:c { info #1 }
+ }
+\ExplSyntaxOff
+
+
+\newcommand{\setshowall}[1]{
+    \parsevars{#1}
+    % #1
+    \begin{center}
+        \sffamily
+        \expandx\tableofoptionsnew{\varone}{Settings}
+        \expandx\tableofoptionsnew{\vartwo}{Inputs}
+        \expandx\tableofoptionsnew{\varthree}{Outputs}
+
+
+    \end{center}
+}
+
+
+% \newcommand{\setshowall}[3]{
+%     % \parsevars{#1}
+%     % #1
+%     \begin{center}
+%         \sffamily
+%         \expandx\tableofoptionsnew{#1}{Settings}
+%         \expandx\tableofoptionsnew{#2}{Inputs}
+%         % \e/xpandx\tableofoptionsnew{#3}{Outputs}
+%     \end{center}
+% }
+
+% \setshowall{\wtoinfo}
+% \setshowall{\wtoset}{\wtoinp}{\wtoout}
+% \newcommand{\infotype}[1]{\csname info#1\endcsname}
+% \setshowall{\infotype{wto}}
+
+% \setshowall{\wtoset}{\wtoinp}{\wtoout}
+% {\wtoinp}{\wtoout}
+
+
+% {
+%     \def\modulename{wto}
+%     \immediate\write18{mkdir \pagesdir/\modulename}
+    
+%     \begin{filecontents*}[overwrite]{\pagesdir/\modulename/set.dat}
+%         {\setaudiooutput},
+%         {Polyphony}/{}/{},
+%         {Glide Scaled}/{}/{},
+%         {Warp Mode}/{}/{},
+%         {Smoothing}/{}/{}%
+%     \end{filecontents*}
+
+%     \begin{filecontents*}[overwrite]{\pagesdir/\modulename/inp.dat}
+%         {\setaudiooutput}%
+%     \end{filecontents*}
+
+%     \begin{filecontents*}[overwrite]{\pagesdir/\modulename/out.dat}
+%         {ENV}/{Envelope}/{CV Output of current envelope value}%
+%     \end{filecontents*}
+    
+%     \tableofoptions{\pagesdir/\modulename}
+% }
+% %     \end{document}
+
+% {
+%     \def\modulename{env}
+%     \immediate\write18{mkdir \pagesdir/\modulename}
+
+%     \begin{filecontents*}[overwrite]{\pagesdir/\modulename/set.dat}
+%         {\setaudiooutput}%
+%     \end{filecontents*}
+
+%     \begin{filecontents*}[overwrite]{\pagesdir/\modulename/inp.dat}
+%         {Attack}/{Value of Attack in range 0s-32s (Level-Attenuator-CV)}/{Value of Attack of AHDSR Envelope, set to small time for punch envelopes},
+%         {Hold}/{Value of Hold in range 0s-32s (Level-Attenuator-CV)}/{Value of Hold of AHDSR Envelope, Keeps sound at highest level for period of time after raising attack, set to 0s for ADSR envelopes},
+%         {Decay}/{Value of Decay in range 0s-32s (Level-Attenuator-CV)}/{Decays is a time that elapses from soundreaching maximum volume level (after A and H stages) till it decresases in volume to Sustain level},
+%         {Sustain}/{Value of Sustain as volume level when AHD stages passed but sound still has Gate ON (Level-Attenuator-CV)}/{Value of Sustain of AHDSR Envelope, Keeps sound at highest level for period of time after raising attack, set to 0s for ADSR envelopes},
+%         {Release}/{Value of Hold in range 0s-32s (Level-Attenuator-CV)}/{Value of Hold of AHDSR Envelope, Slowly fades sound out. Short Release time make sound end rapidly}%
+%     \end{filecontents*}
+
+%     \begin{filecontents*}[overwrite]{\pagesdir/\modulename/out.dat}
+%         {ENV}/{Envelope}/{CV Output of current envelope value}%
+%     \end{filecontents*}
+
+%     \tableofoptions{\pagesdir/\modulename}
+% }
+
+% {
+%     \def\modulename{zzz}
+%     \tableofoptions{\pagesdir/\modulename}
+% }
+
+% {
+%     \tableofoptionsnew{
+%         {Audio Output}/{Selects Audio Output for the module}/{Audio Output can be directed into VOUT outputs or into internal VBuf Virtual Buffer},
+%         \setaudiooutput,
+%         {Polyphony}/{}/{},
+%         {Glide Scaled}/{}/{},
+%         {Warp Mode}/{}/{},
+%         {Smoothing}/{}/{}%
+%     }{
+%         {ENV}/{Envelope}/{CV Output of current envelope value}%
+%     }{
+%         {ENV}/{Envelope}/{CV Output of current envelope value}%
+%     }
+% }

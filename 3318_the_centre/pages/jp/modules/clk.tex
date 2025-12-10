@@ -1,0 +1,74 @@
+\def\clkset{
+  {{Clock Output}/{Clock出力}/{CLK のオーディオ出力先を選択します。 VOUT1-4 は DC 結合されているため、クロックを出力できます。クロックは、選択した出力からSquareクロック信号を出力します。\newline  参照:\underline{\nameref{section:audiooutputs}}}},
+  {{Sync}/{クロックを外部クロックと同期}/{Sync は、クロックモジュールを外部クロックの BPM レートと同期させます。}},
+  {{Clocks PQN}/{外部クロックの 4 分音符あたりのクロック数}/{BPM の外部ソースのクロックの選択。ユーザーは、外部ソースが生成する BPM ごとのクロック数を選択する必要があります。}}%
+}
+
+\def\clkinp{
+  {{BPM}/{ビート/分}/{Beats Per Minute 設定の選択}},
+  {{Clock}/{外部クロック入力}/{外部ソースの BPM を計算するために使用される外部クロック入力　\newline$\blacksquare$ CVY1-4 入力のみで使用}}%
+}
+
+\def\clkout{
+  {{Clock}/{Clock信号}/{BPMに応じて生成されたクロック信号の出力}}%
+}
+
+
+\def\refcardclk{
+  \makereferencecard{
+    NA,
+    }{
+    \textcolor{black}{\textbf{[ON/OFF]}} モジュールのオン/オフ (バイパス),
+    \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+    \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+    \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+  }{
+    \textcolor{black}{\textbf{[BPM]}} BPM レートを調整する,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{%
+    \textcolor{black}{\textbf{[SYNC]}} BPM を外部 BPM に同期する,
+    \textcolor{black}{\textbf{[PPQN]}} 外部クロックの 4 分音符あたりのパルス数 [BPM],
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[EXT CLK]}} 外部クロック CV入力セレクター,
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[OUT]}} 音声出力先の選択,
+  }
+}
+
+\def\modnameshortclk{CLK}
+\def\modnamelongclk{Clock Generator}
+
+\newcommand{\modclk}{
+  \newpage
+  \modmakesection{clk}
+
+  \paragraph*{}
+  クロック ジェネレータ (CLK) は、モジュールを同期するために BPM に基づいてクロック パルスを生成します。
+   
+  \showrefcardsection{clk}
+
+  \subsection{操作}
+  \paragraph*{} クロック ジェネレータ (CLK) は、BPM (1 分あたりの拍数) に関連するレートの安定したパルス信号を生成します。生成されたクロックの数は、グローバル設定:Clocks Per Quarter Note (CPQN) によって異なります。 BPM は 1 分あたりのビート数を決定し、CPQN はビートごとに生成されるクロック数を決定します。
+  \newline$\blacksquare$ MIDI 標準では 4 分音符あたり 24 クロックが設定されていますが、この値は、機器によって異なる想定が使用されるため、変更できます。
+  \newline$\bigstar$ \modnamelink{lfs} や \modnamelink{ply} などのモジュールにクロックを供給して、デフォルトのタイミングを 120 BPM から必要な 1 セットの CLK に変更する必要があります。
+  \subsection{外部Clock}
+  \paragraph*{} Ext Clock Input \textbf{[INPUT:CLOCK]} を接続すると、モジュールは、モジュールの設定で構成された CPQN (Clocks Per Quarter Note) に従って、外部クロック BPM の表示を開始します。 \textbf{[SET:Sync]} を ON にすると、\textbf{[Input:BPM]} で内部 BPM を設定できなくなりますが、外部クロック BPM の値が使用されます。
+  \newline$\blacksquare$ 外部クロックを使用する場合、CVY1 ～ 4 入力のみが使用可能です。これらは低レイテンシー入力です。 参照: \underline{\nameref{section:connectors}}
+  \subsection{Clock出力}
+  \paragraph*{}クロックモジュールは、クロック出力を介して外部モジュールにマスタークロックを提供できます。クロック出力は、VOUT1-4 3.5mm 出力の1つ、または VBufオーディオ入力への設定を介して構成できます。\underline{\nameref{section:audiooutputs}}
+
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\clkset}{\optnameset}
+  \tableofoptionsnew{\clkinp}{\optnameinp}
+  \tableofoptionsnew{\clkout}{\optnameout}
+}
+

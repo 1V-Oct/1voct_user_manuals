@@ -1,0 +1,64 @@
+\def\dstset{
+  {{Audio Output}/{Distortionのオーディオ出力}/{歪んだ信号の音声出力。オーディオ出力は、選択したアルゴリズムで歪んだオーディオ入力信号です。\newline See: \underline{\nameref{section:audiooutputs}}}},
+  {{Audio Input}/{遅延させるオーディオ入力信号}/{エコーを生成するためにバッファリングされ減衰された信号と遅延および合計されるオーディオ信号。}}%
+}
+
+\def\dstinp{
+  {{Drive}/{Signal Gain}/{歪みを処理する際のオーディオ入力信号のゲインのレベルで、効果がより顕著になります。}},
+  {{Mix}/{Dry/Wet Mix}/{処理されていない (元の) 入力信号と歪んだオーディオ信号の混合量}}%
+}
+
+\def\dstout{
+  {{NONE}/{}/{}}%
+}
+
+\def\refcarddst{
+  \makereferencecard{
+   \textcolor{black}{\textbf{[クリック]}} Exit
+    }{
+    \textcolor{black}{\textbf{[ON/OFF]}} モジュールのオン/オフ (バイパス),
+    \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+    \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+    \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+  }{
+    \textcolor{black}{\textbf{[DLY]}} 遅延時間 0 秒～4 秒,
+    \textcolor{black}{\textbf{[ECH]}} 遅延期間後に追加されたエコーの割合,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{%
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+   \textcolor{black}{\textbf{[AUDIO IN]}} オーディオ入力ソースの選択,
+    \textcolor{black}{\textbf{[AUDIO OUT]}} オーディオ出力先の選択,
+  }
+}
+
+\def\modnameshortdst{DST}
+\def\modnamelongdst{Distortion}
+
+\newcommand{\moddst}{
+  \newpage
+  \modmakesection{dst}
+
+  \paragraph*{}
+  Distortion (DST) Effect Processor は、信号を歪ませたり損傷させたりして粗いテクスチャを追加します。
+  \showrefcardsection{dst}
+
+  \subsection{操作}
+  \paragraph*{} ディストーション (DST) エフェクト プロセッサは、入力信号を受け取り、選択したアルゴリズムを使用して歪ませます。 Wet Signal (歪んだ入力信号) は、Input:Mix パラメータで制御された比率で、Dry Signal (未処理の入力信号) とミックスされます。
+
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\dstset}{\optnameset}
+  \tableofoptionsnew{\dstinp}{\optnameinp}
+  \tableofoptionsnew{\dstout}{\optnameout}
+}
+

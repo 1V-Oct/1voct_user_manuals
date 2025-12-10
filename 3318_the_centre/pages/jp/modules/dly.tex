@@ -1,0 +1,64 @@
+\def\dlyset{
+  {{Audio Output}/{Delayのオーディオ出力}/{ディレイで処理された信号のオーディオ出力。オーディオ出力は、バッファされた遅延信号と合計されたオーディオ入力信号です。\newline 参照: \underline{\nameref{section:audiooutputs}}}},
+  {{Audio Input}/{Delayをかけるオーディオ入力信号}/{エコーを生成するためにバッファリングされ減衰された信号と遅延および合計されるオーディオ信号。}}%
+}
+
+\def\dlyinp{
+  {{Delay}/{Delayの長さ}/{0 と 4 の間の遅延期間の長さ。Delayはバッファのサイズです。}},
+  {{Echo}/{Echoレベル}/{さらにレイヤリングするためにバッファリングされる信号のレベル}}%
+}
+
+\def\dlyout{
+  {{NONE}/{}/{}}%
+}
+
+\def\refcarddly{
+  \makereferencecard{
+    \textcolor{black}{\textbf{[クリック]}} Exit
+    }{
+    \textcolor{black}{\textbf{[ON/OFF]}} モジュールのオン/オフ (バイパス),
+    \textcolor{black}{\textbf{[SET]}} モジュールの設定,
+    \textcolor{black}{\textbf{[Inputs]}} モジュールの入力を構成する,
+    \textcolor{black}{\textbf{[Back]}} パッチメニューに戻る,
+  }{
+    \textcolor{black}{\textbf{[DLY]}} 遅延時間 0 秒～4 秒,
+    \textcolor{black}{\textbf{[ECH]}} 遅延期間後に追加されたエコーの割合,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+  }{%
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    \textcolor{black}{\textbf{[AUDIO IN]}} オーディオ入力ソースの選択,
+    \textcolor{black}{\textbf{[AUDIO OUT]}} オーディオ出力先の選択,
+  }
+}
+
+\def\modnameshortdly{DLY}
+\def\modnamelongdly{Delay}
+
+\newcommand{\moddly}{
+  \newpage
+  \modmakesection{dly}
+
+  \paragraph*{}
+  Delay (DLY) エフェクトプロセッサは、信号をバッファリングし、それを合計して遅延エコー効果を提供します。
+  \showrefcardsection{dly}
+
+  \subsection{操作}
+  \paragraph*{} ディレイ (DLY) エフェクト プロセッサは、入力信号を取得し、Input:Delay パラメータに基づいて要求された期間バッファリングし、Input:Echo パラメータで指定された減衰レベルでバッファリングされた信号と合計します。ディレイは可聴エコー効果を生み出します。
+
+  \newpage
+  \section*{\modname}
+  \tableofoptionsnew{\dlyset}{\optnameset}
+  \tableofoptionsnew{\dlyinp}{\optnameinp}
+  \tableofoptionsnew{\dlyout}{\optnameout}
+}
+
