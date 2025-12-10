@@ -19,3 +19,7 @@
   \end{minipage}
   \paragraph*{}
 }
+
+
+\newcommand{\setitemcol}[1]{\IfSubStringInString{NA}{#1}{\color{mlightgray}#1}{#1}}
+\newcommand{\selannotationcol}[2]{\IfSubStringInString{NA}{#1}{\color{mlightgray}}{\color{#2}}}

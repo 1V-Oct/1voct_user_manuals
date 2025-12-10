@@ -3,4 +3,12 @@
 % The main document should pass the language to babel, e.g., \usepackage[english]{babel}
 
 % Set default font. This will be used for English and as a fallback.
-\setmainfont{NotoSans-VariableFont_wdth,wght.ttf}[Path=../fonts/]
+\setmainfont{Noto Sans}[
+  Path=../fonts/,
+  UprightFont = {NotoSans-VariableFont_wdth,wght.ttf},
+  BoldFont = {NotoSans-VariableFont_wdth,wght.ttf},
+  ItalicFont = {NotoSans-Italic-VariableFont_wdth,wght.ttf},
+  BoldItalicFont = {NotoSans-Italic-VariableFont_wdth,wght.ttf},
+  BoldFeatures = {FontFeature = {RawFeature = +wght=700}}
+]
+

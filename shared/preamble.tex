@@ -36,8 +36,6 @@
 \usepackage{multirow}
 \usepackage{xparse}
 
-\usepackage{wrapfig}
-
 \usepackage{qrcode}
 % for settings
     % \usepackage[utf8]{inputenc}
@@ -48,6 +46,7 @@
 \usepackage{tabularx}
 \usepackage{makecell}
 \usepackage{scrextend}
+\usepackage{parskip}
 
 \usepackage{textcomp}
 \usepackage{afterpage}
@@ -56,6 +55,8 @@
 
 
 \usepackage{babel} % Load babel without language options initially
+
+\usepackage{colortbl}
 
 
 \providecommand{\tcversion}{v1.0.0}
@@ -270,7 +271,7 @@
 {}%
 {\tocboxedpart}% 
 {}
-{}
+{\titlerule[0.5pt] \large\thecontentspage}
   
 \titlecontents{section}[0pc]
 {}%
@@ -280,7 +281,8 @@
     ] {\thecontentslabel};
 \end{tikzpicture}\quad}
 {---}
-{$:$ \titlerule[0.5pt]$:$ \large\thecontentspage}
+% {$:$ \titlerule[0.5pt]$:$ \large\thecontentspage}
+{\titlerule[0.5pt] \large\thecontentspage}
 
 \titlecontents{subsection}[1.8pc]
 {}%
@@ -290,8 +292,19 @@
   ] {\thecontentslabel};
 \end{tikzpicture}\quad}
 {---}
-{$:$ \titlerule[0.5pt]$:$ \large\thecontentspage}
+% {$:$ \titlerule[0.5pt]$:$ \large\thecontentspage}
+{\titlerule[0.5pt] \large\thecontentspage}
 
+\titlecontents{subsubsection}[3.6pc]
+{}%
+{\begin{tikzpicture}[baseline={([yshift=-.8ex]current bounding box.center)},]
+\node [
+  thick, draw=none, fill=none, rectangle, rounded corners
+  ] {\thecontentslabel};
+\end{tikzpicture}\quad}
+{---}
+% {$:$ \titlerule[0.5pt]$:$ \large\thecontentspage}
+{\titlerule[0.5pt] \large\thecontentspage}
 \definecolor{m_orange}{RGB}{255,171,64}
 \definecolor{m_green}{RGB}{69, 129, 142}
 \definecolor{m_purple}{RGB}{142, 124, 195}
@@ -312,4 +325,4 @@
 \graphicspath{{images/}}
 
 \input{../shared/titlepage.tex}
-\input{../shared/commands.tex}
+\input{../shared/commands.tex} % This should be loaded once, here.
