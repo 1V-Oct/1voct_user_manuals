@@ -17,6 +17,9 @@ To make for specific language use language code (example for japanese):
 ``` LANG=jp make ```
 
 
+For The Centre there is parameter BUILD_TYPE that can be either 'manual or 'refcards' to build User's Manual or Reference Cards from the same source.
+
+``` BUILD_TYPE=refcards LANG=en make ```
 
 ### Cleaning
 
