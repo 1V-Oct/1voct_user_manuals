@@ -1,7 +1,7 @@
 # Makefile for building the multi-language manual
 
 # Define the LaTeX compiler
-LATEX_COMPILER ?= xelatex
+LATEX_COMPILER ?= latexmk
 
 # Define the base name for the TeX file
 TEX_BASE = main
@@ -10,23 +10,32 @@ TEX_BASE = main
 OUT_DIR ?= out
 
 # Automatically find all language directories (e.g., en, pl, de) inside 'pages'
-LANGS := $(wildcard pages/*/)
-LANG_CODES := $(patsubst pages/%/,%,$(LANGS))
+LANG_CODES := $(patsubst pages/%/,%,$(wildcard pages/*/))
 
-# Generate PDF targets for each language
-PDFS := $(foreach lang,$(LANG_CODES),$(OUT_DIR)/9902_taipo_user_manual_$(lang).pdf)
+# Find all .tex files in the shared directory to use as dependencies
+SHARED_TEX_FILES := $(wildcard ../../shared/*.tex)
+
+# Define all possible PDF targets
+ALL_PDFS := $(foreach lang,$(LANG_CODES),$(OUT_DIR)/9902_taipo_user_manual_$(lang).pdf)
 
 # Targets
-all: pdf
-
-pdf: $(PDFS)
+# If LANG is not specified on the command line, or if it's an invalid language
+# (e.g., from the shell environment), build all available languages.
+# Otherwise, build only the specified (and valid) language.
+ifneq ($(filter $(LANG),$(LANG_CODES)),)
+# LANG is set and is a valid language
+all: $(OUT_DIR)/9902_taipo_user_manual_$(LANG).pdf
+else
+# LANG is not set, or is not a valid language code. Build all.
+all: $(ALL_PDFS)
+endif
+pdf: all
 
 # Generic rule to build a PDF for a given language
-$(OUT_DIR)/9902_taipo_user_manual_%.pdf: $(TEX_BASE).tex preamble.tex titlepage.tex pages/%/content.tex
-	mkdir -p $(OUT_DIR)
-	$(LATEX_COMPILER) -jobname=9902_taipo_user_manual_$* -output-directory=$(OUT_DIR) "\def\LANG{$*}\input{$(TEX_BASE).tex}"
-	# Run twice for table of contents and references
-	$(LATEX_COMPILER) -jobname=9902_taipo_user_manual_$* -output-directory=$(OUT_DIR) "\def\LANG{$*}\input{$(TEX_BASE).tex}"
+.SECONDEXPANSION:
+$(OUT_DIR)/9902_taipo_user_manual_%.pdf: $(TEX_BASE).tex $(SHARED_TEX_FILES) $$(wildcard pages/$$*/*.tex) $$(wildcard pages/$$*/**/*.tex)
+	$(LATEX_COMPILER) -xelatex -synctex=1 -jobname=9902_taipo_user_manual_$* -pretex="\def\LANG{$*}" -usepretex -output-directory=$(OUT_DIR) $(TEX_BASE).tex
+# 	latexmk -xelatex -synctex=1 -interaction=nonstopmode -file-line-error --shell-escape -jobname="users-manual" -pretex="\def\LANG{$*}" -output-directory=out -usepretex manual
 
 clean:
 	rm -rf $(OUT_DIR)
