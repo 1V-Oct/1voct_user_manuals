@@ -13,6 +13,9 @@ TEX_BASE = main
 OUT_DIR ?= out
 
 
+# Default version if not set
+TC_VERSION ?= v0.0.0
+
 # Define LaTeX pre-commands.
 # By default, we define USERMANUAL.
 LATEX_PRETEX =
@@ -52,7 +55,7 @@ pdf: all
 # Generic rule to build a PDF for a given language
 .SECONDEXPANSION:
 $(OUT_DIR)/$(FILE_PREFIX)%.pdf: $(TEX_BASE).tex $(SHARED_TEX_FILES) $$(wildcard shared/*.tex) $$(wildcard pages/$$*/*.tex) $$(wildcard pages/$$*/**/*.tex)
-	$(LATEX_COMPILER) -xelatex -synctex=1 -jobname=$(FILE_PREFIX)$* -pretex="\def\LANG{$*}" -usepretex -output-directory=$(OUT_DIR) $(TEX_BASE).tex
+	$(LATEX_COMPILER) -xelatex -synctex=1 -jobname=$(FILE_PREFIX)$* -pretex="\def\LANG{$*}\def\tcversion{$(TC_VERSION)}" -usepretex -output-directory=$(OUT_DIR) $(TEX_BASE).tex
 # 	latexmk -xelatex -synctex=1 -interaction=nonstopmode -file-line-error --shell-escape -jobname="users-manual" -pretex="\def\LANG{$*}" -output-directory=out -usepretex manual
 
 clean:

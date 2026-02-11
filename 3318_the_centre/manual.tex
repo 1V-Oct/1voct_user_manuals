@@ -49,9 +49,9 @@
 \usepackage{textcomp}
 \usepackage{afterpage}
 \usepackage{placeins}
-
+\ifx\tcversion\undefined
 \providecommand{\tcversion}{v0.0.0}
-
+\fi
 %% There is two way to compare categore
 % The \jobname primitive is a TeX string, so all characters have category code 12 (other) not 11 (letter) (with the exception of any spaces, which are category code 10 (space)). Slightly confusingly, xstring is carrying out a token-based comparison here not a string one! Assuming e-TeX is available you can fix your code easily
 
