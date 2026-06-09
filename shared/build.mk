@@ -55,7 +55,7 @@ pdf: all
 # Generic rule to build a PDF for a given language
 .SECONDEXPANSION:
 $(OUT_DIR)/$(FILE_PREFIX)%.pdf: $(TEX_BASE).tex $(SHARED_TEX_FILES) $$(wildcard shared/*.tex) $$(wildcard pages/$$*/*.tex) $$(wildcard pages/$$*/**/*.tex)
-	$(LATEX_COMPILER) -xelatex -synctex=1 -jobname=$(FILE_PREFIX)$* -pretex="\def\LANG{$*}\def\tcversion{$(TC_VERSION)}" -usepretex -output-directory=$(OUT_DIR) $(TEX_BASE).tex
+	$(LATEX_COMPILER) -xelatex -synctex=1 -jobname=$(FILE_PREFIX)$* -pretex="\def\LANG{$*}\def\tcversion{$(TC_VERSION)}$(LATEX_PRETEX)" -usepretex -output-directory=$(OUT_DIR) $(TEX_BASE).tex
 # 	latexmk -xelatex -synctex=1 -interaction=nonstopmode -file-line-error --shell-escape -jobname="users-manual" -pretex="\def\LANG{$*}" -output-directory=out -usepretex manual
 
 clean:

@@ -138,20 +138,20 @@
     \end{tikzpicture}%
 }}
 
-\newcommand\tocboxedpart[1]{{%
-  \begin{tikzpicture}[inner sep=0pt, inner ysep=0.3ex]
-      \node[
-        inner sep=2mm, 
-        outer sep=3mm, 
-        color=white, 
-        anchor=base west,
-        font=\amatica\fontsize{14}{14}\selectfont
-      ] at (current page.west) (counter) {\thecontentslabel \hskip0.75ex #1};
-        \begin{pgfonlayer}{background}
-            \draw[fill=black] (current bounding box.north -| current page.west) rectangle (current page.east |- current bounding box.south);
-        \end{pgfonlayer}
-    \end{tikzpicture}%
-}}
+% \newcommand\tocboxedpart[1]{{%
+%   \begin{tikzpicture}[inner sep=0pt, inner ysep=0.3ex]
+%       \node[
+%         inner sep=2mm, 
+%         outer sep=3mm, 
+%         color=white, 
+%         anchor=base west,
+%         font=\amatica\fontsize{14}{14}\selectfont
+%       ] at (current page.west) (counter) {\thecontentslabel \hskip0.75ex #1};
+%         \begin{pgfonlayer}{background}
+%             \draw[fill=black] (current bounding box.north -| current page.west) rectangle (current page.east |- current bounding box.south);
+%         \end{pgfonlayer}
+%     \end{tikzpicture}%
+% }}
 
 
 \newcommand\boxedsectionx[1]{{%

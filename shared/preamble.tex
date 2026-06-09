@@ -36,6 +36,7 @@
 \usepackage{multirow}
 \usepackage{xparse}
 
+\usepackage{wrapfig}
 \usepackage{qrcode}
 % for settings
     % \usepackage[utf8]{inputenc}
@@ -173,21 +174,145 @@
     \end{tikzpicture}% 
 }}
 
-\newcommand\tocboxedpart[1]{{
-  \begin{tikzpicture}[inner sep=0pt, inner ysep=0.3ex]
-      \node[
-        inner sep=2mm, 
-        outer sep=3mm, 
-        color=white, 
-        anchor=base west,
-        font=\titlefontfamily\fontsize{14}{14}\selectfont
-      ] at (current page.west) (counter) {\thecontentslabel \hskip0.75ex #1};
-        \begin{pgfonlayer}{background}
-            \draw[fill=black] (current bounding box.north -| current page.west) rectangle (current page.east |- current bounding box.south);
-        \end{pgfonlayer}
-    \end{tikzpicture}%
-}}
+% \newcommand\tocboxedpart{{%
+%   \begin{tikzpicture}[remember picture, overlay]
+%     \fill[black]
+%       (current page.west |- 0,0.8em)
+%       rectangle
+%       (current page.east |- 0,-0.5em);
+%   \end{tikzpicture}%
+% }}
 
+% \newcommand\tocboxedpart[1]{{
+%   \begin{tikzpicture}[inner sep=0pt, inner ysep=0.3ex]
+%       \node[
+%         inner sep=2mm, 
+%         outer sep=3mm, 
+%         color=white, 
+%         anchor=base west,
+%         font=\titlefontfamily\fontsize{14}{14}\selectfont
+%       ] at (current page.west) (counter) {\thecontentslabel \hskip0.75ex #1};
+%         \begin{pgfonlayer}{background}
+%             \draw[fill=black] (current bounding box.north -| current page.west) rectangle (current page.east |- current bounding box.south);
+%         \end{pgfonlayer}
+%     \end{tikzpicture}%
+% }}
+% +\newcommand\tocboxedpart{{%
+% +  \begin{tikzpicture}[remember picture, overlay]
+% +    \fill[black]
+% +      (current page.west |- 0,0.8em)
+% +      rectangle
+% +      (current page.east |- 0,-0.5em);
+% +  \end{tikzpicture}%
+%  }}
+
+% \newcommand\tocboxedpart[1]{%
+%   \begin{tikzpicture}[inner sep=0pt, inner ysep=0.4ex, baseline]
+%     % The text node first (this determines the bounding box height)
+%     \node[
+%       inner xsep=3mm,     % left padding
+%       inner ysep=0.6ex,   % vertical padding inside the bar
+%       text=white,
+%       anchor=base west,
+%       font=\titlefontfamily\fontsize{14}{14}\selectfont
+%     ] (tocnode) at (0,0) {\thecontentslabel \hskip 0.75ex #1};
+
+%     % Full-width black background using the node's bounding box extended to page edges
+%     \begin{pgfonlayer}{background}
+%       \fill[black] 
+%         (tocnode.north west -| current page.west) 
+%         rectangle 
+%         (tocnode.south east -| current page.east);
+%     \end{pgfonlayer}
+%   \end{tikzpicture}%
+% }
+
+% \newcommand\tocboxedpart[1]{%
+%   \begin{tikzpicture}[inner sep=0pt, baseline=0pt]
+%     % Text node - this determines the natural line height
+%     \node[
+%       inner xsep=3mm,      % left padding
+%       inner ysep=1ex,    % controls bar thickness - adjust if needed
+%       text=white,
+%       anchor=base west,
+%       font=\titlefontfamily\fontsize{14}{14}\selectfont
+%     ] (tocnode) at (0,0) {\thecontentslabel \hskip0.75ex #1};
+
+%     % Full-width black bar using the text node's height
+%     \begin{pgfonlayer}{background}
+%       \fill[black] 
+%         (tocnode.north west -| current page.west) 
+%         rectangle 
+%         (tocnode.south east -| current page.east);
+%     \end{pgfonlayer}
+%   \end{tikzpicture}%
+% }
+
+% \newcommand\tocboxedpart[1]{%
+%   \begin{tikzpicture}[baseline=0pt, inner sep=0pt]
+%     % The node contains ONLY the title text (white on black)
+%     \node[
+%       inner xsep=3mm,      % left padding (reduce to 2mm if you want more space)
+%       inner ysep=0.8ex,    % vertical thickness of the black bar
+%       text=white,
+%       anchor=base west,
+%       font=\titlefontfamily\fontsize{14}{14}\selectfont
+%     ] (tocnode) at (0,0) {\thecontentslabel \hskip0.75ex #1};
+
+%     % Full-width black bar
+%     \begin{pgfonlayer}{background}
+%       \fill[black] 
+%         (tocnode.north west -| current page.west) 
+%         rectangle 
+%         (tocnode.south east -| current page.east);
+%     \end{pgfonlayer}
+%   \end{tikzpicture}%
+% }
+
+
+\newcommand\tocboxedpart[1]{%
+  \leavevmode
+  \begin{tikzpicture}[baseline=(tocnode.base), inner sep=0pt]
+    % Text node with title only
+    \node[
+      inner xsep=3mm,      % left padding
+      inner ysep=0.85ex,   % bar thickness (adjust 0.6ex–1.2ex)
+      text=white,
+      anchor=base west,
+      font=\titlefontfamily\fontsize{14}{14}\selectfont,
+      inner ysep=0.85ex
+    ] (tocnode) at (0,0) {\thecontentslabel \hskip 0.75ex #1};
+
+    % Full-width black bar
+    \begin{pgfonlayer}{background}
+      \fill[black] 
+        (tocnode.north west -| current page.west) 
+        rectangle 
+        (tocnode.south east -| current page.east);
+    \end{pgfonlayer}
+  \end{tikzpicture}%
+}
+
+
+% \newcommand\tocboxedpart[1]{%
+%   \begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
+%     % Full-width black background - exactly matching the "Contents" header style
+%     \fill[black] 
+%       ([yshift=1.2ex]current page.west) rectangle 
+%       ([yshift=-1.0ex]current page.east);
+
+%     % White text with proper vertical centering and left padding
+%     \node[
+%       text=white,
+%       anchor=base west,
+%       font=\titlefontfamily\fontsize{14}{14}\selectfont,
+%       inner xsep=3mm,   % left padding - adjust if needed
+%       inner ysep=0pt,
+%       outer sep=0pt
+%     ] at ([xshift=0pt, yshift=0.1ex]current page.west) 
+%       {\thecontentslabel \hskip0.75ex #1};
+%   \end{tikzpicture}%
+% }
 
 \newcommand\boxedsectionx[1]{{
   \begin{tikzpicture}[overlay,remember picture,line width=5pt, inner sep=0pt, inner ysep=0ex, outer sep=0pt]
@@ -265,15 +390,33 @@
 \usepackage{titletoc}
 
 \setcounter{tocdepth}{3}
-\contentsmargin{2.55em}
+\contentsmargin{2.5em}   % Try 3.8em to 4.5em — larger value = more space for page number
 
-\titlecontents{part}[0pc]
-{}%
-{\tocboxedpart}% 
-{}
-{\titlerule[0.5pt] \large\thecontentspage}
-  
-\titlecontents{section}[0pc]
+% \titlecontents{part}[0pc]
+%   {}%
+%   {\tocboxedpart}% 
+%   {}
+%   {\titlerule[0.5pt]\large\thecontentspage}
+
+% \titlecontents{part}[0pc]
+%   {}%
+%   {\tocboxedpart}% 
+%   {}
+%   {\titlerule[0.5pt] \large\thecontentspage}
+
+% \titlecontents{part}[0pc]
+%   {}%
+%   {\tocboxedpart}% 
+%   {}
+%   {\titlerule*[0.5pc]{.}\textcolor{white}{\large\thecontentspage}}   % ← important change
+
+\titlecontents{part}[3.5pc]
+  {\addvspace{10pt}\titlefontfamily\fontsize{14}{14}\selectfont}
+  {\contentslabel{2.3em}}
+  {\hspace*{-2.3em}}
+  {\titlerule*[0.5pc]{.}\thecontentspage}
+
+\titlecontents{section}[3.0pc]
 {}%
 {\begin{tikzpicture}[baseline={([yshift=-.8ex]current bounding box.center)},]
   \node [
@@ -284,7 +427,7 @@
 % {$:$ \titlerule[0.5pt]$:$ \large\thecontentspage}
 {\titlerule[0.5pt] \large\thecontentspage}
 
-\titlecontents{subsection}[1.8pc]
+\titlecontents{subsection}[4.8pc]
 {}%
 {\begin{tikzpicture}[baseline={([yshift=-.8ex]current bounding box.center)},]
 \node [
@@ -295,7 +438,7 @@
 % {$:$ \titlerule[0.5pt]$:$ \large\thecontentspage}
 {\titlerule[0.5pt] \large\thecontentspage}
 
-\titlecontents{subsubsection}[3.6pc]
+\titlecontents{subsubsection}[6.8pc]
 {}%
 {\begin{tikzpicture}[baseline={([yshift=-.8ex]current bounding box.center)},]
 \node [
@@ -325,4 +468,5 @@
 \graphicspath{{images/}}
 
 \input{../shared/titlepage.tex}
+\input{../3318_the_centre/shared/modules.tex}
 \input{../shared/commands.tex} % This should be loaded once, here.

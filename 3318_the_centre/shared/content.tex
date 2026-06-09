@@ -2,6 +2,7 @@
 \newpage
 \tableofcontents
 
+\ifdefined\USERMANUAL
 \newpage
 \part{Before Start}
 % \newpage\input{pages/testing.tex}
@@ -9,21 +10,25 @@
 \newpage\input{calibrate.tex}
 \newpage\input{whats_in_the_box.tex}
 \newpage\input{clocks.tex}
+
 \newpage
 \part{System Overview}
 \newpage\input{overview.tex}
+
 \newpage
 \part{Operation}
 \newpage\input{multi_patch.tex}
 \newpage\input{polyphony.tex}
 \newpage\input{midi.tex}
 \clearpage
+\fi
+
 \newpage
 \part{Module Reference}
 
 \input{module_list.tex}
 
-
+\ifdefined\USERMANUAL
 \newpage
 \part{Appendix}
 \newpage
@@ -35,3 +40,4 @@
 \paragraph*{}%
 \textbf{VXS} format contains multiple patches (4) and effects patch. The VXS format can only be opened and saved from the Multi-Patch (Set) mode. See: \underline{\nameref{section:multipatch}}
 
+\fi

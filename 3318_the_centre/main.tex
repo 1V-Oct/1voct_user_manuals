@@ -8,8 +8,13 @@
 % This must be done early, especially before babel, to set up fontspec correctly.
 \input{../../shared/preamble.tex}
 \input{local_glossary.tex}
-\usepackage{wrapfig}
-\input{modules.tex}
+
+% If building refcards (USERMANUAL is not defined), change the doctype.
+\ifdefined\USERMANUAL
+\else
+  \def\LNGdoctype{\LNGRefCardDoctype}
+\fi
+
 
 \begin{document}
 
